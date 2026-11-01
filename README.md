@@ -16,16 +16,13 @@ PlantGuardian is an intelligent agriculture and botanical health companion desig
 
 ---
 
-## 🛠️ Architecture & Tech Stack
+## 🛠️ Tech Stack
 
-```
-PlantGuardian/
-├── Frontend/           # React 18, Vite, TypeScript, Tailwind CSS, Lucide Icons
-├── Backend/            # Node.js Express server, Supabase Admin client, OpenRouter AI
-├── AI/                 # Python computer vision & agronomic diagnostic pipelines
-├── Database/           # PostgreSQL migration schemas & Supabase table setups
-└── supabase/           # SQL migration definitions for user profiles and scans
-```
+- **AI / ML:** Python 3.10+, Multimodal Computer Vision Pathology(Curated Agronomic Diagnostic Engine, Multimodal Pathology via API), Precision Agronomy AI,         Pandas, NumPy, Web Speech Recognition.
+- **Frontend:** React 18, Vite 6, TypeScript, Tailwind CSS & Glassmorphism, HTML5 Canvas Particle Engine, Lucide Icons.
+- **Backend:** Node.js, Express.js REST API, Nodemailer (SMTP), OpenStreetMap Reverse Geocoding.
+- **Database & Auth:** Supabase PostgreSQL, Supabase Auth (JWT), Supabase Realtime Sync, Supabase S3 Storage.
+
 
 ---
 
@@ -89,6 +86,3 @@ cd Frontend && npm run dev
 Visit `http://localhost:5173` in your browser.
 
 ---
-
-## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
