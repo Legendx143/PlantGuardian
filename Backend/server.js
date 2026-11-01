@@ -20,13 +20,15 @@ const {
 } = process.env;
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  throw new Error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be configured in Backend/.env');
+  console.warn('⚠️ Warning: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are not set in environment variables.');
 }
 
 // Admin client — used for server-side operations that need elevated privileges.
-const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-  auth: { autoRefreshToken: false, persistSession: false },
-});
+const supabaseAdmin = (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY)
+  ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    })
+  : null;
 
 // Configure Mail Transporter
 let mailTransporter = null;
@@ -106,7 +108,7 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 
 // Persistent disk storage for scans so records survive server reloads & restarts
-const SCANS_DIR = path.join(process.cwd(), 'data');
+const SCANS_DIR = process.env.VERCEL ? '/tmp' : path.join(process.cwd(), 'data');
 const SCANS_FILE = path.join(SCANS_DIR, 'scans.json');
 
 function loadScansFromFile() {
@@ -168,6 +170,9 @@ app.get('/health', (_req, res) => res.json({ status: 'ok', service: 'plantguardi
 
 // ─── Auth Middleware ──────────────────────────────────────────────────────
 const requireSession = async (req, res, next) => {
+  if (!supabaseAdmin) {
+    return res.status(500).json({ error: 'Supabase credentials not configured in environment variables.' });
+  }
   const token = req.get('authorization')?.replace(/^Bearer\s+/i, '');
   if (!token) return res.status(401).json({ error: 'Missing authorization token' });
 
@@ -940,19 +945,23 @@ app.get('/api/geo/ip-locate', async (req, res) => {
   }
 });
 
-// ─── Start Server ─────────────────────────────────────────────────────────
-app.listen(Number(PORT), () => {
-  console.log(`🌱  PlantGuardian backend listening on http://localhost:${PORT}`);
-  console.log(`    Supabase PostgreSQL connected: ${SUPABASE_URL}`);
-  console.log(`    CORS: enabled for local origins`);
-  console.log('    Auth Routes:');
-  console.log('      POST /api/auth/register (registers in Supabase + sends confirmation email)');
-  console.log('      POST /api/auth/login    (verifies credentials, returns session)');
-  console.log('      POST /api/auth/logout   (revokes session)');
-  console.log('      GET  /api/auth/verify   (verifies active session)');
-  console.log('      GET  /api/me            (reads user profile with email PK)');
-  console.log('    Feature Routes:');
-  console.log('      GET  /api/scans         (realtime scan records)');
-  console.log('      POST /api/ai/diagnose   (crop disease pathology)');
-  console.log('      POST /api/ai/farming-guide (precision agronomy)');
-});
+// ─── Export & Start Server ─────────────────────────────────────────────────
+export default app;
+
+if (!process.env.VERCEL) {
+  app.listen(Number(PORT), () => {
+    console.log(`🌱  PlantGuardian backend listening on http://localhost:${PORT}`);
+    console.log(`    Supabase PostgreSQL connected: ${SUPABASE_URL}`);
+    console.log(`    CORS: enabled for local origins`);
+    console.log('    Auth Routes:');
+    console.log('      POST /api/auth/register (registers in Supabase + sends confirmation email)');
+    console.log('      POST /api/auth/login    (verifies credentials, returns session)');
+    console.log('      POST /api/auth/logout   (revokes session)');
+    console.log('      GET  /api/auth/verify   (verifies active session)');
+    console.log('      GET  /api/me            (reads user profile with email PK)');
+    console.log('    Feature Routes:');
+    console.log('      GET  /api/scans         (realtime scan records)');
+    console.log('      POST /api/ai/diagnose   (crop disease pathology)');
+    console.log('      POST /api/ai/farming-guide (precision agronomy)');
+  });
+}
