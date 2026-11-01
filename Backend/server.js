@@ -45,18 +45,18 @@ if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
  * Sends a registration email to the registered email address.
  */
 async function sendRegistrationEmail(toEmail) {
-  const subject = 'Welcome to PlantCare AI — You have registered in Pet-Care!';
-  const textContent = `Hello,\n\nYou have successfully registered in PlantCare AI (Pet-Care) with your email: ${toEmail}.\nYour account and password have been securely saved in our PostgreSQL database.\nYou can now log in using your registered credentials.\n\nHappy Planting!\nTeam PlantCare AI`;
+  const subject = 'Welcome to PlantGuardian — You have registered in PlantGuardian!';
+  const textContent = `Hello,\n\nYou have successfully registered in PlantGuardian with your email: ${toEmail}.\nYour account and password have been securely saved in our PostgreSQL database.\nYou can now log in using your registered credentials.\n\nHappy Planting!\nTeam PlantGuardian`;
   const htmlContent = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0c1a0e; color: #ffffff; padding: 36px; border-radius: 20px; max-width: 540px; margin: auto;">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="color: #c7ea6b; margin: 0; font-size: 26px; font-weight: 700;">🌱 PlantCare AI</h1>
+        <h1 style="color: #c7ea6b; margin: 0; font-size: 26px; font-weight: 700;">🌱 PlantGuardian</h1>
         <p style="color: #8da090; font-size: 13px; margin-top: 4px;">Smart Agriculture & Botanical Health</p>
       </div>
       <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); padding: 24px; border-radius: 14px;">
         <h2 style="color: #ffffff; font-size: 18px; margin-top: 0;">Registration Successful!</h2>
         <p style="color: #d0e0d0; font-size: 14px; line-height: 1.6;">
-          You have successfully registered in <strong>PlantCare AI</strong> (Pet-Care) with your email address:
+          You have successfully registered in <strong>PlantGuardian</strong> with your email address:
         </p>
         <p style="background: rgba(199, 234, 107, 0.15); border: 1px solid rgba(199, 234, 107, 0.3); color: #c7ea6b; font-family: monospace; font-size: 15px; padding: 10px 14px; border-radius: 8px; margin: 16px 0;">
           ${toEmail}
@@ -66,7 +66,7 @@ async function sendRegistrationEmail(toEmail) {
         </p>
       </div>
       <p style="color: #607563; font-size: 11px; text-align: center; margin-top: 24px;">
-        © 2026 PlantCare AI. Your data is protected by Supabase PostgreSQL RLS.
+        © 2026 PlantGuardian. Your data is protected by Supabase PostgreSQL RLS.
       </p>
     </div>
   `;
@@ -74,7 +74,7 @@ async function sendRegistrationEmail(toEmail) {
   console.log(`\n📨  [REGISTRATION EMAIL DISPATCH]`);
   console.log(`    To      : ${toEmail}`);
   console.log(`    Subject : ${subject}`);
-  console.log(`    Message : You have registered in Pet-Care (PlantCare AI) with email ${toEmail}\n`);
+  console.log(`    Message : You have registered in PlantGuardian with email ${toEmail}\n`);
 
   if (mailTransporter) {
     try {

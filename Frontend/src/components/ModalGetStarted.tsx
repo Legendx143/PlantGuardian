@@ -170,7 +170,7 @@ export const ModalGetStarted: React.FC<ModalGetStartedProps> = ({
         if (registered) {
           setIsLoading(false);
           setSuccessMessage(
-            `You have registered in Pet-Care! An email has been sent to ${email.trim()}. Please sign in with your credentials.`
+            'You have successfully registered in PlantGuardian.'
           );
           // Move user to the login window as requested
           setMode('signin');
