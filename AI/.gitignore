@@ -1,0 +1,44 @@
+# ==========================================
+# AI Pipeline & Notebooks .gitignore
+# ==========================================
+
+# ── Python Cache & Virtual Environments ──
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# ── Jupyter Notebook Checkpoints ──
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# ── Large Model Weights & Binary Checkpoints (>100MB) ──
+Models/*.h5
+Models/*.pth
+Models/*.pt
+Models/*.bin
+Models/*.onnx
+Models/*.tflite
+Models/*.ckpt
+Models/*.pkl
+Models/*.pickle
+
+# ── Environment & Secrets ──
+.env
+.env.*
+*.env
+
+# ── Temporary Audio & Test Media ──
+temp_*
+*.wav
+*.tmp
+
+# ── OS & IDE Artifacts ──
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

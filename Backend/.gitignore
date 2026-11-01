@@ -1,0 +1,31 @@
+# ==========================================
+# Backend .gitignore
+# ==========================================
+
+# ── Environment & Secrets ──
+.env
+.env.*
+*.env
+*.env.local
+!.env.example
+
+# ── Dependencies ──
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Runtime Local Data ──
+data/scans.json
+data/farming_plans.json
+
+# ── Logs & Debugging ──
+logs/
+*.log
+
+# ── OS & IDE Artifacts ──
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

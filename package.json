@@ -1,0 +1,15 @@
+{
+  "name": "plantguardian-root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "PlantGuardian Workspace Root",
+  "scripts": {
+    "dev": "node run_dev.js",
+    "dev:all": "node run_dev.js",
+    "dev:frontend": "npm --prefix Frontend run dev",
+    "dev:backend": "npm --prefix Backend run dev",
+    "build": "npm --prefix Frontend run build",
+    "start": "npm --prefix Backend run start",
+    "lint": "npm --prefix Frontend run lint"
+  }
+}

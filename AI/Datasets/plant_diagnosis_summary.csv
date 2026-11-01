@@ -1,0 +1,70 @@
+crop,diagnosis,evidence_records,best_score,matched_terms,source_rows
+Groundnut,Leaf Spot,7,0.6166666666666666,yellow; brown spots,"[340, 579, 598, 615, 255, 284, 390]"
+Papaya,Papaya Ring Spot Virus,3,0.6166666666666666,yellowing; brown spots,"[538, 113, 318]"
+Potato,Early Blight,3,0.6166666666666666,yellowing; brown spots,"[208, 454, 52]"
+Bean,Bacterial Blight,1,0.6166666666666666,yellow; brown spots,[544]
+Lady's Finger,Jassids,1,0.6166666666666666,yellowing; leaf margins,[337]
+Rice,Blast,1,0.6166666666666666,yellow; brown spots,[514]
+Brinjal,Mites,7,0.5916666666666667,brown dots; yellowing; yellow,"[49, 186, 400, 218, 291, 441, 520]"
+Chilli,Leaf Curl Virus,8,0.3833333333333333,yellow; leaf margins; yellowing,"[735, 751, 73, 166, 179, 401, 553, 161]"
+Chilli,Thrips,3,0.3833333333333333,yellow; leaf margins,"[585, 588, 589]"
+Onion,Thrips,3,0.3833333333333333,yellowing; yellow,"[747, 483, 624]"
+Maize,Turcicum Leaf Blight,2,0.3833333333333333,yellowing; yellow,"[608, 730]"
+Potato,Common Scab,2,0.3833333333333333,yellowing; yellow,"[550, 378]"
+Potato,Late Blight,1,0.3833333333333333,yellow; leaf edges,[448]
+Banana,Sigatoka Leaf Spot,6,0.3583333333333333,yellow,"[261, 566, 196, 395, 469, 791]"
+Bean,Powdery Mildew,4,0.3583333333333333,yellowing; yellow,"[601, 92, 557, 600]"
+Chilli,Mites,4,0.3583333333333333,yellowing; yellow,"[240, 300, 613, 618]"
+Potato,Bacterial Wilt,4,0.3583333333333333,yellowing,"[289, 324, 522, 607]"
+Chilli,Nitrogen Deficiency,3,0.3583333333333333,yellowing,"[137, 140, 149]"
+Maize,Nitrogen Deficiency,3,0.3583333333333333,yellowing,"[117, 153, 169]"
+Brinjal,Wilt,2,0.3583333333333333,yellowing; yellow,"[63, 575]"
+Cabbage,Nitrogen Deficiency,2,0.3583333333333333,yellowing,"[126, 135]"
+Chickpea,Fusarium Wilt,2,0.3583333333333333,yellowing,"[151, 442]"
+Citrus,Citrus Psyllid,2,0.3583333333333333,yellowing,"[266, 422]"
+Bean,Aphids,1,0.3583333333333333,yellowing,[744]
+Bean,Leaf Miner,1,0.3583333333333333,yellowing,[412]
+Bean,Root Rot,1,0.3583333333333333,yellowing,[187]
+Cauliflower,Black Rot,1,0.3583333333333333,yellowing,[39]
+Chickpea,Ascochyta Blight,1,0.3583333333333333,brown spots,[740]
+Chickpea,Nitrogen Deficiency,1,0.3583333333333333,yellowing,[198]
+Citrus,Citrus Canker,1,0.3583333333333333,yellow,[592]
+Cowpea,Mosaic Virus,1,0.3583333333333333,yellow,[370]
+Groundnut,Collar Rot,1,0.3583333333333333,yellowing,[806]
+Medicinal plants,Potassium Deficiency,1,0.3583333333333333,yellowing,[141]
+Onion,Downy Mildew,1,0.3583333333333333,yellowing,[320]
+Onion,Purple Blotch,1,0.3583333333333333,yellow,[659]
+Papaya,Anthracnose,1,0.3583333333333333,yellowing,[765]
+Papaya,Papaya Mealybug,1,0.3583333333333333,yellowing,[517]
+Potato,Magnesium Deficiency,1,0.3583333333333333,yellow,[122]
+Pumpkin,Nitrogen Deficiency,1,0.3583333333333333,yellowing,[12]
+Rice,Nitrogen Deficiency,1,0.3583333333333333,yellowing,[133]
+Rice,Rice Bug,1,0.3583333333333333,yellow,[303]
+Sponge gourd,Powdery Mildew,1,0.3583333333333333,yellowing,[407]
+Tomato,Bacterial Wilt,1,0.3583333333333333,yellowing,[233]
+Wheat,Nitrogen Deficiency,1,0.3583333333333333,yellowing,[11]
+Wheat,Stripe Rust,1,0.3583333333333333,yellowing,[361]
+Banana,Panama Wilt,1,0.3333333333333333,,[23]
+Brinjal,Shoot and Fruit Borer,1,0.3333333333333333,,[498]
+Cucumber,Downy Mildew,1,0.3333333333333333,,[138]
+Green Gram,Cercospora Leaf Spot,1,0.3333333333333333,,[371]
+Paddy,Potassium Deficiency,1,0.3333333333333333,,[18]
+Cotton,Jassids,2,0.125,yellow,"[309, 492]"
+Ridge gourd,Powdery Mildew,2,0.125,yellow,"[296, 597]"
+Bean,Mosaic Virus,1,0.125,yellow,[154]
+Bean,Nitrogen Deficiency,1,0.125,yellow,[104]
+Bitter gourd,Downy Mildew,1,0.125,yellow,[725]
+Citrus,Leaf Miner,1,0.125,yellow,[610]
+Coriander,Powdery Mildew,1,0.125,yellow,[655]
+Gram,Powdery Mildew,1,0.125,yellow,[264]
+Groundnut,Leaf Miner,1,0.125,yellow,[345]
+Guava,Rust,1,0.125,yellow,[237]
+Kidney bean,Aphids,1,0.125,yellow,[365]
+Papaya,Nitrogen Deficiency,1,0.125,yellow,[114]
+Papaya,Powdery Mildew,1,0.125,yellow,[298]
+Potato,Aphids,1,0.125,yellow,[118]
+Pumpkin,Cucumber Beetle,1,0.125,yellow,[451]
+Ridge gourd,Downy Mildew,1,0.125,yellow,[226]
+Tobacco,Potassium Deficiency,1,0.125,yellow,[177]
+Tobacco,Tobacco Mosaic Virus,1,0.125,yellow,[325]
+Tomato,Leaf Curl Virus,1,0.125,yellow,[664]

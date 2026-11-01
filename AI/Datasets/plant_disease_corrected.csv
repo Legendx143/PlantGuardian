@@ -1,0 +1,3779 @@
+﻿source_row_number,crop,diagnosis,details,country,state
+3,Chilli,Thrips,Upward curling and deformation of leaves. Stunted growth.,India,Andhra Pradesh
+4,Mustard,Aphids,Colonies of aphids on the leaves and pods,India,Bihar
+5,Cauliflower,Boron Deficiency,Smaller curds in cauliflower due to imbalance nutrient supply and deficiency of Boron can aggravate the condition.,India,Bihar
+6,Chilli,Leaf Curl Virus,The symptoms are of typical Chilli Leaf Curl Virus (CLCV),India,Bihar
+7,Brinjal,Shoot and Fruit Borer,"Holes in the leaves, seems like shoot borer caterpillar and leaf eating caterpillar have eaten the leaves",India,Bihar
+9,Potato,Calcium Deficiency,"Younger leaves of Potato plants are small and curling upwards, typical symptoms of Calcium deficiency",India,Bihar
+10,Chilli,Anthracnose,black spots below the leave surface,India,Bihar
+11,Wheat,Nitrogen Deficiency,yellowing of leaves,India,Bihar
+12,Pumpkin,Nitrogen Deficiency,yellowing of leaves,India,Andhra Pradesh
+14,Tomato,Leaf Curl Virus,curling of leaves,India,Bihar
+16,Potato,Calcium Deficiency,"Leaf tips deformed, margins of younger leaves burning appearance turning brownish",India,Bihar
+17,Paddy,Blast,"Typical blast symptoms in Paddy, eye shaped spots with brown ring outside",India,Andhra Pradesh
+18,Paddy,Potassium Deficiency,Dark green plants with yellowish Leaf tips and margins,India,Bihar
+19,Guava,Phosphorus Deficiency,Leaves having dark to blue-green coloration on severe deficiency purple coloring of older leaves,India,Bihar
+20,Chilli,Leaf Curl Virus,Leaf curl virus symptoms in chilli,India,Telangana
+21,Potato,Phosphorus Deficiency,Potato leaves green with blue colored tinges on younger leaves,India,Bihar
+22,Pea,Powdery Mildew,Powdery mildew issue in Pea crop,India,Bihar
+23,Banana,Panama Wilt,Leaf spots coalesce to form yellowish brown leaves and then wilt,India,Odisha
+26,Chilli,Leaf Curl Virus,"Initial stage of leaf curl virus, leaves started showing symptoms",India,Bihar
+27,Brinjal,Mites,Mite infested in brinjal plants,India,Bihar
+28,Mango,Mealybugs,Mealybug infested mango plants,India,Bihar
+29,Potato,Phosphorus Deficiency,Dark green leaves of young potato plants are due to Phosphorus deficiency,India,Bihar
+30,Cowpea,Aphids,"lesions on the leafs, and discoloration",India,Bihar
+31,Mango,Powdery Mildew,Powdery like substance above the leaf surfaces,India,Andhra Pradesh
+33,Wheat,Phosphorus Deficiency,"Wheat Leaves turning deep green and bluish color , typical phosphorus deficiency symptoms.",India,Bihar
+34,Maize,Fall Armyworm,"Typical symptoms of Fall Armyworm, leaves damage from the core inside eaten up by the larvae.",India,Andhra Pradesh
+35,Cauliflower,Boron Deficiency,"Browning of curds may be due to imbalance nutrition, Nitrogen or Boron deficiency, climatic factors like high humidity and temperature",India,Bihar
+36,Maize,Fall Armyworm,"Presence of Irregular holes on the leaves, larval fee leaf margins and  Presence of excreta on the leaves as well as whorls.",India,Bihar
+37,Tomato,Leaf Miner,Silvery mines present on the leaves,India,Andhra Pradesh
+38,Paddy,Stem Borer,"Paddy tillers infested with stem borer, white ear-heads visible",India,Telangana
+39,Cauliflower,Black Rot,"yellowing, browning/wilting from the edges and restricted to the veins 
+or V shaped lesions on seedlings",India,Bihar
+41,Chilli,Thrips,aphid and thrips damage symptoms on backside of the leaves,India,Andhra Pradesh
+43,Lady's Finger,Powdery Mildew,white powdery growth is noticed on the leaves,India,Bihar
+44,Guava,Rust,"Rust symptoms and leaf eating caterpillar infested, leaves eaten by caterpillars also",India,Bihar
+45,Potato,Aphids,"Aphids affected lower leaves in Potato crop, leaves curling upward and drying from margin",India,Bihar
+46,Potato,Aphids,"Aphid insects in young potato plants, leaves have aphid damage symptoms, leaves curling upwards",India,Bihar
+47,Mango,Mealybugs,Mealybugs infested in Mango leaves,India,Bihar
+48,Pea,Powdery Mildew,White powdery patches on leaves and on whole plants,India,Bihar
+49,Brinjal,Mites,"Mites infested leaves, yellowish brown dots and parts of leaves brownish",India,Bihar
+50,Lady's Finger,Thrips,"Damage by thrips in young Okra/Bhindi plants, typical symptoms of leaf deformation, curling upward and mottling of older leaves",India,Bihar
+51,Chilli,Leaf Curl Virus,symptoms of leaf curl virus in chilli plants at flowering stage,India,Andhra Pradesh
+52,Potato,Early Blight,Leaf spots visible are signs of early blight in initial stage of potato crop,India,Bihar
+53,Pumpkin,Cucumber Beetle,"Young leaves damaged by beetles, leaves eaten and holes are visible",India,Bihar
+54,Onion,Thrips,"Typical thrips damage symptoms ,leaf tips are drying and proceeding to whole leaves and drying up",India,Bihar
+58,Chickpea,Thrips,"Thrips damage symptoms , the plant tips whitened as thrips suck the saps turning grey and white",India,Bihar
+60,Tobacco,Tobacco Mosaic Virus,"necrotic (dead) spots or streaks on the leaves, Stunted plant growth",India,Bihar
+61,Maize,Fall Armyworm,"Irregular Holes in the leaves, excreta present in whorls, fed leaf margins",India,Bihar
+62,Mango,Potassium Deficiency,"Leaf tip and margin burn symptoms, primarily caused by potassium deficiency and salt stress, were prominently observed. In addition, gall midge damage symptoms were noted on a few leaves",India,Andhra Pradesh
+63,Brinjal,Wilt,"Complete wilting of the plant was observed, while yellowing symptoms were noted on an adjacent plant (plant on the top edge), indicating possible damage due to Fusarium wilt",India,Bihar
+64,Pea,Rust,"Pustule symptoms on the underside of pea leaves are typically associated with pea rust, caused by Uromyces viciae-fabae.",India,Bihar
+65,Brinjal,Wilt,"Upper leaf surface: White to gray powdery fungal growth was observed on majority of the leaves 
+(this disease can be added and selection options can be made it proper though option of disease is there we are not able to select the options)",India,Bihar
+66,Tomato,Leaf Curl Virus,"Tomato Leaf Curl Virus (TLCV) symptoms like Upward curling and cupping of leaves. 
+-Leaf thickening and leathery texture.
+-Shortened internodes, stunted plant growth.
+-Reduced flowering and fruit set.",India,Bihar
+67,Bean,Mites,"(kindly update the crop Dolichus bean and scale insect damage in this crop)
+(option mite was selected since we cannot bale to find the scale damage so kindly add the damage option)
+
+Dolichus bean scale:
+On stems and leaves scales appear as tiny raised spots or crust-like growths
+-Heavy infestations make stems appear whitish or encruste",India,Bihar
+68,Chilli,Leaf Curl Virus,"upward leaf curling, leaf distortion, and stunted growth are most often symptoms of chilli leaf curl disease caused by Chilli leaf curl virus (ChiLCV)",India,Telangana
+69,Potato,Common Scab,"young leaf curling and reduced leaf size are commonly linked to potato leaf roll disease, caused by Potato leaf roll virus (PLRV)
+(option of PLRV can be added to the list of diseases this option can be added instead of scab)",India,Bihar
+70,Maize,Fall Armyworm,leaf cuts and holes on multiple leaves are usually symptoms of foliar-feeding insect pests most often fall armyworm (Spodoptera frugiperda) or common armyworm (Mythimna separata) damage,India,Bihar
+71,Papaya,Powdery Mildew,"White, powdery fungal growth on both sides of young leaves, older leaves and petioles",India,Bihar
+72,Mustard,White Rust,"Symptoms:  stunted growth, white, powdery pustules (blisters) on the underside of leaves; thickening and deformation of inflorescences (“staghead”)",India,Bihar
+73,Chilli,Leaf Curl Virus,"symptoms:
+-Leaf cupping: Upward or downward curling of leaves.
+-Little leaf: Reduced leaf size.
+-Discoloration: Pale green or yellowing between veins.
+-Stunted plant growth and reduced fruit set in severe infections.",India,Andhra Pradesh
+74,Papaya,Papaya Ring Spot Virus,only slight narrowing of leaf blades are seen in leaves,India,Andhra Pradesh
+75,Chilli,Mites,"Dark bluish-green older leaves, silvery-white patches, and distortion of older leaves in chilli are typical symptoms of mite infestation",India,Andhra Pradesh
+77,Tomato,Nitrogen Deficiency,symptoms of nitrogen and phosphorous deficiency was noticed in Tomato seedlings,India,Bihar
+78,Chilli,Leaf Curl Virus,"-Distorted younger leaves: Leaves may curl upwards or downwards, become puckered or crinkled.
+-Long petioles: Stretched leaf stalks (petioles) leading to a “loose” leaf arrangement.
+-Broadened older leaves: Older leaves become thicker, wider, and sometimes leathery.
+-Stunted growth, reduced flowering, and poor fruit development.",India,Bihar
+79,Mustard,Alternaria Blight,"-Small, round to irregular brown to black spots on leaves.
+-Spots often have concentric rings, giving a “target spot” or “bull’s eye” appearance",India,Bihar
+80,Chilli,Leaf Curl Virus,"Leaf curling: Leaves curl upward prominently.
+
+Leathery texture: Leaves become thick and tough.
+
+Glossy appearance: Leaves often appear shiny due to altered cell structure.
+
+Distortion: Leaves may be puckered, crinkled, or malformed.
+
+Plant growth: Stunted growth with reduced flowering and fruiting.",India,Telangana
+81,Bottle gourd,Aphids,"Aphid infestation on the leaves 
+secondary infection of black mold on above the leaves",India,Bihar
+82,Watermelon,Mosaic Virus,"cucumber mosaic virus symptoms:
+-Crinkled, curled, or distorted leaves.
+-Mosaic patterns (light and dark green patches).",India,Odisha
+85,Bean,Powdery Mildew,"Crop name: Dolichos Bean 
+white powdery patches are seen on the leaves",India,Bihar
+86,Potato,Common Scab,"Rough, corky, and scabby lesions on the skin",India,Bihar
+89,Chilli,Leaf Curl Virus,"leaf crinkling, curling, stunted growth and wilting symptoms are noticed in the given image",India,Andhra Pradesh
+90,Bean,Mosaic Virus,Dolichos bean: intertwined with cucumber which is completely dried off; on bean mosaic viral infection is observed,India,Bihar
+91,Chilli,Leaf Curl Virus,"Young leaves curl upward 
+Leaves become thickened, leathery and slightly giving glossy look",India,Andhra Pradesh
+92,Bean,Powdery Mildew,"Crop: Dolichos bean
+
+Downey mildew 
+-Pale yellow to light green angular spots on the upper leaf surface.
+-On the underside of infected leaves, a downy, grayish to purplish fungal growth appears
+
+Powdery mildew: White, powdery fungal growth appears on the upper surface of leaves, stems",India,Bihar
+93,Cauliflower,Black Rot,"dark, sunken, water-soaked lesions on curds and leaves",India,Bihar
+94,Chilli,Leaf Curl Virus,"leaf curling, crinkling, distorted and stunted growth poor flowering and fruiting",India,Bihar
+95,Mango,Potassium Deficiency,Leaf tip drying or burning in mango is commonly caused by potassium deficiency or salt stress,India,Bihar
+96,Chilli,Mites,Downward curling of dark green leaves in chilli is often a symptom of mite infestation,India,Bihar
+97,Tomato,Leaf Miner,Tomato Leaves with serpentine/zig zag mines.,India,Andhra Pradesh
+98,Guava,Phosphorus Deficiency,A purplish or reddish discoloration of older Guava leaves,India,Bihar
+99,Rice,Stem Borer,Presence of white ear or chaffy grains during the reproductive stage of Rice crop.,India,Telangana
+100,Maize,Fall Armyworm,"Papery spots/patches and Irregular holes on the leaves, Presence excreta in whorl of maize leaves.",India,Andhra Pradesh
+101,Chilli,Thrips,"Upward curling, cup shaped leaves, Stunted Plant Growth.",India,Bihar
+102,Brinjal,Shoot and Fruit Borer,presence of holes on brinjal fruits which is the sign of shoot and fruit borer in,India,Odisha
+103,Red Gram,Sterility Mosaic,the visible issue in the crop appears to be related to sterility mosaic disease which leads to leaf damage specifically distortion of leaves. small spots can also be seen,India,Bihar
+104,Bean,Nitrogen Deficiency,yellow discoloration and leaf damage is seen. it may be a nutrient deficiency or disease,India,Bihar
+105,Potato,Late Blight,the visible issue in the potato field appears to be late blight exhibiting discoloration leading to rapid wilting and defoliation,India,Bihar
+106,Chilli,Leaf Curl Virus,"the curling, crinkling and distortion of leaves, often accompanied by stunted growth can be seen",India,Andhra Pradesh
+107,Maize,Stem Borer,larvae excreta can be seen and irregular holes,India,Bihar
+110,Tomato,Leaf Curl Virus,"Tomato Leaf Curl Virus (TLCV): slightest symptoms of TLCV symptoms were seen 
+
+Symptoms:
+-Upward or downward curling of young leaves.
+-Thickened, puckered, or distorted leaf growth
+
+Control measures:
+-Cultural: Remove infected plants, maintain spacing, rotate crops.
+-Biological/Organic: Neem oil, insecticidal soaps, encourage natural predators.
+-Chemical: Systemic insecticides (Imidacloprid 0.3-0.5 ml/L) to control whitefly vectors.
+-Preventive: Use resistant varieties, protect seedlings with insect-proof nets.",India,Jharkhand
+111,Onion,Thrips,"Onion thrips infestation: 
+Symptoms: Onion tip burning and slight leaf curling at the tips
+
+control measures: 
+-Spray Neem oil or insecticidal soap.
+-Encourage natural predators like ladybugs.
+-Maintain proper plant spacing and field hygiene.",India,Bihar
+112,Tomato,Leaf Curl Virus,"Initial symptoms of Tomato leaf curl virus is observed 
+
+-observed symptoms: leaf curling and distortion of leaves 
+
+-Control measures:
+Cultural: Remove infected plants, maintain spacing, rotate crops.
+
+Biological/Organic: Neem oil, insecticidal soaps, encourage natural predators.
+
+Chemical: Systemic insecticides to control whitefly vectors.
+
+Preventive: Use resistant varieties, protect seedlings with insect-proof nets",India,Bihar
+113,Papaya,Papaya Ring Spot Virus,"symptom: Papaya bunchy top disease(this disease is  not listed in the above options)
+
+symptoms: Stunted growth and shortened internodes.
+Leaves appear small, narrow, and clustered at the top (bunchy appearance).
+Leaf curling, yellowing, or chlorosis.
+Reduced flowering and fruiting; fruits may be malformed.
+
+Control measures:
+Cultural: Remove infected plants, use virus-free seedlings, maintain spacing and sanitation, control weeds.
+
+Biological/Organic: Encourage natural aphid predators, spray neem oil or insecticidal soaps.
+
+Chemical: Systemic insecticides like imidacloprid for aphid control.
+
+Preventive: Use resistant varieties, protect young plants with insect-proof nets",India,Andhra Pradesh
+114,Papaya,Nitrogen Deficiency,Yellow of leaves and interviews,India,Bihar
+115,Pumpkin,Powdery Mildew,"Visible symptom is the appearance of white, powdery spots on the upper surfaces of leaves in Pumpkin. Typical signs of Powdery mildew disease",India,Bihar
+116,Red Gram,Aphids,"Aphids infested Arhar(Pigeon Pea) plants at flowering stage ,is very damage causing at this stage of the crop.",India,Odisha
+117,Maize,Nitrogen Deficiency,Yellowing of leaf (Chlorosis),India,Bihar
+118,Potato,Aphids,Potato leaves curling and yellow patches on leaves show that it could be aphids.,India,Bihar
+119,Chilli,Thrips,"A very low population of thrips, which typically attack chilli during the flowering stage, has been observed on the flowers",India,Andhra Pradesh
+120,Rice,Blast,Rice blast diseases : This is fungal diseases caused spindle-shaped spots with grayish center and brown margins on leaves,India,Bihar
+121,Maize,Fall Armyworm,Damage caused by Fall Armyworm .Holes and ragged edges on the leaves and the presence of frass may also be visible in the whorl.,India,Bihar
+122,Potato,Magnesium Deficiency,Leaves showing interveinal yellow colour (chlorosis) with veins remaining green,India,Bihar
+123,Brinjal,Shoot and Fruit Borer,"Leaves with holes and irregular feeding damage, crinkled young leaves",India,Bihar
+124,Papaya,Powdery Mildew,"White, powdery patches on the leaf surface, typical of the fungus, growth is spread all over the leaf.",India,Bihar
+125,Potato,Cutworms,Some leaves have cut pattern on them which could be resultant of cutworm.,India,Bihar
+126,Cabbage,Nitrogen Deficiency,Yellowing of the older leaves with a bit of pale/light green color is a symptom of nitrogen deficiency.,India,Bihar
+127,Maize,Fall Armyworm,It usually creates a “window pane” effect on leaves at an early stage and then irregular large holes with frass (insect waste) in the whorl.,India,Andhra Pradesh
+128,Cabbage,Diamondback Moth,"Damage symptom of DBM - Plutella xylostella, holes on leaves and feeding damage on central leaves.",India,Bihar
+129,Groundnut,Collar Rot,"wilting, drying and drooping of leaves.",India,Andhra Pradesh
+130,Red Gram,Phytophthora Blight,"Pods turned black, shriveled, and rotten, resulting in an impact on yield.",India,Andhra Pradesh
+131,Maize,Fall Armyworm,The caterpillar in the image resembles the larvel stage of the moths in the known as Fall Armyworm . The leaf structure suggests a monocotyledonus plant such as Maize. the feeding habit leads to various forms of damage depending on crop and larval stage including defoliation.,India,Bihar
+132,Squash,Powdery Mildew,The leaves shows white fuzzy coating which is know as fungal diseases like powdery mildew.,India,Bihar
+133,Rice,Nitrogen Deficiency,"yellowing in rice nitrogen deficiency  , certain rice diseases can cause yellowing of leaves, environmental stress , weedy rice infestation",India,Bihar
+135,Cabbage,Nitrogen Deficiency,"the symptom start from the older leaves, the foliage becomes yellowish-green, crop development delayed",India,Bihar
+136,Sponge gourd,Powdery Mildew,white patches on the leaves caused by fungal infection,India,Bihar
+137,Chilli,Nitrogen Deficiency,"yellowing of leaves 
+falling of flowers",India,Telangana
+138,Cucumber,Downy Mildew,Yellowish angular spots in the initial stage.,India,Bihar
+140,Chilli,Nitrogen Deficiency,yellowing of the plant leaves or insufficient light can aslo  lead their leaves can turn pale or yellowish as they struggle to produce chlorophyll,India,Andhra Pradesh
+141,Medicinal plants,Potassium Deficiency,"yellowing of leaves starts from margins, main venis remain dark green , curled leaves, stunted growth",India,Bihar
+142,Potato,Aphids,"basically it as potato leafroll virus so it is due to aphids 
+Upturned leaf margins 
+stiff and upward pointing stalks 
+stunted growth",India,Bihar
+144,Chilli,Thrips,"leaves curl upwards 
+early defoliation of plant 
+flowers",India,Bihar
+145,Tobacco,Whiteflies,"leaf thickening, downward leaf curling, vein swelling as well as stunting symptoms 
+Plant height is reduced and internodes are shortened",India,Bihar
+146,Wheat,Armyworm,"feeding damage on all plant parts 
+frass can be found on leaves",India,Karnataka
+147,Mango,Anthracnose,"It is fungal diseases causing white spots on leaves potentially leading to defoliation 
+Anthracnose may also cause black irregularly shaped lesions on leaves and fruits",India,Bihar
+149,Chilli,Nitrogen Deficiency,yellowing of leaves are seen in the picture,India,Bihar
+150,Mango,Mealybugs,"the mango plant shows mealy bug infestation which looks like white, waxy colonies on stem",India,Bihar
+151,Chickpea,Fusarium Wilt,the yellowing and wilting in chickpea is caused by fusarium wilt,India,Bihar
+153,Maize,Nitrogen Deficiency,the image shows nitrogen deficiency with the maize crop identified by yellowing of leaves,India,Bihar
+154,Bean,Mosaic Virus,"irregular yellow green mottling on leaves with puckered appearence
+lesions enlarge becoming dark brown 
+stunted growth",India,Andhra Pradesh
+155,Cauliflower,Boron Deficiency,the image shows browning or discoloration on its head and potentially uneven or loose curd formation,India,Bihar
+156,Chilli,Leaf Curl Virus,the issue in the image is leaf curl disease caused by whitefly. the leaves are upward curling and sometimes inward curling can also be seen,India,Telangana
+157,Banana,Calcium Deficiency,the image shows calcium deficiency which leads to improper leaf development and crinkling of leaf,India,Bihar
+159,Chilli,Leaf Curl Virus,"the issue is leaf curl virus of chilli,",India,Jharkhand
+160,Mango,Powdery Mildew,powdery mildew observed on inflorescence and stalks of mango,India,Jharkhand
+161,Chilli,Leaf Curl Virus,the symptoms shows leaf curl and distortion and characterstic leaf spots and blight,India,Bihar
+164,Brinjal,Potassium Deficiency,purplish border can be seen on the edges which is a potassium deficiency,India,Bihar
+165,Mango,Mealybugs,small white soft bodied patches can be seen with honey dew appearance can be seen,India,Bihar
+166,Chilli,Leaf Curl Virus,curling of leaves can be seen yellowing of leaves can also be seen,India,Andhra Pradesh
+167,Chilli,Leaf Curl Virus,downward curling of leaves seen in chilli,India,Jharkhand
+169,Maize,Nitrogen Deficiency,yellowing of leaves,India,Bihar
+170,Mango,Powdery Mildew,"Mango plant having powdery mildew disease, which appears as white, powdery patches on leaves, flowers, and fruits. The disease causes premature dropping of flowers and young fruits, reducing crop yields. Apply fungicides such as wettable sulfur @ 2gm per liter of water foliar spray.",India,Bihar
+171,Wheat,Loose Smut,"Loose Smut transforms entire heads of wheat into black, powdery masses of spores, diseases are seed-borne and spread by spores, with symptoms appearing during or after the plant's heading stage. Foliar spray of fungicides like triadimefon can be used to cure existing infections and prevent further spread, particularly at the early stem extension stage. Treat the seeds with Carbendazim (2.5 g/kg seed)
+Use of smut resistant varieties.",India,Bihar
+172,Mango,Anthracnose,"Mango leaves affected by anthracnose, to control remove infected debris and prune for good air circulation. 
+Fungicides:
+Rotation: Alternate between different fungicides to prevent resistance, including contact (e.g., copper-based) and systemic types.",India,Telangana
+174,Papaya,Papaya Ring Spot Virus,upper leaves browning wilting and a dried appearence,India,Bihar
+175,Potato,Early Blight,"Potato plants having small water soaked patches on the leaves, on close observation few leaves started turning brownish, symptoms of early blight. To control early blight Spray Carbendazim or Chlorothalonil 1ml per liter of water, spray 8 to 10 days interval.",India,Bihar
+176,Bottle gourd,Red Pumpkin Beetle,"The caterpillar is thorny, seems venomous and stingy. Could be a type of Bihar Hairy caterpillar on leaves of Bottle gourd plant. To control these type caterpillars spray Chlorpyriphos or Propenophos 30% EC @2ml per liter of water or 2% powder could be dusted over the foliage and base of the plant.",India,Andhra Pradesh
+177,Tobacco,Potassium Deficiency,"Younger leaves of Tobacco are turning yellow, which is symptoms of Potassium deficiency. To recover at this stage foliar spray of KNO3 or MOP(Murate of Potash) @ 1gm per liter of water is advised.",India,Bihar
+178,Chikoo,Cutworms,"The Chikoo plant Leaves are affected with cutworm insects, the damage to leaves are clearly seen in the image. it can be controlled by spray of Chloropyriphos or Prophenophos@ 2ml per liter of water at regular interval of 8 to 10 days.",India,Bihar
+179,Chilli,Leaf Curl Virus,"curling of leaves downward can be cause of leaf curl virus caused by white fly, we can use pesticide or yellow sticky trap to control these pest",India,Bihar
+180,Paddy,Blast,"Typical Blast disease symptoms in Paddy. Which can be controlled by use of resistant rice varieties, apply seed treatments, maintain consistent field flooding to prevent disease development, and apply fungicides like tricyclazole or azoxystrobin @ 1ml per liter of water during critical growth stages.",India,Bihar
+181,Brinjal,Shoot and Fruit Borer,"The brinjal plant affected with Shoot and Fruit borer, wilted plant top portion to be cut and destroyed. At initial stages Neem oil,1500ppm Azhadiractin @1ml per liter of water to be sprayed at 8-days interval. In case of severe infestation Emamectin Benzoate or Lambda-Cyhalothrin to be applied @1.5ml per liter of water at 8 to 10 days interval.",India,Bihar
+182,Cowpea,Leaf Hopper,"Leaves are damaged by Leaf hoppers and also leaf eating caterpillars. At early stages apply Neem oil, 300ppm @ 5ml per liter of water or for chemical control spray Chlorpyrifos with Cypermethrin @ 2ml per liter of water at every 8-days interval",India,Bihar
+183,Papaya,Anthracnose,"Papaya fruits infected with anthracnose disease, which can be checked by spraying  Mancozeb 0.2 % at 10 days interval controls the disease. Fumigation with bezyl-isothiocyanate controls post harvest spots and rots.",India,Karnataka
+185,Guava,Bark Eating Caterpillar,Caterpillar feeds on the leaves surfaces and reduces the growth,India,Bihar
+186,Brinjal,Mites,"Symptoms:
+-Pin head size spots on the the leaves especially underside of the leaves, fine webbing
+-Yellowing and bronzing of leaves
+
+Brinjal Mite Control:
+-Cultural: Remove infested leaves, maintain irrigation, avoid excess N, rotate crops.
+-Biological: Conserve predatory mites and ladybird beetles.
+-Botanical: Spray Neem oil 3% or NSKE 5%.
+-Chemical: Use Propargite (2 ml/L) or Fenpyroximate (1 ml/L) on leaf undersides.
+-Preventive: Keep field clean, moist, and weed-free",India,Bihar
+187,Bean,Root Rot,"Symptoms: Yellowing and wilting of lower leaves.
+
+Bean Root Rot Control:
+-Cultural: Use well-drained soil, avoid waterlogging, rotate crops.
+-Seed: Treat with Trichoderma viride (4 g/kg) or Carbendazim (2 g/kg).
+-Soil: Apply Trichoderma compost or neem cake.
+-Chemical: Drench with Carbendazim 0.1% or Copper oxychloride 0.25%.
+-Sanitation: Remove and destroy infected plants.",India,Bihar
+188,Cabbage,Cabbage Looper,"-Cabbage Head Borer (Hellula undalis): Tthe pest that bores into cabbage heads and leaves fecal matter inside
+-Control measures:
+Cultural: Remove infested plants; rotate crops.
+Biological: Release Trichogramma chilonis @ 50,000/ha.
+Botanical: Spray Neem oil 3% or NSKE 5%.
+Chemical: Use Spinosad 0.3 ml/L or Emamectin benzoate 0.4 g/L.",India,Bihar
+190,Mango,Bacterial Canker,leaf burning symptoms is visible in the image  and,India,Bihar
+191,Lemon,Leaf Miner,"leaf miner that feed on leaves are seen, eaten leaves like structure is visible",India,Bihar
+192,Bottle gourd,Powdery Mildew,"discoloration of leaves, curling and white powdery substance like visible sign make it appear to be infected",India,Bihar
+193,Chilli,Leaf Curl Virus,upward curling of leaves,India,Andhra Pradesh
+194,Mango,Boron Deficiency,"Mango flowers have dried up with poor fruit setting and fruit dropping.
+Spray the tree with Naphthalene Acetic Acid (NAA) at the pea-sized fruit stage to increase fruit retention. Gibberellic Acid (GA3) can also be used to aid retention.
+Apply Boron (e.g., Borax 0.2%) before flowering to improve pollination. During fruit development, spray with Calcium (e.g., Calcium Nitrate 1%) to strengthen fruit walls and Potassium (e.g., Potassium Nitrate 1-1.5%) to reduce fruit drop.",India,Andhra Pradesh
+196,Banana,Sigatoka Leaf Spot,"Sigatoka disease in Banana-Spray 3 times with Carbendazim 0.1 per cent or Propicanozole 0.1 % or Mancozeb 0.25% and teepol (sticking agent) at 10-15 days interval, as the disease starting from initial appearance of leaf specks",India,Bihar
+197,Maize,Fall Armyworm,"Fall armyworm (FAW) management in maize requires an integrated approach combining cultural practices, biological control, and chemical control.
+For early infestations, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,West Bengal
+198,Chickpea,Nitrogen Deficiency,Typical Nitrogen deficiency with yellowing of leaves and crop health is poor. Which can be controlled by use of balance fertiliser having Nitrogen. For immediate result apply foliar spray of Nano DAP@ 2.5 ml per liter of water.,India,Bihar
+199,Brinjal,Shoot and Fruit Borer,"The brinjal plant affected with Shoot and Fruit borer, wilted plant top portion to be cut and destroyed. At initial stages Neem oil,1500ppm Azhadiractin @1ml per liter of water to be sprayed at 8-days interval. In case of severe infestation Emamectin Benzoate or Lambda-Cyhalothrin to be applied @1.5ml per liter of water at 8 to 10 days interval.",India,Andhra Pradesh
+200,Groundnut,Aphids,"Aphids infestation symptoms along with caterpillar damage also seen. For organic control of these common pests spray Neem oil,300ppm @ 5ml per liter of water at 8 to 10 days  interval in early stages of growth.
+In cases of high infestation, spray an insecticide such as Thiamethoxam (12.6%) + Lambda-cyhalothrin (9.5%) at 5 ml per 10 liters of water.",India,Andhra Pradesh
+202,Potato,Early Blight,Typical early blight symptoms on Potato leaves. Very early spraying with Zineb or captan 0.2% and repeating it for every 15 – 20 days gives effective control. Removal and destruction of infected plant debris should be done because the spores lying in the soil are the primary source of infection.,India,Bihar
+204,Chilli,Thrips,"Twisting of leaves, stunted growth  due to Thrips infestation. Thrips can be controlled by Use reflective mulch, sticky traps, or biological controls like ladybugs. You can also spray with neem oil 300ppm @5ml per liter of water.",India,Andhra Pradesh
+205,Brinjal,Shoot and Fruit Borer,"Early stage of shoot and fruit borer in Brinjal crop. At Initial stages Neem oil,1500ppm Azhadiractin @1ml per liter of water to be sprayed at 8-days interval. At severe case, you can use Emamectin Benzoate or Lambda-Cyhalothrin @ 1ml per liter of water at 8-days interval.",India,Bihar
+206,Spinach,Aphids,"The spinach leaves are affected by aphids, which can be controlled by spray of Neem oil, 300ppm@ 5ml per liter of water by organic method. Also control by Soap spray: Mix 1-2 tablespoons of mild liquid soap with one gallon of water. Spray it directly on the aphids, covering the tops and undersides of leaves, as the soap suffocates them by breaking down their protective coating.",India,Andhra Pradesh
+208,Potato,Early Blight,"Symptoms: Notable symptoms include yellowing of the lower leaves, accompanied by the appearance of brown spots on them
+
+Control measures: Remove and destroy infected leaves; practice crop rotation and proper spacing for good air circulation.
+
+Apply recommended fungicides (e.g., mancozeb or chlorothalonil) at regular intervals.",India,Bihar
+209,Cauliflower,Downy Mildew,"The lower leaves show powdery symptoms with the initiation of necrotic spots on the upper surface, and downy mildew symptoms have also begun to appear on the lower leaves
+
+Control measures:
+Spray appropriate fungicides like Mancozeb or Copper oxychloride at recommended intervals and remove severely affected leaves to reduce disease spread",India,Bihar
+210,Maize,Fall Armyworm,"Symptoms: Larvae feed on leaves, creating irregular holes and defoliation; severe infestations can damage tassels and cob formation.
+
+Control measures:
+Handpick larvae in small fields.
+
+Spray Neem-based insecticides or chemical insecticides like Emamectin benzoate or Chlorantraniliprole as per recommendation.
+
+Use pheromone traps for monitoring and early control",India,Bihar
+211,Onion,Thrips,"Symptom: The onion leaves show tip drying and curling, often indicating nutrient deficiency (like potassium or water stress) or early thrips infestation.
+ 
+control measures
+Pest control: If thrips are present, spray Neem oil or recommended insecticides.
+Cultural practices: Remove severely affected leaves and maintain field hygiene.
+Water and nutrient management: Ensure proper irrigation and balanced fertilization, especially potassium",India,Bihar
+215,Maize,Fall Armyworm,"Maize fall army warm damage:
+Scrapping of leaf surface by young larvae.
+Older larvae, feeds upon central whorl, causing extensive defoliation.
+Whorl, tassel and cob fed by larva.
+
+Control measures:
+Biological: Use natural enemies like Trichogramma, Telenomus, or Beauveria bassiana fungus.
+
+Chemical: Apply recommended insecticides (e.g., Spinosad, Chlorantraniliprole) at early larval stage",India,Bihar
+217,Maize,Fall Armyworm,"Symptoms:
+Chewed or ragged leaves with holes or irregular edges.
+Larvae or caterpillars may be visible on the leaves.
+Severe feeding can reduce photosynthesis and yield
+
+Control Measures:
+
+Handpick larvae if infestation is small.
+
+Biological control: Trichogramma, Beauveria bassiana.
+
+Chemical control: Spray Spinosad or Chlorantraniliprole at early larval stage",India,Andhra Pradesh
+218,Brinjal,Mites,"Brinjal Mite Damage Symptoms:
+
+Leaves turn yellowish or bronze, curl, and become scorched.
+
+Severe infestation leads to stunted growth and reduced fruit yield.
+
+Tiny mites may be visible on the underside of leaves as fine webbing
+
+Control measures:
+Cultural: Remove and destroy infested leaves, maintain proper plant spacing, avoid excessive nitrogen.
+
+Biological: Release predatory mites (Phytoseiulus persimilis).
+
+Chemical: Spray miticides like Propargite or Dicofol, following recommended doses.",India,Bihar
+221,Brinjal,Shoot and Fruit Borer,"Identified pest: Brinjal Fruit and Shoot Borer 
+Symptoms:
+Wilting of young shoots due to larval boring.
+
+Small holes on fruits with excreta (frass) sticking at the entry point.
+
+Infested fruits become unfit for consumption and drop prematurely.
+
+Control Measures:
+Collect and destroy affected shoots and fruits.
+
+Install pheromone traps @ 12–15/acre to monitor and trap moths.
+
+Use neem seed kernel extract (NSKE) 5% or neem oil 2%.
+
+Spray insecticides like Emamectin benzoate 5SG @ 0.4 g/L or Cypermethrin 25EC @ 0.5 ml/L if infestation is severe.",India,Andhra Pradesh
+224,Tomato,Leaf Miner,"Tomato Leaf Miner (Tuta absoluta)
+Symptoms:
+Small, irregular mines or blotches on leaves caused by larvae feeding inside.
+
+Leaves dry and curl due to extensive mining.
+
+Larvae bore into stems and fruits, causing holes and fruit rotting.
+
+Reduced photosynthesis and yield loss.
+
+Control Measures:
+Remove and destroy infested leaves and fruits.
+
+Use pheromone traps @ 12–15/acre for monitoring and mass trapping.
+
+Spray neem oil 2% or NSKE 5% as a preventive measure.
+
+Release biological control agents like Trichogramma chilonis.
+
+If severe, spray Emamectin benzoate 5SG @ 0.4 g/L or Spinosad 45SC @ 0.3 ml/L",India,Andhra Pradesh
+225,Chilli,Thrips,"Chilli Black Thrips (Scirtothrips dorsalis)
+Symptoms:
+Silvery or brownish patches on tender leaves
+Leaf curling and distortion, especially at the top
+Buds and flowers drop prematurely.
+In severe cases, plants become stunted and yield decreases.
+
+Control Measures:
+Remove and destroy infested plant parts.
+Avoid excess nitrogen and maintain field sanitation.
+Spray neem oil 2% or NSKE 5%.
+If severe, spray Fipronil 5SC @ 1 ml/L or Imidacloprid 17.8SL @ 0.3 ml/L.",India,Bihar
+226,Ridge gourd,Downy Mildew,"Ridge Gourd Downy Mildew 
+Symptoms:
+Yellow angular spots appear on upper leaf surfaces.
+
+Greyish or purplish mold growth on the lower side of leaves.
+
+Infected leaves turn brown, curl, and dry up.
+
+Reduces photosynthesis and fruit yield.
+
+Control Measures:
+Remove and destroy infected leaves.
+
+Ensure good air circulation and avoid overhead irrigation.
+
+Spray Mancozeb 0.25% or Metalaxyl + Mancozeb 0.2%.
+
+Grow resistant or tolerant varieties if available.",India,Bihar
+227,Lemon,Leaf Miner,"The citrus plants affected with leaf miner and leaf eating caterpillars. For leaf miner control apply Neem oil, 300ppm @ 5ml per liter of water. synthetic insecticides like spinosad or imidacloprid as a last resort. For caterpillar control manual removal and use organic sprays like neem oil or a soap and water solution. For persistent problems, consider biological controls such as Bacillus thuringiensis or use chemical sprays as a last resort.",India,Bihar
+228,Cauliflower,Cutworms,"The cauliflower plants affected with cutworm and caterpillars. For  control at early growing stage of Cauliflower apply, Neem oil and neem seed kernel extract (NSKE) 300ppm@5ml per liter of water are effective.",India,Bihar
+229,Rose,Powdery Mildew,"The Rose plants have powdery mildew, a common fungal disease that appears as a white, powdery coating on leaves, stems, and buds. Powdery mildew can be controlled by application of wettable Sulphur @ 0.2%. Preventive measures by spray of Neem oil,300ppm @ 5ml per liter of water at early stages of growth.",India,Bihar
+231,Potato,Early Blight,"Early blight on potato plants, appears as small, dark brown-to-black spots on the older leaves, which grow into larger lesions. To control,Use fungicides like mandipropamid, chlorothalonil, fluazinam, or mancozeb.
+Seed treatment with fungicides like mancozeb before sowing.",India,Bihar
+233,Tomato,Bacterial Wilt,"In the given image tomato wilt symptoms are noticed:
+Yellowing of lower leaves, wilting, and drooping. Plants may die in severe cases.
+
+Control Measures:
+Cultural: Use resistant varieties; rotate crops; remove and destroy infected plants; avoid waterlogging.
+Biological: Apply antagonistic fungi like Trichoderma spp. to soil.
+
+Chemical: Soil drenching with fungicides like Carbendazim or Thiophanate-methyl (follow label instructions).",India,Jharkhand
+237,Guava,Rust,"Symptoms: Guava Rust
+
+Yellow-orange pustules on leaves, especially the underside.
+
+Leaves may curl, dry, and drop prematurely.
+
+Severe infection reduces flowering and fruit set.
+
+Control Measures:
+Cultural: Remove and destroy infected leaves; maintain proper tree spacing and hygiene.
+
+Chemical: Spray fungicides like Copper Oxychloride or Mancozeb at early stages.",India,Andhra Pradesh
+238,Maize,Fall Armyworm,"Maize Fall Armyworm (Spodoptera frugiperda):
+
+Damage Symptoms:
+Larvae feed on leaves, creating irregular holes and ragged edges.
+
+“Windowpane” effect on young leaves (transparent patches).
+
+Damaged whorl leaves may dry; severe infestation can damage cobs and reduce yield.
+
+Frass (insect excreta) visible on leaves.
+
+Control Measures:
+Cultural: Remove and destroy affected plants; maintain weed-free fields; practice crop rotation.
+
+Biological: Use natural enemies like Trichogramma spp., Bracon spp., or entomopathogenic fungi.
+
+Chemical: Apply selective insecticides such as Spinosad, Emamectin benzoate, or Chlorantraniliprole at early infestation.",India,Bihar
+240,Chilli,Mites,"Damage Symptoms: Chilli mites
+
+-inverted boat shaped leaves, leaf curling and distortion
+-Leaves show yellowing, bronzing, or silvery patches.
+-Severe infestation reduces flowering, fruit set, and yield.
+
+Control Measures:
+Cultural: Remove and destroy heavily infested leaves; maintain proper spacing and irrigation; avoid water stress.
+
+Biological: Release predatory mites like Phytoseiulus persimilis.
+
+Chemical: Spray miticides such as Abamectin, Spiromesifen, or Fenpyroximate at early infestation.",India,Bihar
+242,Potato,Late Blight,"Potato Late Blight (caused by Phytophthora infestans):
+
+Water-soaked, dark green or brown lesions on leaves, often along leaf margins.
+
+Rapid spread of lesions under humid conditions; leaves may collapse and die.
+
+Control Measures:
+Cultural:
+Use certified disease-free seed tubers.
+
+Ensure proper spacing and avoid waterlogging.
+
+Remove and destroy infected plants and crop debris.
+
+Practice crop rotation with non-host crops.
+
+Chemical:
+
+Apply fungicides such as Mancozeb, Metalaxyl, or Copper Oxychloride at early disease stages.
+
+Repeat sprays at recommended intervals, especially during humid conditions.
+
+Resistant Varieties:
+Grow late-blight-resistant potato varieties where available.",India,Bihar
+246,Maize,Fall Armyworm,"Symptoms of FAW damage, For early infestations, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,Bihar
+247,Potato,Late Blight,"Late blight symptoms with water soaked spots appear on leaves, increase in size, turn purple brown& finally black colour
+White growth develops on under surface of leaves.
+Control measures: spraying with mancozeb or zineb 0.2 % should be done to prevent infection of tubers.",India,Bihar
+252,Onion,Healthy,"Leaf Symptoms:
+Older leaves show marginal chlorosis (yellowing at leaf edges).
+Leaves develop necrotic spots or die back from the tip.
+Leaf tips may curl or scorch.
+Stunted leaf growth, pale green color.
+measures:
+Apply potassium fertilizers such as:
+Muriate of Potash (KCl) – commonly used.
+Sulfate of Potash (K2SO4) – preferred if sulfur is also needed.
+Dosage: Typically, 30–60 kg K₂O/ha depending on soil test results.",India,Bihar
+253,Tomato,Fruit Borer,"Symptoms :
+Fruit borers (Helicoverpa armigera / tomato fruit borer):
+
+Caterpillars bore holes into immature fruits, leaving frass (excrement) inside.
+Fruits may rot quickly after entry
+
+measures:
+Cultural: Rotate crops, remove affected fruits.
+
+Biological: Release Trichogramma wasps, encourage predators.
+
+Chemical: Use Bt, Neem oil, or pyrethroids.
+
+Barriers: Use insect netting and fruit bagging.
+
+Monitor: Use pheromone traps, check for pests.
+
+Preventive: Keep plants healthy, harvest early.",India,Bihar
+255,Groundnut,Leaf Spot,"the identified symptoms are 
+-small holes on the leaves 
+-leaf spots on the leaves 
+
+possible causes  are;
+for leaf holes are;
+Pests:
+Caterpillars (e.g., Spodoptera): They feed on leaves, causing small holes.
+
+Control: Use Bacillus thuringiensis (Bt), Neem oil, or pyrethroids for caterpillar control.
+
+Leafhoppers: They cause leaf spots and small holes due to feeding.
+
+Control: Apply insecticidal soap or systemic insecticides for leafhopper management
+
+leaf spot symptoms are due to;
+Early Leaf Spot (Cercospora arachidicola): Small spots that may grow larger, with yellow halos around them.
+Control: Apply fungicides (e.g., chlorothalonil) and practice crop rotation",India,Telangana
+261,Banana,Sigatoka Leaf Spot,"Symptoms:
+Rusty spots on the underside of banana leaves are usually caused by Sigatoka disease (Yellow Sigatoka), a fungal infection caused by Mycosphaerella musicola.
+
+-Symptoms: Rusty or yellow streaks/spots on the underside of leaves, later turning brown.
+Cause: High humidity and poor air circulation favor fungal growth.
+
+-Management:
+Remove and destroy infected leaves.
+Apply fungicides like mancozeb or copper-based sprays as per recommended guidelines.
+Improve spacing and drainage to reduce humidity.",India,Kerala
+263,Cauliflower,Black Rot,"symptom: Black Rot (Xanthomonas campestris):
+
+Symptoms: Black discoloration on curd and stem, slimy decay.
+Control: Store at low temperature (0–2 °C), maintain hygiene, avoid mechanical injury.",India,Bihar
+264,Gram,Powdery Mildew,"Powdery Mildew in Blackgram
+
+Symptoms:
+White, powdery fungal growth on upper leaf surfaces.
+Leaves turn yellow, curl, and dry prematurely.
+Severe infection reduces pod formation and yield.
+
+Control Measures:
+Cultural: Use resistant varieties, avoid dense planting, and ensure good air circulation.
+Biological: Spray neem oil (2%) or Trichoderma-based formulations.
+Chemical: Apply wettable sulfur (0.2%) or carbendazim (0.1%) at early stages; repeat if needed.",India,Bihar
+266,Citrus,Citrus Psyllid,"Citrus Psyllid Damage:
+Nymphs and adults suck sap from young shoots and leaves, causing leaf curling, yellowing, and stunted growth.
+
+They transmit Citrus Greening (Huanglongbing), a severe disease that reduces fruit quality and tree lifespan.
+
+Control Measures:
+Cultural: Prune infested shoots, maintain orchard hygiene, and avoid dense planting.
+Biological: Release predators like Tamarixia radiata and use neem-based sprays.
+Chemical: Apply imidacloprid or thiamethoxam as soil drench or foliar spray at recommended doses; rotate chemicals to prevent resistance.",India,Telangana
+267,Maize,Fall Armyworm,"Maize Fall Armyworm (FAW)
+
+Symptoms:
+Leaf Damage: Window-pane feeding on young leaves; later, large irregular holes.
+Frass: Sawdust-like droppings in leaf whorls.
+Larvae Presence: Caterpillars hiding in whorls during the day.
+Severe Infestation: Stunted growth and poor cob development.
+
+Control Measures:
+Cultural: Early sowing, deep ploughing, and crop rotation.
+Mechanical: Hand-pick larvae and destroy egg masses.
+
+Biological:
+Release Trichogramma egg parasitoids.
+Spray neem-based formulations (5%) or Bt (Bacillus thuringiensis).
+
+Chemical:
+Apply spinosad (0.3 ml/L) or emamectin benzoate (0.4 g/L) when infestation crosses threshold (5% plants damaged).
+Rotate insecticides to prevent resistance.",India,Bihar
+275,Brinjal,Shoot and Fruit Borer,"Infestation of borer and caterpillars(spodoptera) on plants of brinjal. Initial stages Neem oil,1500ppm Azhadiractin @1ml per liter of water to be sprayed at 8-days interval.
+For managing fruit borer infestations in brinjal, you can use Emamectin Benzoate or Lambda-Cyhalothrin.",India,Bihar
+277,Brinjal,Shoot and Fruit Borer,"In the given image brinjal shoot and fruit borer damage is identified 
+Symptoms in shoots are ;
+Larvae bore into tender shoots, causing wilting and drying of terminal shoots.
+Drooping of leaves and “dead hearts” in severe cases.
+
+Control measures:
+Cultural: Remove and destroy infested shoots/fruits; rotate crops; maintain field sanitation.
+Mechanical: Hand-pick larvae; install pheromone traps (10–12 per acre).
+Biological: Spray Bacillus thuringiensis (Bt); apply neem-based products (NSKE 5%, neem oil); encourage natural parasitoids.
+Chemical: Use insecticides like Carbaryl (3 g/l), Profenofos (2 ml/l), or Cypermethrin (1 ml/l) judiciously; avoid residues near harvest.
+IPM: Combine all methods with regular monitoring for sustainable control.",India,Bihar
+282,Lady's Finger,Healthy,"Apply calcium-rich amendments like lime, gypsum, or calcium nitrate to the soil. Foliar Sprays: Use foliar sprays containing calcium chloride, calcium acetate, or calcium nitrate to provide a quick boost of calcium to the plant.",India,Bihar
+283,Garlic,Healthy,Nitrogen top dressing in the form of Urea or Neem coated Urea is also applicable to the soil after weeding during earthing up.,India,Bihar
+284,Groundnut,Leaf Spot,Symptoms of Leaf spot in Groundnut. At present  condition it can be controlled by foliar spray of Tebuconazole or Chlorothalonil@ 1ml per liter of water.,India,Bihar
+285,Brinjal,Mites,The brinjal plant is affected with mites as per symptoms. Acaricides like Dicofol (0.05%) and Wettable Sulphur (0.3%) gives effective control of mites. Collection and burning of severely infested plant parts reduces further multiplication of mites.,India,Bihar
+287,Maize,Fall Armyworm,"Fall armyworm in Maize plant, to control for early infestations, apply biopesticides like Neem azadirachtin,1500ppm@3ml per liter of water or chemical insecticides such as chlorantraniliprole or flubendiamide@1ml per liter of water to the plant's whorl.",India,Bihar
+289,Potato,Bacterial Wilt,"Potato wilt
+Observed symptoms: 
+-Sudden -wilting of plants, even when soil has moisture
+-Yellowing and drying of lower leaves first
+-Brown discoloration in stem/vascular tissue when cut
+-Plants may collapse and die early
+-In bacterial wilt, milky ooze may come out when stem is cut and dipped in water
+
+Control / Management
+-Use disease-free, certified seed tubers
+-Follow crop rotation (3–4 years) with non-host crops
+-Ensure good drainage; avoid waterlogging
+-Remove and destroy infected plants immediately
+-Seed treatment with bioagents (Trichoderma)
+-For fungal wilt: soil drenching with Carbendazim
+-Maintain field sanitation and balanced nutrition",India,Bihar
+290,Chilli,Mites,"Chilli mites – symptoms and control measures
+
+Symptoms
+
+Young leaves become small, thick, curled and brittle
+
+Crinkled, wrinkled appearance of leaves
+
+Shortened internodes, bushy growth
+
+Flower and fruit drop
+
+Fruits become small, rough or deformed
+
+Overall stunted plant growth
+
+Control measures
+
+Remove and destroy heavily infested plant parts
+
+Maintain proper irrigation and field sanitation
+
+Spray neem oil (2–3 ml/L) or azadirachtin
+
+Use wettable sulphur (2 g/L) or miticides as recommended
+
+Encourage natural predators (lady beetles, predatory mites)
+
+Avoid excess nitrogen fertilization",India,Telangana
+291,Brinjal,Mites,"Brinjal (eggplant) mites – symptoms and control measures
+
+Symptoms
+
+Leaves show yellow or pale specks that later turn bronze
+
+Downward curling and drying of leaves
+
+Fine webbing on underside of leaves in severe cases
+
+Stunted plant growth
+
+Reduced flowering and fruit size
+
+Leaves may drop prematurely
+
+Control measures
+
+Remove and destroy heavily infested leaves
+
+Maintain proper irrigation; avoid drought stress
+
+Spray neem oil (2–3 ml/L) or azadirachtin
+
+Use wettable sulphur (2 g/L) or recommended acaricides if infestation is severe
+
+Encourage natural enemies (predatory mites)
+
+Avoid excessive nitrogen fertilizers
+
+Early detection and timely spraying help prevent yield loss",India,Bihar
+294,Cauliflower,Downy Mildew,"Bolting & Blackening of Heads and slight symptoms of downy mildew
+
+Symptoms:
+Premature flower stalk elongation
+
+Head formation is delayed or incomplete
+
+Leaves may appear elongated and loose
+
+Causes:
+
+Low temperatures after seedlings are 4–6 weeks old
+
+Variety sensitivity to cold
+
+Water stress or irregular irrigation
+
+Management:
+
+Choose bolt-resistant varieties
+
+Sow at the correct season to avoid cold stress
+
+Maintain consistent irrigation and nutrition
+
+Avoid delays in transplanting
+
+2. Blackening of Heads
+
+Symptoms:
+
+White cauliflower head develops black or brown patches
+
+Tissue becomes discolored and decayed
+
+Affects marketable quality
+
+Causes:
+
+Fungal infections (Alternaria, Sclerotinia)
+
+Waterlogging or poor drainage
+
+Excess nitrogen or prolonged leaf wetness
+
+Management:
+
+Ensure proper drainage and avoid waterlogging
+
+Remove infected leaves promptly
+
+Spray fungicides like mancozeb (0.25%) or copper oxychloride
+
+Practice crop rotation and maintain field hygiene
+
+Tip: Timely transplanting, balanced fertilization, and good field sanitation reduce both problems.",India,Bihar
+296,Ridge gourd,Powdery Mildew,"Ridge Gourd – Powdery Mildew:
+Symptoms
+
+White, powdery coating on upper and lower leaf surfaces
+
+Leaves may curl, become yellow, and dry
+
+Severe infection can affect flowers and young fruits, reducing yield
+
+Stunted plant growth in heavy infestation
+
+Control Measures
+
+Use resistant varieties if available
+
+Ensure proper plant spacing for good air circulation
+
+Remove and destroy infected leaves
+
+Spray fungicides:
+
+Wettable sulphur (2–3 g/L)
+
+Mancozeb (0.25%) or triforine as per recommendations
+
+Apply potash-rich fertilizers to strengthen plants
+
+Avoid excessive nitrogen, which favors fungal growth",India,Bihar
+298,Papaya,Powdery Mildew,"Papaya – Powdery Mildew: Symptoms & Control
+
+Symptoms
+
+White, powdery fungal growth on leaves, stems, and young fruits
+
+Leaves may curl, yellow, and dry in severe infection
+
+Reduced photosynthesis and fruit size
+
+Young fruits may develop scabby patches
+
+Cause:
+
+Fungal infection caused by Oidium caricae
+
+Control Measures
+
+Use resistant or tolerant varieties
+
+Ensure good air circulation and proper spacing
+
+Remove and destroy infected leaves
+
+Spray sulphur (2–3 g/L) or wettable sulphur
+
+For severe cases, use triforine or systemic fungicides as recommended
+
+Avoid over-fertilization with nitrogen, which favors fungal growth",India,Bihar
+300,Chilli,Mites,"mite Symptoms
+
+Leaves become small, curled, and thickened
+
+Yellow or bronze patches appear on leaves
+
+Stunted plant growth
+
+Flower and fruit drop
+
+Severe infestation may reduce yield significantly
+
+Control Measures
+
+Remove and destroy heavily infested leaves
+
+Maintain proper irrigation and field hygiene
+
+Spray neem oil (2–3 ml/L) or azadirachtin
+
+Use wettable sulphur (2 g/L) or recommended acaricides for severe infestation
+
+Encourage natural predators like ladybugs and predatory mites
+
+Avoid excessive nitrogen fertilization, which favors mite multiplication",India,Bihar
+302,Potato,Late Blight,"Potato Blight (Phytophthora infestans)
+
+Symptoms:
+
+Leaves: Water-soaked, dark green patches → turn brown and necrotic; white fungal growth may appear underneath in humid conditions
+
+Stems: Dark lesions, softening, or rotting
+
+Tubers: Brown/black sunken spots; may rot internally
+
+Spread: Rapid in cool, wet, and humid conditions
+
+Control Measures:
+
+Use disease-free, certified seed tubers
+
+Crop rotation with non-host crops (e.g., cereals)
+
+Ensure good drainage; avoid waterlogging
+
+Remove and destroy infected leaves and tubers
+
+Apply fungicides:
+
+Mancozeb (0.25%) or chlorothalonil for prevention
+
+Metalaxyl + Mancozeb for curative action
+
+Maintain field sanitation and avoid dense planting
+
+Irrigate early in the day to allow leaves to dry quickly",India,Bihar
+303,Rice,Rice Bug,"Rice – Yellow Hairy Caterpillar (Psalis pennatula)
+
+Symptoms
+
+Caterpillars feed on leaf blades, leaving irregular holes
+
+Young seedlings may be completely defoliated
+
+Leaves appear ragged and skeletonized
+
+Caterpillars are yellowish with long hair
+
+Severe infestation can stunt plant growth and reduce yield
+
+Control Measures
+
+Handpick and destroy caterpillars in small fields
+
+Encourage natural predators (birds, spiders)
+
+Spray Bacillus thuringiensis (Bt) for early-stage larvae
+
+Use recommended insecticides if infestation is severe
+
+Maintain field sanitation and remove weeds that host larvae",India,Telangana
+304,Maize,Fall Armyworm,"Maize – Fall Armyworm (Spodoptera frugiperda)
+
+Damage Symptoms
+
+Leaf feeding: Leaves have irregular, ragged holes; often look “shredded”
+
+Whorl damage: Young leaves in the whorl are cut, causing torn, folded leaves
+
+Frass (droppings): Dark green/black droppings visible on leaves and whorls
+
+Cob damage: Larvae may bore into developing cobs, reducing grain quality
+
+Plant stunting: Severe infestation can stunt growth and reduce yield
+
+Control Measures
+
+Early monitoring of whorls for larvae
+
+Handpick and destroy egg masses or small larvae in small fields
+
+Encourage natural predators like ladybugs, lacewings, and parasitic wasps
+
+Spray Bacillus thuringiensis (Bt) or spinosad for early-stage larvae
+
+Use recommended chemical insecticides for heavy infestations
+
+Practice field sanitation and remove weed hosts",India,Telangana
+306,Chilli,Leaf Curl Virus,"Chilli leaf curl virus infestation, it can not be cured, the severely affected plants are uprooted and destroyed. To control whitefly (vector of chili leaf curl virus) spray Imidacloprid @3ml /10 liters of water, or Neem oil,300ppm @ 5ml per liter of water.",India,Andhra Pradesh
+307,Potato,Aphids,"Potato plants affected with Leaf roll virus with Aphids infestation.
+An integrated approach focusing on reducing the aphid vector and using certified, disease-free seed tubers.Removing affected plants and controlling aphid populations with insecticides(Imidachloprid 3ml/10liters of water or Neem oil,300ppm@5ml /liter of water) to prevent virus spread.",India,Bihar
+308,Mango,Powdery Mildew,"Mango plant having severe powdery mildew. Apply neem oil, carbonic acid, or even milk (whey) for natural control. Dust with fine sulfur powder or spray Wettable Sulfur (0.2%) before flowering starts for chemical control.",India,Bihar
+309,Cotton,Jassids,"Cotton leaves pale yellow, with margins developing reddish or bronze patches. ""Hopper Burn"": A signature symptom where leaves dry, turn brown, crumble, and fall off.
+Apply targeted insecticides (like imidacloprid, thiamethoxam) to leaf undersides, or use neem oil for organic control.",India,Gujarat
+310,Tomato,Fruit Borer,"Tomato plant affected by flea beetle adults cause the majority of injury to plants by causing defoliation known as “shot hole” injury. This occurs when the beetles chew numerous small holes on the leaves of infested plants or there is presence of shoot and fruit borer caterpillars. Control by spray of Neem oil,300ppm@5ml per liter of water or chemical control by applying Spinosad or Emamectin benzoate @ 3ml in 10-liters of water.",India,Bihar
+314,Maize,Fall Armyworm,"Maize Fall Armyworm Damage Symptoms:
+
+Leaf damage: Irregular holes, particularly on younger leaves.
+
+Feeding on whorls: Larvae feed on maize whorls, causing the plant to appear “tattered”.
+
+Root and ear damage: The larvae can bore into the ears, reducing kernel development.
+
+Stunted growth: Plants may become stunted due to continuous feeding.
+
+Control Measures:
+
+Insecticidal sprays: Use spinosad or Bacillus thuringiensis (Bt) for effective control.
+
+Neem oil: Natural option to repel and disrupt pest feeding.
+
+Pheromone traps: To monitor and reduce adult moth populations.
+
+Biological control: Introduce natural predators like parasitoid wasps.
+
+Handpicking: Manually remove visible larvae and eggs.
+
+Crop rotation: Prevent pest buildup by rotating crops.",India,Andhra Pradesh
+318,Papaya,Papaya Ring Spot Virus,"Papaya Ringspot Virus (PRSV) Symptoms:
+
+Yellowing of leaves, especially older ones.
+
+Deformed, distorted leaves with a mottled appearance.
+
+Dark green spots or rings on yellowed leaves.
+
+Stunted growth and reduced fruit yield.
+
+Widespread plant decline in advanced stages.
+
+Control Measures:
+
+Remove and destroy infected plants to prevent spread.
+
+Use resistant varieties of papaya.
+
+Control aphid vectors with insecticides or neem oil.
+
+Proper spacing and crop rotation to reduce virus transmission.
+
+Disinfect tools to avoid cross-contamination.",India,Andhra Pradesh
+320,Onion,Downy Mildew,"Watery onion leaves with fuzzy growth are likely caused by:
+
+Downy Mildew: Yellowing and fuzzy gray growth on leaf undersides.
+
+Control: Apply fungicides like mancozeb, remove infected leaves, improve air circulation.
+
+White Rot: Cotton-like fungal growth at the base and on roots.
+
+Control: Remove and destroy infected plants, apply Chlorothalonil, rotate crops.
+
+Bacterial Soft Rot: Soft, watery leaves with a foul smell.
+
+Control: Prune infected leaves, improve drainage, reduce watering.",India,Bihar
+324,Potato,Bacterial Wilt,"Bacterial wilt – symptoms and control measures 
+
+Symptoms:
+Sudden wilting of young leaves during the day, with partial recovery at night
+
+Permanent wilting of the entire plant without yellowing
+
+Brown discoloration of vascular tissues in stem
+
+Milky white bacterial ooze from cut stem when placed in water
+
+Poor root development and eventual plant death
+
+Control measures:
+Use disease-free and resistant/tolerant varieties
+
+Practice crop rotation with non-host crops (cereals, legumes)
+
+Ensure good drainage; avoid waterlogging
+
+Remove and destroy infected plants
+
+Soil solarization or application of bleaching powder/lime in infested fields
+
+Use biocontrol agents like Pseudomonas fluorescens or Bacillus spp.
+
+Maintain field sanitation and avoid movement of contaminated soil",India,Bihar
+325,Tobacco,Tobacco Mosaic Virus,"the identified disease is leaf curl which is not listed in the given options above 
+
+Tobacco leaf curl – symptoms and control
+
+Symptoms:
+Upward or downward curling of leaves
+
+Thickened, leathery, and crinkled leaves
+
+Stunted plant growth and shortened internodes
+
+Reduced leaf size and poor leaf quality
+
+Heavy infestation leads to severe yield reduction
+
+Control measures:
+Use healthy, virus-free seedlings
+
+Rogue out and destroy infected plants at early stages
+
+Control whitefly (Bemisia tabaci), the vector, using need-based insecticides
+
+Use yellow sticky traps to monitor and reduce whitefly population
+
+Remove weed hosts around the field
+
+Grow tolerant/resistant varieties if available
+
+Maintain proper spacing and balanced fertilization",India,Bihar
+327,Brinjal,Shoot and Fruit Borer,"Brinjal leaf roller – damage symptoms and control measures
+
+Damage symptoms:
+
+Leaves rolled and webbed together by larvae
+
+Larvae feed inside rolled leaves, causing skeletonization
+
+Reduced photosynthetic area and stunted plant growth
+
+Severe infestation leads to poor flowering and yield loss
+
+Control measures:
+Collect and destroy rolled leaves with larvae
+
+Install pheromone or light traps for monitoring
+
+Encourage natural enemies (parasitoids, predators)
+
+Spray neem oil/neem-based formulations or need-based recommended insecticides",India,Andhra Pradesh
+332,Mango,Anthracnose,"Mango malformation – Vegetative
+
+Symptoms: Deformed shoots and flowers, dense bushy growth, twisted leaves, and reduced fruit set.
+
+Control: Prune and destroy affected parts, use healthy grafts, apply copper fungicides, and maintain proper nutrition and spacing.",India,Bihar
+336,Mango,Anthracnose,"Mango anthracnose – symptoms:
+Dark brown to black sunken spots on leaves, flowers, and fruits
+Blighting of panicles and flower drop
+
+
+Mango gall fly – symptoms:
+Formation of conical or horn-shaped galls on leaves and midribs
+Leaves become deformed and curled
+Severe infestation reduces photosynthetic area and weakens trees
+
+Control measures
+Mango anthracnose:
+Prune and destroy infected twigs and panicles
+
+Spray copper fungicides or Bordeaux mixture at flowering and fruit set
+
+Ensure good aeration and avoid overhead irrigation
+
+Mango gall fly:
+Collect and destroy galled leaves during early stages
+
+Deep ploughing to expose pupae in soil
+
+Spray recommended systemic insecticides during new leaf flush",India,Bihar
+337,Lady's Finger,Jassids,"Bhendi (okra) jassid – damage
+
+Symptoms:
+Yellowing and curling of leaf margins (“hopper burn”)
+Leaves turn brown, dry, and curl downward
+Reduced plant vigor and stunted growth
+
+Control measures:
+Remove weeds and maintain field sanitation
+Encourage natural enemies
+Spray neem oil/neem-based formulations
+Apply recommended systemic insecticides if infestation is severe",India,Andhra Pradesh
+338,Maize,Fall Armyworm,"Symptoms of early infestations of FAW, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,Andhra Pradesh
+339,Maize,Fall Armyworm,"Early infestations of FAW, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,Bihar
+340,Groundnut,Leaf Spot,"Symptoms-Leaf spot
+Small, circular to irregular brown to dark brown spots on leaves
+
+Yellow halo around spots (more prominent in early leaf spot)
+
+Spots enlarge and may coalesce, causing premature defoliation
+
+Late leaf spot shows dark spots mainly on the lower leaf surface
+
+Severe infection leads to reduced photosynthesis and yield loss
+
+Management
+Cultural practices
+Use disease-free and resistant varieties
+
+Follow crop rotation with non-legume crops
+
+Avoid dense planting; ensure good aeration
+
+Collect and destroy infected crop residues
+
+Chemical control
+Spray Mancozeb 75 WP @ 2–2.5 g/L or
+
+Chlorothalonil 75 WP @ 2 g/L
+
+Systemic fungicides: Hexaconazole or Tebuconazole @ 1 ml/L
+
+First spray at 30–35 DAS, repeat at 10–15 day intervals (2–3 sprays)
+
+Integrated approach
+Seed treatment with Trichoderma spp.
+
+Balanced fertilization, especially adequate potassium",India,Andhra Pradesh
+345,Groundnut,Leaf Miner,"Groundnut leaf miner
+Symptoms:
+Zig-zag or blotch-like mines on leaves
+
+Leaflets turn yellow, dry, and fall prematurely
+
+Control:
+Remove and destroy affected leaves; install pheromone traps
+
+Spray neem oil/NSKE or recommended insecticides at early infestation stages",India,Telangana
+348,Pumpkin,Powdery Mildew,"Typical powdery mildew in Pumpkin plants at growing stage. At initial stage powdery mildew can be controlled by spraying Neem oil, 300ppm @ 5ml per liter of water or application of Sulfur: Wettable sulfur (2000 ppm)@ 1gm per liter of water is effective.",India,Bihar
+349,Mango,Powdery Mildew,Mango Malformation: Pruning of diseased parts along the basal 15-20 cm apparently healthy portions. This is followed by the spraying of Carbendazim (0.1%) or Captafol (0.2%),India,Bihar
+350,Mango,Powdery Mildew,"Powdery mildew can be controlled by application of Wettable sulphur @ 0.2%.. Preventive measures by spray of Neem oil, 300ppm @ 5ml per liter of water at early stages of growth.",India,Bihar
+351,Maize,Fall Armyworm,"Fall armyworm (FAW) management in maize requires an integrated approach combining cultural practices, biological control, and chemical control. Key strategies include early planting, intercropping, pheromone trapping, biological control agents, and targeted insecticide applications. For early infestations, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,Bihar
+352,Wheat,Healthy,Nitrogen top dressing in the form of Urea or Neem coated Urea is also applicable to the soil after weeding during earthing up. Foliar spray of Liquid Nano Urea @ 2.5 ml per liter of water is advised for the standing crop.,India,Bihar
+353,Kidney bean,Aphids,"Aphids infestation on growing parts of country bean at flowering and fruiting stage. Apply Neem oil, 300ppm @5ml per liter of water or Imidacloprid @1ml in one liter of water as chemical control.",India,Bihar
+355,Kidney bean,Cutworms,"Spodoptera species infestation which can be controlled at initial stages by spray of Neem oil, 300ppm @ 5ml per liter of water or by chemical method use Emamectin Benzoate or Lambda-Cyhalothrin.",India,Bihar
+356,Red Gram,Pod Borer,"Pod borer and Leaf Folder, which feed on leaves, flowers, and pods, causing significant yield loss by damaging developing seeds and foliage. Management involves Integrated Pest Management (IPM) with cultural practices, biological controls, and targeted chemical sprays like Imamectin Benzoate or Spinosad is effective..",India,Andhra Pradesh
+358,Brinjal,Shoot and Fruit Borer,"Spodoptera infestation in brinjal, also shoot and fruit borer , can be managed by at Initial stages Neem oil,1500ppm Azhadiractin @1ml per liter of water to be sprayed at 8-days interval. For managing shoot and fruit borer infestations in brinjal, you can use Emamectin Benzoate or Lambda-Cyhalothrin as chemical control.",India,Bihar
+359,Paddy,Healthy,"Yellowing of leaves starting from the margins, main veins remain dark green, curled and crinkled leaves with stunted growth. Apply MOP(Muriate of potash)@ 10 to 15kg per acre after soil test, Foliar spray of  potassium nitrate@ 2gm per liter of water is advised for standing crop.",India,Andhra Pradesh
+361,Wheat,Stripe Rust,"Symptoms:
+White powdery patches on leaves and stems
+Leaf curling or yellowing
+Stunted growth in severe cases
+
+Control:
+Use resistant varieties
+Rotate crops and avoid continuous wheat
+Avoid excess nitrogen; ensure proper spacing
+Apply fungicides like Propiconazole, Tebuconazole, or Sulphur at first sign
+
+Early detection is key, especially in cool, humid conditions.",India,Bihar
+364,Pumpkin,Powdery Mildew,"Powdery mildew on pumpkin leaves. At initial stage powdery mildew can be controlled by spraying Neem oil,300ppm @ 5ml per liter of water or application of Sulfur: Wettable sulfur (2000 ppm)@ 1gm per liter of water is effective.",India,Bihar
+365,Kidney bean,Aphids,"Controlling aphids in country beans (Lablab purpureus) involves an integrated approach using yellow sticky traps (5/acre), encouraging natural predators like ladybird beetles, and applying biopesticides like 5% neem extract or 2% neem oil.
+For severe infestations, insecticides such as Imidacloprid (40 ml/ac) or Acetamiprid (20 g/ac) can be used, with applications typically made in early morning or evening.",India,Bihar
+370,Cowpea,Mosaic Virus,"Yellow mosaic virus in cowpea plants at flowering stage.  transmitted primarily by leaf beetles and mechanically, with symptoms including mosaic patterns, chlorosis, and potential root issues, managed through resistant varieties, vector control, and virus-free seeds. Vector Control: Managing the beetle vectors through insecticides (e.g., monocrotophos, methyl demeton@1gm per liter of water.",India,Bihar
+371,Green Gram,Cercospora Leaf Spot,"Cercospora leaf spot disease in Moong plants. Cercospora leaf spot , is a major, often devastating, fungal disease in mung bean, causing up to 50-70% yield losses. Use resistant or tolerant cultivars. Foliar spray with fungicides like chlorothalonil, mancozeb, or benomyl at the first sign of symptoms (usually at 35-45 days old) to protect the crop.
+Use healthy, certified seeds and treat them with fungicides to prevent the spread of the seed-borne disease.",India,Andhra Pradesh
+375,Mustard,Aphids,"Symptoms:
+Flower buds and inflorescence shrivel and dry
+Flower drop and poor pod (siliqua) formation
+Sticky honeydew on stem and flowers
+Clusters of aphids on tender shoots and flowers
+
+Control measures:
+Cultural: Remove heavily infested shoots; avoid excess nitrogen
+Biological: Spray Neem oil 0.5–1% or NSKE 5%
+Chemical (if severe):
+Imidacloprid 17.8 SL @ 0.3 ml/L or
+Thiamethoxam 25 WG @ 0.2 g/L
+Spray in early morning or evening to protect pollinators",India,Bihar
+376,Tomato,Leaf Miner,"Symptoms:
+Irregular whitish to brown blotch mines on leaves
+Affected areas turn dry, papery, and necrotic
+Leaves curl, wither, and may drop in severe cases
+Reduced photosynthesis, leading to poor plant vigor and yield
+
+Control measures:
+Cultural: Remove and destroy mined leaves; avoid excess nitrogen
+Biological: Spray Neem oil 0.5–1% or NSKE 5%
+Chemical (if severe):
+Abamectin 1.9 EC @ 0.5 ml/L or
+Spinosad 45 SC @ 0.3 ml/L
+Spray at early infestation stage and rotate molecules to avoid resistance",India,Bihar
+377,Mango,Anthracnose,"Symptoms:
+Abnormal growth of shoots – excessive, twisted, and clustered shoots called “witches’ broom.”
+
+Small, narrow leaves with reduced leaf lamina.
+
+Reduced flowering – flowers may be sparse or absent.
+
+Stunted growth – affected shoots are weak and bushy.
+
+Control Measures:
+
+Prune and destroy affected shoots to prevent spread.
+
+Maintain tree nutrition – apply balanced fertilizers, especially nitrogen carefully.
+
+Avoid excessive nitrogen as it promotes vegetative malformation.
+
+Apply growth regulators like paclobutrazol in severe cases to reduce abnormal shoot growth.
+
+Use clean planting material and maintain proper orchard hygiene.",India,Bihar
+378,Potato,Common Scab,"Symptoms:
+White powdery growth on leaves, stems, and sometimes tubers.
+
+Yellowing of leaves followed by premature leaf drop.
+
+Stunted plant growth in severe cases.
+
+Reduced yield due to poor photosynthesis.
+
+Control Measures:
+
+Use resistant/tolerant varieties if available.
+
+Ensure proper spacing and good air circulation to reduce humidity.
+
+Avoid excessive nitrogen which favors disease.
+
+Remove and destroy infected plant parts.
+
+Fungicide sprays – apply sulfur-based or systemic fungicides as recommended.
+
+Practice crop rotation to reduce pathogen buildup in soil.",India,Bihar
+379,Brinjal,Shoot and Fruit Borer,"Brinjal Shoot and Fruit Borer (Leucinodes orbonalis):
+Symptoms:
+On shoots:
+Tiny holes and bore marks on young shoots.
+Wilting of shoots – “shoot tip drying.”
+Presence of larvae inside bored shoots.
+
+Brinjal Shoot & Fruit Borer – Control (Concise):
+
+Cultural: Remove infested shoots/fruits, practice crop rotation, maintain field hygiene.
+
+Chemical: Spray approved insecticides (spinosad, Bt) at recommended intervals.
+
+Biological: Use Trichogramma or encourage natural predators.
+
+Varieties: Plant resistant/tolerant types.",India,Bihar
+380,Maize,Fall Armyworm,"Maize Fall Armyworm (Spodoptera frugiperda):
+Symptoms:
+Leaf damage: Irregular, ragged holes starting from leaf edges (“window pane” effect).
+
+Frass (caterpillar droppings) on leaves.
+
+Larvae feeding inside whorls of young plants.
+
+Stunted growth and sometimes tassel damage.
+
+Control Measures:
+
+Cultural: Remove weeds and crop residues; destroy infested plants.
+
+Chemical: Spray approved insecticides (spinosad, emamectin benzoate, or chlorantraniliprole).
+
+Biological: Use Trichogramma, parasitoids, or Bt formulations.
+
+Resistant Varieties: Plant tolerant maize hybrids if available.",India,Bihar
+381,Bean,Mosaic Virus,"Dolichos Bean Mosaic Virus (DBMV):
+
+Symptoms:
+
+Mosaic pattern on leaves – light and dark green patches.
+
+Leaf distortion – curling, puckering, or stunted leaves.
+
+Stunted growth and reduced vine development.
+
+Reduced flowering and pod formation, leading to lower yield.
+
+Control Measures:
+
+Use virus-free seeds and resistant varieties.
+
+Rogue out and destroy infected plants to prevent spread.
+
+Control aphid vectors with insecticides or natural predators.
+
+Weed management – remove alternate host plants.
+
+Maintain field hygiene and avoid mechanical transmission.",India,Bihar
+382,Potato,Late Blight,"Potato Late Blight (caused by Phytophthora infestans):
+
+Symptoms:
+
+Leaves: Water-soaked spots that turn brown, often with a pale green border; white fungal growth may appear under humid conditions.
+
+Stems: Dark lesions, sometimes leading to stem collapse.
+
+Tubers: Firm, brown, dry rot inside, often with reddish-brown edges.
+
+Rapid disease spread in cool, wet conditions.
+
+Control Measures:
+
+Cultural: Use certified disease-free seed; practice crop rotation; remove and destroy infected plants; ensure proper spacing for air circulation.
+
+Chemical: Apply fungicides like mancozeb, metalaxyl, or chlorothalonil as preventive sprays.
+
+Resistant varieties: Plant late blight-tolerant potato varieties.",India,Bihar
+385,Maize,Banded Leaf and Sheath Blight,"Maize streak virus affected plants. Early symptoms appear 3-7 days post-infection as tiny, pale, circular spots on young leaves, which later develop into streaks. Severe infections lead to dramatic stunting, reduced grain filling, and potential plant death, especially if infected before the 4-5 leaf stage.",India,Bihar
+386,Potato,Aphids,"Potato crop having aphids and leaf roll virus. An integrated approach focusing on reducing the aphid vector and using certified, disease-free seed tubers.Removing affected plants and controlling aphid populations with insecticides(Imidachloprid 3ml/10liters of water or Neem oil,300ppm@5ml /liter of water) to prevent virus spread.",India,Bihar
+388,Chilli,Leaf Curl Virus,"Chilli leaf curl virus infestation, it can not be cured, the severely affected plants are uprooted and destroyed. To control whitefly (vector of chili leaf curl virus) spray Imidacloprid @3ml /10 liters of water, or Neem oil,300ppm @ 5ml per liter of water",India,Andhra Pradesh
+390,Groundnut,Leaf Spot,"There is start of leaf spot disease  in groundnut crop as seen from the image, few leaves are affected. At present  condition it can be controlled by foliar spray of Tebuconazole or Chlorothalonil@ 1ml per liter of water.",India,Andhra Pradesh
+391,Potato,Bacterial Wilt,"Potato leaves wilting and dying from one side of the plants, it is due to diseases like Verticillium wilt, It seems the plants are near the end of the season, then potato harvesting to be done.
+Affected plants to be uprooted and destroyed , field sanitation and crop rotation helps control this disease.",India,Bihar
+392,Maize,Fall Armyworm,"Seems the farmer wanted to show the FAW insect which has entered the whorl of the maize plant. For early infestations, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,Bihar
+394,Turmeric,Scale Insects,"Turmeric leaves are damaged by caterpillars and  insects like grasshoppers have cut leaves and eaten. To check apply by spraying 0.5% neem oil, 0.1% malathion, or 0.1% carbaryl at 30-day intervals from July to October. Manual removal of affected, folded leaves and using light traps (1/acre) also helps manage populations. For severe infestations, apply Chlorpyriphos (1.5 l/ha)",India,Bihar
+395,Banana,Sigatoka Leaf Spot,"Young  banana plants, having signs of Sigatoka leaf spot at early stage with speck mark on leaves. Spray 3 times with Carbendazim 0.1 per cent or Propicanozole 0.1 % or Mancozeb 0.25% and teepol (sticking agent) at 10-15 days interval, as the disease starting from initial appearance of leaf specks .",India,Bihar
+396,Potato,Early Blight,"Early blight on potatoes appears as small, dark brown-to-black spots on the older leaves, which grow into larger lesions with characteristic concentric ""bullseye"" rings. Early blight management in Potato involves crop rotation, using disease-free seed, proper fertilization, irrigation, and sometimes fungicides, as the fungus overwinters in plant debris.",India,Bihar
+397,Potato,Aphids,"Potato leaf folding, or rolling, is primarily caused by the Potato Leafroll Virus (PLRV), resulting in upward curling of leaves, stunting, and up to 50% yield loss. Often transmitted by aphids (e.g., green peach aphid), it causes leaves to turn pale, brittle, and sometimes purple, starting from the bottom.
+Plant certified, virus-free tubers to prevent primary infections.
+Control Aphids: Apply insecticides or use natural predators like ladybirds to reduce aphid populations.",India,Bihar
+400,Brinjal,Mites,"Brinjal (eggplant) mite infestation – symptoms & control
+
+Symptoms
+Yellowing and bronzing of leaves
+Downward curling, crinkling and thickening of leaves
+Silvery sheen on leaf surface
+Leaves become dry, brittle and may fall
+Stunted plant growth, poor flowering and fruit set
+Severe attack → webbing on underside of leaves
+
+Control measures
+Remove and destroy heavily infested leaves
+
+Spray Dicofol 2.5 ml/L or Propargite 2 ml/L
+
+Alternatives: Spiromesifen 1 ml/L or Fenazaquin 1.5 ml/L
+
+Eco-friendly: Neem oil 3–5 ml/L or NSKE 5%
+
+Maintain proper irrigation and avoid dust stress
+
+Encourage natural enemies (predatory mites)",India,Bihar
+401,Chilli,Leaf Curl Virus,"Chilli Leaf Curl Disease
+
+Symptoms:
+
+Leaf curling, thick and leathery leaves
+
+Stunted, bushy plants
+
+Flower drop, deformed small fruits
+
+Control:
+
+Use healthy seedlings, resistant varieties
+
+Rogue infected plants
+
+Control whitefly (yellow sticky traps + Imidacloprid/Thiamethoxam)
+
+Neem oil/neem formulations, keep field weed-free",India,Andhra Pradesh
+403,Cauliflower,Healthy,"small curd formation in cauliflower
+Curds remain small, loose or poorly compact
+Premature curd formation (buttoning)
+
+Main Causes:
+Nutrient imbalance (low nitrogen, boron or molybdenum)
+
+Temperature stress (low/high during curd initiation)
+
+Poor irrigation or stress conditions
+
+Over-aged or weak seedlings
+
+Control Measures:
+Use healthy seedlings of right age (25–30 days)
+
+Apply balanced fertilization (adequate N, B @ 1 kg/ha, Mo @ 0.5 kg/ha)
+
+Maintain uniform irrigation and proper spacing
+
+Grow season-specific varieties",India,Bihar
+407,Sponge gourd,Powdery Mildew,"Sponge gourd – Powdery mildew 
+
+Symptoms
+White powdery patches on leaves and stems
+
+Yellowing, drying and leaf fall
+
+Reduced growth and yield
+
+Control measures
+Remove infected leaves, ensure good spacing
+
+Wettable sulphur 2–3 g/L or neem oil 3–5 ml/L
+
+Hexaconazole / Penconazole 1 ml/L if severe",India,Bihar
+412,Bean,Leaf Miner,"Leaf miner – Symptoms
+White, zigzag mines on leaves
+Yellowing, curling, and drying of leaves
+Reduced plant growth and photosynthesis
+
+Leaf miner – Control
+Remove and destroy infested leaves
+Spray Neem oil 2–3 ml/L or Azadirachtin 3 ml/L
+For severe cases: Spinosad 0.3 ml/L or Abamectin 0.5 ml/L",India,Andhra Pradesh
+413,Maize,Fall Armyworm,"Maize fall armyworm – Symptoms
+
+Window panes and ragged holes on young leaves
+
+Frass (sawdust-like excreta) inside the whorl
+
+Severe feeding causes dead heart and poor cob formation
+
+Heavy infestation leads to stunted plants and yield loss
+
+Control Measures
+Handpick and destroy egg masses and larvae
+
+Apply Neem oil 3 ml/L or Azadirachtin 0.03% – 3 ml/L
+
+Release Trichogramma spp. (biological control)
+
+For severe infestation: Spinetoram / Spinosad / Emamectin benzoate (as per label dose)",India,Bihar
+417,Chilli,Anthracnose,"Chilli – Anthracnose
+
+Symptoms
+Small sunken dark brown to black lesions on fruits
+Lesions enlarge with concentric rings
+Fruits rot, shrivel, and drop prematurely
+
+Control
+Use disease-free seeds
+Remove and destroy infected fruits
+
+Spray Carbendazim + Mancozeb (1 g + 2 g/L) or Azoxystrobin / Hexaconazole (label dose)",India,Andhra Pradesh
+420,Mango,Mango Hopper,"Mango – Malformation of inflorescence
+
+Symptoms
+
+Compact, bushy, malformed panicles
+
+Flowers mostly male or sterile, poor fruit set
+
+Panicles remain green and do not dry normally
+
+Control Measures
+
+Prune and destroy malformed panicles well below affected portion
+
+Spray NAA 200 ppm during bud initiation
+
+Apply Carbendazim 1 g/L at panicle emergence
+
+Maintain orchard sanitation and balanced nutrition",India,Jharkhand
+422,Citrus,Citrus Psyllid,"Citrus psyllid – Symptoms
+Leaf curling and distortion of young flush
+
+Yellowing and stunted growth
+
+White waxy secretions and honeydew on leaves
+
+Sooty mould development; vector of citrus greening (HLB)
+
+Control Measures
+Prune and destroy infested shoots
+Spray Neem oil 3 ml/L
+
+If severe: Imidacloprid / Thiamethoxam (label dose)",India,Bihar
+423,Mango,Anthracnose,"Mango – Vegetative malformation
+
+Symptoms
+Short internodes with dense, bunchy growth
+
+Small, narrow, thickened leaves
+
+Shoots form a witches’ broom appearance
+
+Affected branches show poor or no flowering
+
+Control Measures
+Prune and destroy malformed shoots 10–15 cm below affected portion
+
+Spray Carbendazim 1 g/L after pruning
+
+Apply NAA 200 ppm during vegetative flush
+
+Maintain orchard sanitation and balanced nutrition",India,Jharkhand
+424,Brinjal,Shoot and Fruit Borer,"Brinjal fruit upside damage + zigzag marks 
+
+Cause
+Fruit & shoot borer (Leucinodes orbonalis)
+Hole near fruit stalk (upper side), frass coming out.
+
+Control
+Remove infested fruits regularly
+Pheromone traps: 10–12/acre
+Fruit borer: Emamectin benzoate 5 SG 0.4 g/L or Chlorantraniliprole 18.5 SC 0.3 ml/L",India,Bihar
+425,Maize,Fall Armyworm,"Maize Fall Armyworm – concise
+
+Symptoms
+
+Window-pane feeding, shot holes on leaves
+
+Frass (sawdust-like) in whorl
+
+Ragged leaves, stunted plants
+
+Cob/husk damage in severe cases
+
+Control
+
+Destroy egg masses & larvae
+
+Pheromone traps: 5–10/acre
+
+Neem oil 3 ml/L (early stage)
+
+Spray into whorl (evening):
+
+Emamectin benzoate 5 SG 0.4 g/L
+
+Chlorantraniliprole 18.5 SC 0.3 ml/L
+
+Spinetoram 11.7 SC 0.5 ml/L",India,Bihar
+426,Maize,Healthy,"yellowing of leaves and reddish stalks are the symptoms of maize.
+it can be controlled by Spraying a 2% Urea solution ((20g of Urea/liter of water) can provide rapid, temporary recovery.",India,Bihar
+431,Banana,Banana Weevil,"Black patches on banana stem with shattering/splitting of leaves and stem
+
+Probable reasons
+
+Banana pseudostem weevil (Odoiporus longicollis)
+
+Bacterial soft rot (favoured by injuries + waterlogging)
+
+Mechanical injury with secondary infection
+
+Nutrient imbalance (K deficiency) + stress (aggravates splitting)
+
+Key symptoms
+
+Black or dark brown patches on pseudostem
+
+Cracks/splitting and weakening of stem
+
+Leaves tear or shatter easily
+
+Foul smell, soft tissue inside stem (if bacterial rot)
+
+Holes/frass inside stem (if weevil)
+
+Control measures
+
+Uproot and destroy severely affected plants
+
+For weevil:
+
+Pseudostem traps @ 10–15/acre
+
+Chlorpyrifos 2.5 ml/L or Fipronil 1 ml/L (pseudostem drenching)
+
+For rot:
+
+Improve drainage; avoid waterlogging
+
+Bleaching powder 10–12 kg/acre in soil
+
+Nutrition:
+
+Apply MOP (potash) 50–60 kg/acre
+
+Maintain field sanitation; avoid stem injuries",India,Bihar
+438,Brinjal,Shoot and Fruit Borer,"Grasshoppers
+
+Symptoms: Clean-cut large holes; insects seen during day.
+
+Control:
+Field sanitation
+Neem spray
+Light traps
+General management
+Remove heavily damaged leaves
+Maintain proper spacing
+Avoid excess nitrogen
+Encourage natural enemies",India,Bihar
+439,Mango,Anthracnose,"Mango Leaf Gall (Psyllid – Apsylla cistellata) 
+
+Symptoms:
+
+Small raised blisters / pouch-like galls
+
+Green → reddish → brown
+
+Mostly on young tender leaves
+
+Leaves become distorted
+
+Control:
+
+Prune and destroy affected shoots
+
+Spray Imidacloprid / Thiamethoxam during new flush
+
+Spray at early stage of leaf emergence",India,Bihar
+441,Brinjal,Mites,"Common mite: Red spider mite (Tetranychus urticae)
+
+Symptoms
+Yellow specks (stippling) on upper leaf surface
+
+Leaves turn bronze → reddish → dry
+
+Curling downward
+
+Fine webbing on underside
+
+Severe case: leaf drying & yield reduction
+
+Control Measures
+
+ Cultural
+Avoid excess nitrogen
+Maintain field humidity (mites increase in hot, dry weather)
+Remove heavily infested leaves
+
+ Chemical / Biological
+Spray Abamectin (0.5 ml/L)
+Or Spiromesifen / Fenpyroximate / Propargite (as per label)
+Neem oil 3–5 ml/L (early stage)
+Rotate chemicals to avoid resistance",India,Andhra Pradesh
+442,Chickpea,Fusarium Wilt,"Fusarium Wilt (most common)
+
+Symptoms:
+
+Sudden drying of whole plant
+
+Yellowing of lower leaves first
+
+Brown discoloration in stem (cut stem shows browning)
+
+Plants dry in patches
+
+Control:
+
+Seed treatment: Trichoderma 4 g/kg or Carbendazim 2 g/kg
+
+Crop rotation (3–4 years)
+
+Avoid water stress",India,Bihar
+448,Potato,Late Blight,"Potato – Holes from leaf edges + medium holes on older leaves 
+and wilting symptoms due to late blight
+
+Late blight infection:
+Late blight in potato 
+
+Symptoms:
+Water-soaked spots → brown/black lesions
+White growth underside (humid weather)
+Rapid leaf blighting
+Brown rot in tubers
+
+Control:
+Spray Metalaxyl + Mancozeb or Cymoxanil + Mancozeb
+Repeat 7–10 days in humid weather
+Avoid overhead irrigation.
+ 
+
+Epilachna beetle (Hadda beetle) 
+Symptoms:
+Irregular holes starting from edges
+Older leaves more affected
+Yellow spiny grubs on underside
+Leaves may get skeletonized
+
+Control:
+Handpick beetles & grubs
+Spray Neem oil (3–5 ml/L)
+If severe: Spinosad / Emamectin benzoate",India,Bihar
+451,Pumpkin,Cucumber Beetle,"Pumpkin beetle damage in pumpkin crop
+
+Symptoms
+Irregular holes on leaves
+Severe damage on seedlings
+Leaves skeletonized
+Flowers also eaten
+Adults (orange/red beetles) visible
+
+Control
+Handpick beetles (early stage)
+Neem oil 3–5 ml/L
+Install yellow sticky traps
+If severe: Imidacloprid / Thiamethoxam (as per label)
+Soil application of insecticide at sowing (for heavy infestation)",India,Bihar
+453,Maize,Fall Armyworm,"Transparent leaf patches in maize (corn) – concise
+Fall armyworm (early stage) – most common
+
+Symptoms:
+Window-pane/transparent patches
+Later holes with ragged edges
+Frass (sawdust-like) in whorl
+
+Control:
+Check whorl for larvae
+Spray Emamectin benzoate / Chlorantraniliprole
+Apply spray into whorl",India,Bihar
+454,Potato,Early Blight,"Early blight (Alternaria) – 
+
+Symptoms:
+Small brown spots with concentric rings
+Starts on lower leaves
+Yellowing around spots
+
+Control:
+Spray Mancozeb / Chlorothalonil
+If severe: Azoxystrobin / Tebuconazole
+Remove infected leaves",India,Bihar
+460,Maize,Fall Armyworm,"There is infestations of FAW(Fall Armyworm), apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,Bihar
+461,Tomato,Leaf Miner,"Early infestation of leaf minor in Tomato plants. For control by Organic methods, Apply Neem Oil: Spray Azadirachtin (neem oil), 300ppm, in the early morning or late evening, ensuring good leaf coverage (e.g., 5ml/L water with soap).",India,Bihar
+462,Papaya,Healthy,"Papaya plants having very poor growth, Apply FYM 10 Kg/plant as basal and 50 g in each of N, P and K per plant at bi-monthly intervals from the third month of planting after removing unwanted male or sterile plant forms.",India,Bihar
+463,Paddy,Blast,"Blast disease in Paddy, to control maintain consistent field flooding to prevent disease development, and apply fungicides like tricyclazole or azoxystrobin during critical growth stages.",India,Bihar
+464,Strawberry,Thrips,"Thrips infestation in strawberry plants. Use sprays of the Entrust formulation of spinosad, azadirachtin (Neemix), Isaria fumosorosea (PFR-97), Beauveria bassiana (Botanigard), or combinations of these products on strawberry plants.",India,Andhra Pradesh
+466,Cotton,Bollworm,"Cotton bollworm control involves a combination of cultural (like crop rotation, early sowing, and sanitizing fields), biological (using natural predators or parasitoids), mechanical (pheromone traps and destroying infested bolls), and chemical methods (using specific insecticides at the right time).",India,Uttar Pradesh
+467,Maize,Fall Armyworm,"For early infestations of FAW(Fall armyworm), apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.",India,Bihar
+469,Banana,Sigatoka Leaf Spot,"The symptoms as visible are most likely caused by Sigatoka, a fungal disease. Spray 3 times with Carbendazim 0.1 per cent or Propicanozole 0.1 % or Mancozeb 0.25% and teepol (sticking agent) at 10-15 days interval, as the disease starting from initial appearance of leaf specks.",India,Bihar
+471,Maize,Turcicum Leaf Blight,"These spots are long, elliptical, grayish-green or tan lesions ranging from 2.5 to 15 cm in length. Spray Mancozeb or Zineb @2-4 g/litre at 10 days interval after first appearance of the disease.",India,Bihar
+473,Maize,Turcicum Leaf Blight,"Turcicum blight in Maize, in severe case ,these spots are long, elliptical, grayish-green or tan lesions ranging from 2.5 to 15 cm in length, whole plant is affected along with cobs and plant drying up completely. Spray Mancozeb or Zineb @2-4 g/litre of water at 10 days interval after first appearance of the disease symptoms.",India,Bihar
+481,Maize,Fall Armyworm,crop is not shown but in the given image we can see the larvae of Spodoptera or fall army warm,India,Bihar
+482,Lady's Finger,Shoot and Fruit Borer,the image shows the bhindi plant is affected by fruit and shoot borer where we can see the irregular holes,India,Telangana
+483,Onion,Thrips,yellowing of leaves and white patches can also be seen this is due to both nutrient deficiency and thrips attack where we can see the white patches,India,Bihar
+485,Chilli,Thrips,the crop identified here is chilli which is majorly attacked by thrips which is identified by upward curling,India,Jharkhand
+487,Brinjal,Mites,"Epilachna Beetle damage  in Brinjal
+(Caused by Henosepilachna vigintioctopunctata)
+
+symptoms of spray residue presence can also be seen in some leaves
+Damage:
+Leaves scraped and skeletonized
+Brown dry patches
+Severe attack reduces yield
+
+Control:
+Handpick adults & egg clusters
+Spray Neem oil 3–5 ml/L
+If severe: Emamectin benzoate or Chlorantraniliprole",India,Bihar
+489,Potato,Bacterial Wilt,"Potato Wilt
+
+Bacterial Wilt – Ralstonia solanacearum
+
+Sudden wilting, green leaves
+Brown vascular ring
+Control: Remove plants, improve drainage, crop rotation.",India,Bihar
+491,Citrus,Leaf Miner,"Citrus plant affected with leaf miner and leaf folder larvae, that roll or mine into young citrus leaves, feeding on tissues and causing leaves to curl, dry out, and turn brown.
+Prune infested leaves and destroy them to reduce populations. Apply horticultural oils, neem oil, or insecticides containing spinosad on new growth to kill larvae.",India,Bihar
+492,Cotton,Jassids,"Jassids infested Cotton leaves turning pale, then yellow, with margins developing reddish or bronze patches. ""Hopper Burn"": A signature symptom where leaves dry, turn brown, crumble, and may fall off. 
+Effective control of cotton jassids is achieved using systemic insecticides applied to the undersides of leaves, with top recommendations including Imidacloprid 17.8% SL (3 ml/10 L water), Acetamiprid 20% SP (20 g/acre), Flonicamid 50% WG (60 g/acre).",India,Bihar
+495,Maize,Fall Armyworm,"Fall armyworm (FAW) affected Maize plants. For early infestations, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl as recommended doses.",India,Bihar
+498,Brinjal,Shoot and Fruit Borer,"In the given image symptoms caused by Epilachna beetle (Hadda beetle) and Caterpillars (Spodoptera)
+
+In the given image we can observe the symptoms like leaf scraping, holes and irregulate holes on leaves 
+-Epilachna beetle (Hadda beetle)
+Scrapes leaf surface first
+Later leaves develop round holes
+Yellowish grubs seen underside
+
+-Caterpillars (Spodoptera)
+Larger irregular holes
+Frass (insect droppings) visible
+
+Control
+- Hand pick beetles/grubs in early stage
+- Spray Neem oil (2–3 ml/L)
+- If severe: Emamectin benzoate or Spinosad (as per label)
+- Maintain field sanitation",India,Bihar
+499,Groundnut,Leaf Miner,"slight symptoms of leaf minor is observed in one or two leaves
+
+Leaf miner control in groundnut:
+Spray Neem oil 2–3 ml/L (early stage).
+At 15% damage:
+Chlorantraniliprole 0.3 ml/L or
+Emamectin benzoate 0.4 g/L or
+Spinosad 0.3 ml/L.
+Rotate insecticides to prevent resistance.",India,Andhra Pradesh
+505,Maize,Fall Armyworm,"Leaf cutting & leaf damage in maize – likely pests:
+
+Fall armyworm (Spodoptera frugiperda)
+
+Irregular holes, window-pane damage
+
+Frass (sawdust-like) in whorl
+
+Control :
+Apply Emamectin benzoate 0.4 g/L or Chlorantraniliprole 0.3 ml/L into whorl
+
+Install pheromone traps (for FAW)
+
+Remove heavily infested plants early.",India,Bihar
+506,Brinjal,Phomopsis Blight,"Watery round big spots on brinjal leaves + browning & drying – likely cause:
+- Phomopsis blight (Phomopsis vexans)
+
+Large circular watery spots
+
+Later turn brown with concentric rings
+
+Leaves dry and may drop
+
+Control :
+Remove affected leaves
+Spray Mancozeb 2–2.5 g/L
+or
+Carbendazim + Mancozeb 2 g/L
+Repeat after 10–12 days
+Avoid overhead irrigation and dense crop.",India,Bihar
+510,Potato,Late Blight,"Potato Late Blight
+Cause: Phytophthora infestans
+
+Symptoms:
+Water-soaked spots on leaves
+Brown/black lesions spreading fast White fungal growth on underside
+Tuber brown rot
+
+Control:
+Preventive: Mancozeb 2–2.5 g/L
+After appearance: Metalaxyl + Mancozeb 2 g/L
+Spray every 7–10 days in cool, humid weather
+Early control is essential.",India,Bihar
+514,Rice,Blast,"Dark Brown Spindle-Shaped Spots with Yellow Halo symptoms are like Disease: Leaf Blast
+Cause: Magnaporthe oryzae
+
+Symptoms:
+Spindle (eye-shaped) dark brown spots
+Grey/whitish centre
+Yellow halo around lesions
+Spots enlarge and may merge
+Severe cases → leaf drying
+
+Control:
+Spray Tricyclazole 0.6 g/L
+OR Isoprothiolane 1.5 ml/L
+Repeat after 7–10 days if needed
+Avoid excess nitrogen
+Ensure good field drainage
+Early control is important as blast spreads fast in humid weather.",India,Telangana
+517,Papaya,Papaya Mealybug,"Papaya Mealy Bug
+Pest: Paracoccus marginatus
+
+Symptoms:
+• White cottony masses on leaves, stems, fruits
+• Leaf yellowing & curling
+• Stunted growth
+• Sooty mould due to honeydew
+
+Control:
+Remove infested parts
+Release Acerophagus papayae
+Spray Imidacloprid 0.3 ml/L (if severe)
+Repeat after 10–14 days if needed.",India,Bihar
+519,Maize,Fall Armyworm,"Maize – Fall Armyworm
+Pest: Spodoptera frugiperda
+
+Symptoms:
+• Window-pane damage on young leaves
+• Irregular holes in whorl leaves
+• Frass (sawdust-like excreta) inside whorl
+• Severe attack → damaged growing point
+
+Control:
+Cultural:
+-Early sowing
+-Destroy egg masses & larvae
+
+Biological:
+-Spray Bt (Bacillus thuringiensis)
+-Release Trichogramma
+
+Chemical (whorl application):
+-Emamectin benzoate 0.4 g/L
+-Chlorantraniliprole 0.3 ml/L
+
+Spray directed into whorl; repeat after 10–12 days if needed.",India,Bihar
+520,Brinjal,Mites,"Brinjal – scrapping of green matter and Big Holes on Leaves
+Epilachna Beetle
+-Henosepilachna vigintioctopunctata
+Symptoms:
+• Scraping of leaf surface (skeletonization)
+• Large irregular holes
+• Yellow spiny grubs underside
+
+Control:
+Hand pick beetles & grubs
+Spray Neem oil 3–5 ml/L
+Severe: Emamectin benzoate 0.4 g/L",India,Bihar
+521,Maize,Fall Armyworm,"Maize – Fall Armyworm
+Pest: Spodoptera frugiperda
+
+Symptoms:
+• Window-pane damage on young leaves
+• Irregular holes in whorl leaves
+• Frass (sawdust-like excreta) inside whorl
+• Severe attack → damaged growing point
+
+Control:
+Cultural:
+Early sowing
+Destroy egg masses & larvae
+
+Biological:
+Spray Bt (Bacillus thuringiensis)
+Release Trichogramma
+
+Chemical (whorl application):
+Emamectin benzoate 0.4 g/L
+Chlorantraniliprole 0.3 ml/L
+
+Spray directed into whorl; repeat after 10–12 days if needed.",India,Bihar
+522,Potato,Bacterial Wilt,"Bacterial Wilt
+Caused by Ralstonia solanacearum
+• Sudden wilting, no initial yellowing
+• Brown vascular tissue
+• Milky ooze from cut stem
+
+Control:
+Remove infected plants
+Good drainage
+Crop rotation",India,Bihar
+527,Brinjal,Mites,"Brinjal – Mite Infestation
+Common pest: Polyphagotarsonemus latus
+
+Symptoms:
+• Leaves become small, thick & crinkled
+• Upward curling of young leaves
+• Bronzing / rough leaf surface
+• Stunted plant growth
+• Poor flowering
+
+Control:
+-Spray Wettable sulphur 2 g/L (early stage)
+-Spray Abamectin 0.5 ml/L or Spiromesifen 1 ml/L
+-Spray directed to underside of leaves
+-Avoid excess nitrogen
+
+Repeat after 7–10 days if needed.",India,Bihar
+531,Groundnut,Leaf Miner,"Big Irregular Holes in Groundnut
+
+Main pests:
+Spodoptera litura
+Helicoverpa armigera
+
+Symptoms: Large round/irregular holes, heavy defoliation.
+
+Control:
+Pheromone traps (5/acre)
+NSKE 5% or Bt spray
+If severe: Emamectin benzoate 0.4 g/L or Spinosad 0.3 ml/L",India,Andhra Pradesh
+538,Papaya,Papaya Ring Spot Virus,"Leaf margin yellowing (chlorosis)
+
+Small brown spots or necrotic patches
+
+Slight curling at the edges",India,Bihar
+544,Bean,Bacterial Blight,"Crop: Bush bean
+
+-Brown spots with yellow halo in beans  indicate bacterial blight (common bacterial blight or halo blight).
+
+-Symptoms
+Small brown, water-soaked spots on leaves
+Distinct yellow halo around spots
+Spots enlarge and may merge
+Severe cases → leaf drying and defoliation
+Pods may show greasy lesions
+
+-Cause
+Bacterial infection (favored by rain, overhead irrigation, high humidity)
+
+-Control:
+Use disease-free seed
+Avoid overhead irrigation
+Remove and destroy infected plants
+Ensure proper spacing for airflow
+Spray copper oxychloride 3 g/L or copper hydroxide 2 g/L
+For biological option: spray Pseudomonas fluorescens 5–10 g/L",India,Jharkhand
+546,Maize,Fall Armyworm,"Maize fall armyworm 
+
+Symptoms
+Window-pane scraping on young leaves
+Irregular holes and ragged leaf feeding
+Whorl filled with frass (sawdust-like excreta)
+Shot holes when leaves unfurl
+Severe cases: dead heart in young plants
+Large green-brown caterpillar with inverted Y on head
+
+Control
+Monitor early (seedling to whorl stage)
+Handpick and destroy larvae in whorl (small fields)
+Apply sand + lime/ash in whorl (early stage)
+Spray emamectin benzoate 0.4 g/L or spinosad 0.3 ml/L
+
+Biological: Metarhizium/Beauveria or NPV formulations
+Install pheromone traps (5/acre)
+Maintain field sanitation and timely sowing",India,Bihar
+549,Chilli,Thrips,"Chilli black thrips 
+
+Symptoms
+Silvery/bronzed streaks on leaves
+Leaf curling and crinkling
+Black thrips visible on undersides
+Scarring on buds and fruits
+Severe attack → stunted plants
+
+Control
+Install blue sticky traps
+Spray spinosad 0.3 ml/L or fipronil 1 ml/L
+Alternative: emamectin benzoate 0.4 g/L
+Biological: neem oil 2–3 ml/L
+Avoid excess nitrogen and maintain field sanitation",India,Andhra Pradesh
+550,Potato,Common Scab,"Potato leaf curl disease
+
+Cause
+Viral disease (spread by whitefly)
+
+Symptoms
+Upward leaf curling
+Thick, leathery leaves
+Yellowing and stunting
+Reduced tuber size and yield
+
+Control
+Use healthy, virus-free seed tubers
+Rogue infected plants early
+Install yellow sticky traps
+Spray imidacloprid 0.3 ml/L or thiamethoxam 0.25 g/L
+Spray neem oil 2–3 ml/L
+Control weeds (alternate hosts)",India,Bihar
+551,Brinjal,Mites,"Brinjal mites 
+
+Symptoms
+Leaves curl downward and become thick
+Silvery/bronzed leaf surface
+Leaf crinkling and narrowing
+Stunted plant growth
+Poor flowering and fruit set
+Mites seen on leaf underside (with lens)
+
+Control
+Spray spiromesifen 1 ml/L or propargite 2 ml/L
+Alternative: abamectin 0.5 ml/L
+Biological: neem oil 2–3 ml/L
+Remove heavily infested leaves
+Avoid excess nitrogen",India,Bihar
+553,Chilli,Leaf Curl Virus,"Chilli leaf curl virus 
+
+Symptoms
+Upward leaf curling and puckering
+Thick, small leaves
+Vein swelling
+Stunted plants
+Flower drop and poor fruit set
+
+Vector
+Whitefly
+
+Control
+Use tolerant varieties
+Remove infected plants early
+Install yellow sticky traps
+Spray imidacloprid 0.3 ml/L or thiamethoxam 0.25 g/L
+Spray neem oil 2–3 ml/L
+Control weeds and maintain sanitation",India,Andhra Pradesh
+555,Mango,Anthracnose,"Mango anthracnose 
+
+Symptoms
+Small black/brown sunken spots on leaves
+Dark lesions on panicles → flower drying
+Dieback of tender shoots in severe cases
+
+Control
+Prune and destroy infected parts
+Maintain canopy aeration
+Spray mancozeb 2.5 g/L or chlorothalonil 2 g/L (pre-flowering)
+During flowering/fruit set: carbendazim 1 g/L or azoxystrobin 0.5 ml/L
+Avoid overhead irrigation and maintain orchard sanitation",India,Andhra Pradesh
+556,Chilli,Mites,"Chilli mites-severe infection
+
+Symptoms
+Downward leaf curling
+Leaves become thick, narrow, and crinkled
+Bronzing/silvery appearance
+Stunted plants and shortened internodes
+Poor flowering and fruit set
+
+Control
+Spray spiromesifen 1 ml/L or propargite 2 ml/L
+Alternative: abamectin 0.5 ml/L
+Biological: neem oil 2–3 ml/L
+Remove heavily infested leaves
+Avoid excess nitrogen",India,Bihar
+557,Bean,Powdery Mildew,"Dolichos bean-Powdery mildew 
+
+Symptoms
+White powdery patches on leaves
+Spots enlarge and cover leaf surface
+Leaves yellow and dry prematurely
+Severe cases → poor flowering and pod set
+
+Control
+
+Ensure good spacing and airflow
+
+Spray wettable sulphur 2 g/L
+
+Alternative: hexaconazole 1 ml/L or penconazole 0.5 ml/L
+
+Remove heavily infected leaves
+
+Avoid excess nitrogen",India,Bihar
+558,Chilli,Thrips,"Chilli thrips 
+
+Symptoms
+Silvery streaks or patches on leaves
+Leaf curling upward/downward
+Leaf crinkling and distortion
+Flower drop
+Scarring on fruits
+Stunted plant growth
+
+Control
+Install blue sticky traps
+Spray spinosad 0.3 ml/L or fipronil 1 ml/L
+Alternative: emamectin benzoate 0.4 g/L
+Biological: neem oil 2–3 ml/L
+Avoid excess nitrogen and keep field clean",India,Bihar
+561,Brinjal,Shoot and Fruit Borer,"Brinjal fruit & shoot borer 
+
+Symptoms
+Drooping and drying of tender shoots
+Entry holes with frass on shoots/fruits
+Boreholes on fruits with internal feeding
+Premature fruit drop
+Poor fruit quality
+
+Control
+Remove and destroy affected shoots/fruits regularly
+Install pheromone traps (10–12/acre)
+Release Trichogramma egg parasitoids (if available)
+Spray emamectin benzoate 0.4 g/L or spinosad 0.3 ml/L
+Alternative: chlorantraniliprole 0.3 ml/L
+Maintain field sanitation",India,Bihar
+562,Chilli,Thrips,"Chilli black thrips 
+
+Symptoms
+Silvery to bronze streaks on leaves
+
+Leaf curling and crinkling
+Black thrips on leaf underside
+Bud and fruit scarring
+Stunted plants
+
+Control
+Install blue sticky traps
+Spray spinosad 0.3 ml/L or fipronil 1 ml/L
+Alternative: emamectin benzoate 0.4 g/L
+Biological: neem oil 2–3 ml/L
+Avoid excess nitrogen and keep field clean",India,Andhra Pradesh
+564,Maize,Fall Armyworm,"Maize fall armyworm 
+
+Symptoms
+Window-pane feeding on young leaves
+Shot holes and ragged leaf damage
+Frass (sawdust-like) in whorl
+Whorl feeding and leaf shredding
+Severe cases: dead heart in young plants
+Caterpillar with inverted Y mark on head
+
+Control
+Monitor from seedling stage
+Handpick larvae in whorl (small fields)
+Apply sand + ash/lime in whorl (early stage)
+Install pheromone traps (5/acre)
+Spray emamectin benzoate 0.4 g/L or spinosad 0.3 ml/L
+Biological: Beauveria/Metarhizium or NPV formulations
+Maintain field sanitation",India,Bihar
+565,Chilli,Thrips,"Chilli black thrips 
+
+Symptoms
+Silvery/bronze streaks on leaves
+
+Leaf curling and crinkling
+
+Black thrips on leaf underside
+
+Bud and fruit scarring
+
+Stunted plant growth
+
+Control
+Install blue sticky traps
+Spray spinosad 0.3 ml/L or fipronil 1 ml/L
+Alternative: emamectin benzoate 0.4 g/L
+Biological: neem oil 2–3 ml/L
+Avoid excess nitrogen and keep field clean",India,Andhra Pradesh
+566,Banana,Sigatoka Leaf Spot,"Banana Sigatoka leaf spot 
+
+Symptoms
+Small yellow specks on older leaves
+Specks enlarge into brown elongated spots
+Spots develop grey center with dark margin
+Leaves turn yellow and dry prematurely
+Severe cases → reduced bunch size
+
+Control
+Remove and destroy heavily infected leaves
+Maintain good spacing and aeration
+Avoid overhead irrigation
+Spray mancozeb 2.5 g/L or chlorothalonil 2 g/L
+Systemic option: propiconazole 1 ml/L or hexaconazole 1 ml/L
+Follow regular spray schedule in humid weather",India,Andhra Pradesh
+569,Maize,Fall Armyworm,"Maize fall armyworm 
+
+Symptoms
+Window-pane feeding on young leaves
+Shot holes and ragged damage
+Frass (sawdust-like) in whorl
+Leaf shredding from whorl
+Severe cases: dead heart
+Caterpillar with inverted Y on head
+
+Control
+Monitor from seedling stage
+Handpick larvae in whorl (small fields)
+Apply sand + ash/lime in whorl (early stage)
+Install pheromone traps (5/acre)
+Spray emamectin benzoate 0.4 g/L or spinosad 0.3 ml/L
+
+Biological: Beauveria/Metarhizium or NPV
+Maintain field sanitation",India,Bihar
+570,Mango,Anthracnose,"Mango malformation (floral & vegetative) 
+
+Symptoms
+Deformed, compact inflorescences from internodes
+Bunching (rosetting) of small leaves
+Short, thick malformed shoots/branches
+Excessive branching giving “witches’ broom” look
+Poor or no fruit set on affected panicles
+
+Control
+Prune and destroy malformed shoots/panicles 15–20 cm below affected part
+
+Spray NAA 200 ppm in October (pre-flowering)
+
+Maintain balanced nutrition (avoid excess nitrogen)
+
+Keep orchard clean and well aerated
+
+Follow regular monitoring and early removal",India,Jharkhand
+572,Maize,Fall Armyworm,"Maize fall armyworm damage 
+
+Damage symptoms
+Window-pane feeding on young leaves
+
+Irregular holes and ragged leaf margins
+
+Shot holes after leaf unfurling
+
+Whorl packed with frass (sawdust-like)
+
+Central whorl feeding and leaf shredding
+
+Severe attack → dead heart in seedlings
+
+Poor cob development in heavy infestation
+
+Management
+
+Scout from seedling to whorl stage
+
+Handpick larvae in small fields
+
+Apply sand + ash/lime in whorl (early stage)
+
+Install pheromone traps (5/acre)
+
+Spray emamectin benzoate 0.4 g/L or spinosad 0.3 ml/L
+
+Biological: Beauveria/Metarhizium or NPV formulations",India,Bihar
+573,Mango,Anthracnose,"Mango malformation (vegetative) 
+
+Symptoms
+Deformed, compact inflorescences from internodes
+
+Bunching (rosetting) of small leaves
+
+Short, thick malformed shoots/branches
+
+Excessive branching giving “witches’ broom” look
+
+Poor or no fruit set on affected panicles
+
+Control
+Prune and destroy malformed shoots/panicles 15–20 cm below affected part
+
+Spray NAA 200 ppm in October (pre-flowering)
+
+Maintain balanced nutrition (avoid excess nitrogen)
+
+Keep orchard clean and well aerated
+
+Follow regular monitoring and early removal",India,Bihar
+575,Brinjal,Wilt,"Brinjal little leaf 
+
+Cause
+Phytoplasma (spread by leafhopper)
+
+Symptoms
+
+Very small, narrow leaves
+
+Bunching/rosetting at shoot tips
+
+Short internodes (bushy plant)
+
+Reduced or no flowering
+
+Flowers turn green and sterile
+
+Severe stunting
+
+Control
+Remove and destroy infected plants early
+
+Control leafhopper vector
+
+Spray imidacloprid 0.3 ml/L or thiamethoxam 0.25 g/L
+
+Install yellow sticky traps
+
+Maintain field sanitation and remove weeds",India,Bihar
+576,Cabbage,Diamondback Moth,"Leaf-eating caterpillars (diamondback moth)
+
+Symptoms:
+Large irregular holes on outer leaves
+Larvae and black droppings present
+Poor or no head formation
+
+Control:
+Spray Bt @ 1–2 g/L or Spinosad @ 0.3 ml/L
+If severe: Emamectin benzoate @ 0.4 g/L
+Spray evening; cover leaf undersides.",India,Bihar
+579,Groundnut,Leaf Spot,"Cercospora leaf spot in groundnut
+
+Symptoms
+Small circular brown spots on leaves
+Spots with yellow halo (early leaf spot)
+Dark brown to black spots (late leaf spot)
+Severe infection → premature leaf fall and yield loss
+
+Control
+Use resistant varieties
+Remove crop debris
+Spray Mancozeb @ 2.5 g/L
+or Chlorothalonil @ 2 g/L
+Severe: Tebuconazole @ 1 ml/L or Hexaconazole @ 1 ml/L
+Repeat spray every 10–14 days",India,Andhra Pradesh
+580,Tobacco,Tobacco Mosaic Virus,"Symptoms of TMV in tobacco. The virus affected plants to be uprooted and destroyed immediately, to control whitefly (vector of TMV)spray Imidacloprid @3ml /10 liters of water or Neem oil,300ppm @ 5ml per liter of water as preventive measures at early stage of the crop.",India,Andhra Pradesh
+582,Chilli,Thrips,"Chilli Thrips – Symptoms
+
+Symptoms
+Silvery streaks/bronzing on leaves
+Leaf curling upward, crinkling
+Leaf margins dry and turn brown
+Stunted plants; flower drop
+Severe attack → leaf curl–like appearance
+
+Control
+Install blue sticky traps (10–12/acre)
+Spray Neem oil 2–3 ml/L or NSKE 5%
+If severe: spray Spinosad 45 SC @ 0.3 ml/L or Fipronil 5 SC @ 1 ml/L or Imidacloprid 17.8 SL @ 0.3 ml/L
+Avoid excess nitrogen; keep field weed-free",India,Telangana
+585,Chilli,Thrips,"Chilli thrips 
+
+Cause: Thrips feeding  on the underside of leaves.
+
+Symptoms:
+Silvery or bronzed patches on leaf underside
+Leaf margins curl upward
+Rough, scarred leaf surface
+Leaves become narrow, distorted
+Heavy attack → stunted plants, flower drop
+
+Management:
+Remove heavily infested leaves early
+Install blue/yellow sticky traps (10–15/acre)
+Spray neem oil 2–3 ml/L or azadirachtin 1500 ppm
+If severe: spray spinosad 0.3 ml/L or fipronil 1 ml/L (rotate chemicals)
+Avoid excess nitrogen and dusty conditions",India,Andhra Pradesh
+587,Banana,Panama Wilt,"The fungus is soil-borne and can survive in soil for years, making integrated management strategies like using resistant varieties, proper soil hygiene, and seed treatment crucial for control of panama wilt.",India,Bihar
+588,Chilli,Thrips,"Chilli thrips
+Cause: Thrips feeding (mostly Scirtothrips dorsalis) on the underside of leaves.
+
+Symptoms:
+Silvery or bronzed patches on leaf underside
+Leaf margins curl upward
+Rough, scarred leaf surface
+Leaves become narrow, distorted
+Heavy attack → stunted plants, flower drop
+
+Management:
+Remove heavily infested leaves early
+Install blue/yellow sticky traps (10–15/acre)
+Spray neem oil 2–3 ml/L or azadirachtin 1500 ppm
+If severe: spray spinosad 0.3 ml/L or fipronil 1 ml/L (rotate chemicals)
+Avoid excess nitrogen and dusty conditions",India,Telangana
+589,Chilli,Thrips,"Chilli thrips
+
+Cause: Thrips feeding on the underside of leaves.
+
+Symptoms:
+Silvery or bronzed patches on leaf underside
+Leaf margins curl upward
+Rough, scarred leaf surface
+Leaves become narrow, distorted
+Heavy attack → stunted plants, flower drop
+
+Management:
+Remove heavily infested leaves early
+Install blue/yellow sticky traps (10–15/acre)
+Spray neem oil 2–3 ml/L or azadirachtin 1500 ppm
+If severe: spray spinosad 0.3 ml/L or fipronil 1 ml/L (rotate chemicals)
+Avoid excess nitrogen and dusty conditions",India,Bihar
+590,Maize,Fall Armyworm,"Maize Fall Armyworm 
+
+Symptoms
+Window-pane feeding on young leaves
+Large irregular holes and ragged leaves
+Frass (sawdust-like) in whorl
+Larva with inverted Y mark on head
+Severe attack → dead heart in young plants
+
+Control
+Install pheromone traps 5/acre
+Apply sand + ash or sand + lime into whorl (early stage)
+Spray Neem oil 3 ml/L (early infestation)
+If severe: spray Emamectin benzoate 5 SG @ 0.4 g/L or Spinetoram 11.7 SC @ 0.5 ml/L or Chlorantraniliprole 18.5 SC @ 0.4 ml/L
+Encourage natural enemies; keep field weed-free",India,Bihar
+592,Citrus,Citrus Canker,"Citrus Canker 
+
+Symptoms
+Small raised corky lesions with yellow halo on leaves
+Similar rough lesions on twigs and fruits
+Lesions become crater-like with cracks
+Severe infection → leaf drop, fruit blemishes
+
+Control
+Use disease-free planting material
+Prune and destroy infected twigs
+Avoid overhead irrigation and injuries
+Spray Copper oxychloride 3 g/L or Bordeaux mixture 1% at 20–25 day intervals
+Add Streptocycline 0.1 g/L + copper spray in severe cases
+Maintain good orchard sanitation",India,Bihar
+597,Ridge gourd,Powdery Mildew,"Ridge Gourd Powdery Mildew 
+
+Symptoms
+White powdery patches on leaves and stems
+
+Leaves turn yellow, dry, and curl
+
+Poor fruit development in severe cases
+
+Control
+Spray Wettable sulphur 2–3 g/L or Potassium bicarbonate 5 g/L
+
+If severe: spray Hexaconazole 1 ml/L or Tebuconazole 1 ml/L
+
+Ensure good spacing and air circulation
+
+Avoid excess nitrogen
+
+Repeat spray at 7–10 day interval if needed",India,Bihar
+598,Groundnut,Leaf Spot,"Groundnut Leaf Spot 
+
+Symptoms
+Small brown to dark spots on leaves
+
+Spots enlarge with yellow halo
+
+Severe cases → leaf drying and defoliation
+
+Yield reduction
+
+Control
+Use resistant varieties
+
+Remove crop debris; follow crop rotation
+
+Spray Mancozeb 2.5 g/L or Chlorothalonil 2 g/L
+
+If severe: Tebuconazole 1 ml/L or Hexaconazole 1 ml/L
+
+Start spray at first appearance; repeat every 10–14 days",India,Andhra Pradesh
+600,Bean,Powdery Mildew,"Bean Powdery Mildew 
+Symptoms
+White powdery patches on leaves and stems
+
+Leaves turn yellow and dry
+
+Premature leaf fall
+
+Poor pod filling in severe cases
+
+Control
+Spray Wettable sulphur 2–3 g/L
+
+If severe: spray Hexaconazole 1 ml/L or Tebuconazole 1 ml/L
+
+Maintain good spacing and air circulation
+
+Avoid excess nitrogen
+
+Repeat spray at 7–10 day interval if needed",India,Bihar
+601,Bean,Powdery Mildew,"Bean Powdery Mildew 
+
+Symptoms
+
+White powdery growth on leaves/stems
+
+Yellowing and drying of leaves
+
+Premature leaf fall
+
+Reduced pod yield
+
+Control
+Spray Wettable sulphur 2–3 g/L
+
+If severe: Hexaconazole 1 ml/L or Tebuconazole 1 ml/L
+
+Ensure good air circulation
+
+Avoid excess nitrogen
+
+Repeat spray every 7–10 days if needed",India,Bihar
+602,Chilli,Thrips,"Chilli thrips
+
+Symptoms:
+
+Silvery/bronzed patches (leaf underside)
+
+Upward curling, distorted leaves
+
+Flower drop, stunting
+
+Control:
+
+Blue sticky traps (10–15/acre)
+
+Neem oil 2–3 ml/L
+
+If severe: spinosad 0.3 ml/L or fipronil 1 ml/L
+
+Spray underside of leaves and rotate chemicals",India,Andhra Pradesh
+603,Mango,Mango Hopper,"Mango Hopper 
+
+
+Symptoms
+
+Sap sucking on panicles
+
+Flower drying and drop
+
+Honeydew and sooty mould
+
+Poor fruit set
+
+Control
+Spray Neem oil 2–3 ml/L
+
+If severe: Imidacloprid 0.3 ml/L or Thiamethoxam 0.25 g/L
+
+Prune canopy; keep orchard clean
+
+Spray at panicle emergence and pea stage",India,Andhra Pradesh
+605,Brinjal,Shoot and Fruit Borer,"Brinjal Fruit & Shoot Borer- wilting and drying of young shoots
+
+Cause: Leucinodes orbonalis
+
+Symptoms
+
+Wilting/drooping of tender shoots
+
+Entry holes on fruits with frass (excreta)
+
+Fruits become unmarketable
+
+Larva found inside shoots/fruits
+
+Control
+Remove and destroy affected shoots/fruits regularly
+
+Install pheromone traps (10–12/acre)
+
+Release Trichogramma if available
+
+Spray neem oil (2–3 ml/L)
+
+If severe: spray emamectin benzoate or spinosad as recommended",India,Bihar
+607,Potato,Bacterial Wilt,"Wilting of potato plants, sudden wilting and no yellowing
+
+Most likely: Bacterial wilt
+
+symptoms
+
+Single plant suddenly wilts
+
+Leaves stay green but droop
+
+Brown vascular tissue in stem
+
+Milky ooze in water test
+
+Control:
+
+Uproot and destroy affected plant with surrounding soil
+
+Avoid excess irrigation and water stagnation
+
+Disinfect tools and avoid field spread
+
+Use disease-free seed in future",India,Bihar
+608,Maize,Turcicum Leaf Blight,"Maize – Yellowing, Browning & Necrotic Patches
+
+Most likely: Turcicum leaf blight (Northern corn leaf blight)
+
+Symptoms
+
+Long yellow-brown lesions on leaves
+
+Lesions turn necrotic (dry brown)
+
+Starts on lower leaves and spreads upward
+
+Severe cases cause leaf drying
+
+Control
+Grow resistant hybrids
+
+Avoid dense planting and excess nitrogen
+
+Remove crop residues
+
+Spray mancozeb or propiconazole at early stage (repeat if needed)*",India,Bihar
+609,Maize,Fall Armyworm,"Maize Fall Armyworm
+
+Cause: Spodoptera frugiperda
+
+Symptoms
+
+Window-pane feeding on young leaves
+
+Irregular large holes in whorl leaves
+
+Sawdust-like frass inside whorl
+
+Ragged, shredded leaves
+
+Control
+
+Regular field scouting (early stage)
+
+Install pheromone traps (5/acre)
+
+Apply neem seed kernel extract (NSKE 5%)
+
+Apply sand + lime/ash in whorl (early stage)
+
+If severe: spray emamectin benzoate or spinetoram into whorl as recommended",India,Telangana
+610,Citrus,Leaf Miner,"Citrus Leaf Miner
+
+Cause: Phyllocnistis citrella
+
+Symptoms
+
+Silvery zig-zag mines on young leaves
+
+Leaf curling and distortion
+
+Twisted tender flush
+
+Reduced plant vigor
+
+Control
+
+Avoid excess nitrogen (reduces flush)
+
+Prune heavily infested shoots
+
+Spray neem oil (2–3 ml/L) on new flush
+
+Install yellow sticky traps
+
+If severe: spray abamectin or imidacloprid on tender leaves",India,Telangana
+613,Chilli,Mites,"Mites (yellow mites)
+Cause: Polyphagotarsonemus latus
+Symptoms
+Downward curling, puckered leaves
+
+Leaf bronzing and thickening
+
+Stunted top growth
+
+Control
+Spray spiromesifen or propargite
+
+Neem oil (2–3 ml/L) in early stage
+
+Avoid excessive nitrogen",India,Bihar
+615,Groundnut,Leaf Spot,"Groundnut Leaf Spot (Tikka) 
+
+Symptoms:
+Small brown to dark circular spots on leaves, yellow halo around lesions, heavy infection causes premature leaf fall and yield loss.
+
+Control:
+Grow tolerant varieties and maintain field sanitation.
+
+Spray mancozeb or chlorothalonil at first appearance.
+
+If severe: spray carbendazim + mancozeb or tebuconazole (as per label) at 10–14 day intervals.",India,Andhra Pradesh
+618,Chilli,Mites,"Chilli – Mite Infestation 
+
+Symptoms:
+Tiny specks on leaf surface → leaves turn yellow or bronze.
+
+Leaves curl, dry, and drop in severe attack.
+
+Fine webbing may appear on underside of leaves.
+
+Control:
+
+Spray wettable sulphur (2 g/L) or neem oil.
+If severe: use propargite or spiromesifen (follow label dose).
+
+Keep field weed-free and maintain proper irrigation.",India,Bihar
+621,Bitter gourd,Powdery Mildew,"leaf minor and powdery mildew infections are seen
+
+Bitter Gourd – Leaf Minor & Powdery Mildew
+
+Symptoms:
+Leaf Minor: serpentine tunnels, silvery patches, leaf drying.
+
+Powdery Mildew: white powdery coating, leaf curl, distortion.
+
+Control:
+Remove affected leaves, maintain spacing.
+Spray neem oil or wettable sulphur.
+If severe: abamectin/emamectin (leaf minor), hexaconazole/tebuconazole (powdery mildew).",India,Bihar
+622,Maize,Fall Armyworm,"Maize – Fall Armyworm 
+
+Symptoms:
+Chewed leaves with ragged edges, “windowpane” feeding.
+
+Caterpillars bore into whorl and cob, causing stunted growth.
+
+Frass (excreta) visible in whorls and on ground.
+
+Control:
+Handpick and destroy larvae in small fields.
+
+Spray neem oil or azadirachtin for early infestations.
+
+If severe: use spinosad (follow label dose).
+
+Maintain weed-free fields and crop rotation to reduce pest buildup.",India,Bihar
+624,Onion,Thrips,"Onion – Thrips 
+
+Symptoms:
+Tiny yellow-white insects on leaf surface and underside.
+
+Leaves develop silvery streaks, curl, and may dry.
+
+Severe attack reduces bulb size and yield.
+
+Control:
+Spray neem oil or azadirachtin early.
+If severe: use spinosad or imidacloprid (follow label dose).
+Maintain proper spacing and weed-free fields.",India,Jharkhand
+626,Bean,Pod Borer,"Dolichos Bean – Flower-Eating 
+
+Symptoms:
+
+Caterpillars feed on flowers, buds, and young pods.
+
+Flowers drop prematurely → poor pod set.
+
+Chewed petals and visible larvae on plants.
+
+Control:
+Handpick and destroy larvae in small fields.
+
+Spray neem oil or azadirachtin early.
+
+If severe: use Bacillus thuringiensis (Bt) or chlorantraniliprole (follow label dose).
+
+Maintain field hygiene and remove weed hosts.",India,Bihar
+627,Chilli,Leaf Curl Virus,"Chilli leaf curl virus infestation, it can not be cured, the severely affected plants are uprooted and destroyed. To control whitefly (vector of chili leaf curl virus) spray Imidacloprid @3ml /10 liters of water or Neem oil,300ppm @ 5ml per liter of water.",India,Bihar
+629,Maize,Fall Armyworm,"Infestation of FAW, For early infestations, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl as recommended doses.",India,Bihar
+631,Potato,Aphids,"There is aphids infestation in potato plants. Removing affected plants and controlling aphid populations with insecticides(Imidachloprid 3ml/10liters of water or Neem oil,300ppm@5ml /liter of water)",India,Bihar
+641,Papaya,Healthy,"Papaya plant having poor growth, apply balance NPK nutrition and papaya tree needs an adequate supply of moisture in the soil to keep it growing vigorously all the time for better flowering and fruit setting.",India,Bihar
+645,Brinjal,Shoot and Fruit Borer,"Brinjal Shoot and Fruit Borer (Leucinodes orbonalis)
+
+Symptoms
+Wilting and drying of tender shoots (“dead heart”).
+
+Entry holes on shoots and fruits with frass (insect excreta) outside.
+
+Fruits show internal tunneling and rotting.
+
+Deformed, unmarketable fruits and heavy yield loss.
+
+Control Measures
+Remove and destroy infested shoots and fruits regularly.
+
+Install pheromone traps (12–15/acre) for monitoring and mass trapping.
+
+Encourage natural enemies (e.g., Trichogramma release).
+
+Spray neem oil (2–3 ml/L) or NSKE 5%.
+
+If severe: spray emamectin benzoate 0.4 g/L or spinosad 0.3 ml/L.
+
+Follow crop rotation and avoid continuous brinjal cropping.",India,Andhra Pradesh
+650,Mango,Anthracnose,"Likely Cause: Mango malformation
+Symptoms
+Vegetative buds become bushy, bunchy (witches’ broom).
+
+Leaves crowded and small at shoot tips.
+
+Tip drying of leaves/shoots.
+
+Short internodes and abnormal vegetative growth.
+
+Poor or no flowering on affected shoots.
+
+Control Measures
+
+Prune and destroy malformed shoots 15–20 cm below affected portion.
+
+After pruning, spray carbendazim 1 g/L on cut ends.
+
+Spray NAA 200 ppm in October (helps reduce malformation).
+
+Maintain balanced nutrition (especially potassium).
+
+Avoid excess nitrogen fertilizer.
+
+Keep orchard well aerated.",India,Bihar
+654,Chilli,Anthracnose,"If Dieback / Anthracnose
+
+Symptoms
+Drying starts from tip and moves backward.
+
+Branches show dark lesions and rot.
+
+Twigs dry and break easily.
+
+Fruit may also show sunken spots.
+
+Control
+Prune and destroy affected branches.
+
+Spray carbendazim 1 g/L or mancozeb 2.5 g/L.
+
+If severe: azoxystrobin + difenoconazole as per label.
+
+Avoid overhead irrigation and maintain spacing.",India,Andhra Pradesh
+655,Coriander,Powdery Mildew,"Powdery Mildew in Coriander 
+
+Symptoms
+White powdery coating on leaves and stems.
+Leaves turn yellow and dry.
+Poor growth and reduced seed yield.
+Severe cases → premature drying.
+
+Control
+Ensure good spacing and air circulation.
+Avoid excess nitrogen.
+Spray wettable sulphur 2 g/L at first appearance.
+If severe: spray hexaconazole 1 ml/L or penconazole 1 ml/L.
+Repeat after 10–12 days if needed.",India,Bihar
+658,Mango,Powdery Mildew,"A white powdery fungal coating appears on leaves, and tender shoots.",India,Bihar
+659,Onion,Purple Blotch,"Onion Purple Blotch
+Symptoms:
+Purple-brown concentric spots with yellow halo on leaves → tip drying and blight.
+
+Control:
+Use clean seed, proper spacing, avoid leaf wetness. Spray Mancozeb 2–2.5 g/L or Azoxystrobin 1 ml/L at 10–12 day interval.",India,Bihar
+660,Cabbage,Diamondback Moth,"Small ragged holes on cabbage leaves
+
+Likely cause: Leaf-eating caterpillars (e.g., Diamondback moth larvae, cabbage butterfly).
+
+Symptoms:
+Irregular small holes, window-pane feeding, green larvae on underside.
+
+Control:
+
+Hand pick larvae; use netting.
+
+Spray Bacillus thuringiensis (Bt) @ 1 g/L or
+
+Spinosad @ 0.3 ml/L or
+
+Emamectin benzoate @ 0.4 g/L.
+Repeat at 7–10 days.",India,Odisha
+664,Tomato,Leaf Curl Virus,"Typical symptoms of Tomato Leaf Curl Virus (ToLCV) cannot be cured once infected, so treatment focuses on removing infected plants to prevent spread and controlling the whitefly vector. Effective management includes using yellow sticky traps, applying insecticides (e.g., imidacloprid, thiamethoxam), utilizing resistant varieties, and removing weeds.",India,Bihar
+665,Pumpkin,Powdery Mildew,"Pumpkin plants severely affected with Powdery mildew, can be controlled by application of Wettable sulphur @ 0.2%.. Preventive measures by spray of Neem oil,300ppm @ 5ml per liter of water at early stages of growth.",India,Bihar
+671,Potato,Aphids,"On close observation, there is infestation of aphids in potato crop at early stage. This can be controlled by an integrated approach focusing on reducing the aphid vector and using certified, disease-free seed tubers. Removing affected plants and controlling aphid populations with insecticides(Imidachloprid 3ml/10liters of water or Neem oil,300ppm@5ml /liter of water) to prevent virus spread.",India,Bihar
+672,Paddy,Stem Borer,"The paddy panicles are of white ear heads having stem borer infestation at grain filling stage. which to be controlled from the beginning of paddy cultivation starting from using- resistant varieties, timely planting, crop rotation, and field sanitation. Biological control includes using Trichogramma egg parasitoids. For chemical control, apply granular Chlorantraniliprole before infestation or foliar sprays like Flubendiamide. Monitoring with light or pheromone traps is also effective for timely intervention.",India,Telangana
+673,Custard apple,Powdery Mildew,"Powdery mildew symptoms having white, talcum-like patches on leaves, young shoots, and sometimes fruit, leading to leaf distortion, premature drop, and fruit deformation. Management involves pruning infected twigs and applying sulfur-based fungicides to reduce infection.",India,Bihar
+677,Chilli,Thrips,"Early infestation of Thrips in chilli plants. To control Thrips spray Imidacloprid, or Acetamiprid @1ml per one liter of water, repeat spray in a gap of 8 to 10 days interval.",India,Andhra Pradesh
+681,Rose,Thrips,"Rose thrips
+
+Symptoms
+
+Silvery streaks or patches on petals/leaves
+
+Flower buds distorted, petals brown at edges
+
+Leaves curl and show scarring
+
+Poor flower quality
+
+Control
+
+Spray Neem oil 2–3 ml/L (early stage)
+
+For heavy infestation:
+
+Spinosad 45 SC @ 0.3 ml/L or
+
+Fipronil 5 SC @ 1 ml/L or
+
+Imidacloprid 17.8 SL @ 0.3 ml/L
+
+Install blue sticky traps (8–10 per acre)
+
+Remove heavily infested buds
+
+Repeat spray after 7–10 days if needed.",India,Bihar
+682,Brinjal,Shoot and Fruit Borer,"Brinjal shoot & fruit borer
+
+Symptoms
+
+Wilting/drooping of tender shoots (with entry hole)
+
+Bore holes on fruits with frass (excreta) outside
+
+Damaged, unmarketable fruits
+
+Larva inside shoot or fruit
+
+Control
+
+Remove and destroy infested shoots and fruits regularly
+
+Install pheromone traps (12/acre)
+
+Spray at flowering/fruiting:
+
+Emamectin benzoate 5 SG @ 0.4 g/L or
+
+Spinosad 45 SC @ 0.3 ml/L or
+
+Chlorantraniliprole 18.5 SC @ 0.3 ml/L
+
+Use neem oil 3 ml/L in early stage
+
+Repeat spray every 10–12 days during infestation",India,Bihar
+685,Chilli,Mites,"Chilli mite infestation
+
+Symptoms
+Leaf curling downward (cup-shaped)
+
+Leaves become thick, brittle, and bronzed
+
+Shortened internodes, bushy top
+
+Flower drop and poor fruit set
+
+Mites seen on leaf underside (with lens)
+
+Control
+
+Remove heavily infested shoots
+
+Spray Neem oil 2–3 ml/L (early stage)
+
+For severe attack:
+
+Spiromesifen 22.9 SC @ 1 ml/L or
+
+Propargite 57 EC @ 2 ml/L or
+
+Fenazaquin 10 EC @ 1 ml/L
+
+Ensure good field sanitation and avoid excess nitrogen
+
+Repeat spray after 7–10 days if needed.",India,Telangana
+689,Tomato,Late Blight,"To treat tomato blight, immediately remove and destroy infected leaves, apply fungicides (like copper or chlorothalonil), and mulch soil to prevent splash-back.",India,Bihar
+690,Potato,Aphids,"On close observation there is leaf curls in potato plants, which is a virus disease transmitted by Aphids, this is controlled by managing aphid vectors, using certified disease-free seeds and removing infected plants. Since no direct chemical cure exists, control focuses on prevention, such as applying insecticides and using resistant varieties.",India,Bihar
+691,Pumpkin,Powdery Mildew,"Powdery mildew infestation in pumpkin, which can be controlled by  application of Wettable sulphur @ 0.2%.. Preventive measures by spray of Neem oil,300ppm @ 5ml per liter of water at early stages of growth.",India,Bihar
+692,Papaya,Anthracnose,"To control anthracnose use-
+Cultural Practices: Remove and destroy infected plant debris, prune affected leaves, ensure proper spacing for airflow, and avoid fruit wounding during harvest
+Chemical Control: Apply protective fungicides like Mancozeb, Chlorothalonil, or Copper-based sprays (e.g., Copper hydroxide) every 2-4 weeks, starting when fruit set begins.",India,Bihar
+693,Potato,Common Scab,"Rotting of stored potatoes, typically caused by Fusarium (dry rot) or bacteria (soft rot), occurs due to high moisture, improper ventilation, and infection of wounded tubers. Prevent decay by curing at 10-15 degree centigrade
+ for 10-14 days, maintaining cool (7–10°C) in dark, dry, and well-ventilated storage and promptly removing spoiled potatoes.",India,Bihar
+694,Potato,Aphids,"An integrated approach focusing on reducing the aphid vector and using certified, disease-free seed tubers.Removing affected plants and controlling aphid populations with insecticides(Imidachloprid 3ml/10liters of water or Neem oil,300ppm@5ml /liter of water) to prevent virus spread.",India,Bihar
+695,Paddy,Blast,"To check the spread of blast disease maintain consistent field flooding to prevent disease development, and apply fungicides like tricyclazole or azoxystrobin(1gm/liter of water) during critical growth stages.
+Use resistant rice varieties, apply seed treatments for the next crop.",India,Andhra Pradesh
+698,Tobacco,Tobacco Mosaic Virus,"Typical symptoms of TMV, it can not be cured but can be prevented by using resistant cultivars (e.g., TMVRR-2, NC 567), strict sanitation to prevent mechanical spread (disinfecting tools with 10% bleach/soap, washing hands), and removing infected plants.",India,Bihar
+699,Barley,Smut,"Barley crop at grain filling stage having smut. Smut control in barley is best achieved through a combination of using certified disease-free, resistant seeds and applying systemic fungicide seed treatments (e.g., carboxin, tebuconazole, or triadimenol) to manage both loose and covered smuts.",India,Bihar
+700,Cowpea,Mosaic Virus,"Managing Cowpea Mosaic Virus (CPMV) involves an integrated approach focusing on controlling beetle vectors, using resistant varieties, and removing infected plants early. Key strategies include spraying insecticides like imidacloprid, lambda-cyhalothrin, or neem oil, rogueing infected plants within 30 days, using virus-free seeds and managing alternate weed hosts",India,Bihar
+703,Mango,Bacterial Canker,"Mango malformation, caused by Fusarium species, is controlled through an integrated approach involving pruning diseased panicles/shoots 15-20 cm below the infection point, applying 100-200 ppm NAA (Naphthalene Acetic Acid) in October, and spraying fungicides like 0.1% Carbendazim or 0.2% Captafol",India,Bihar
+715,Potato,Aphids,"Aphids in potato causing leaf curl and roll . An integrated approach focusing on reducing the aphid vector and using certified, disease-free seed tubers. Removing affected plants and controlling aphid populations with insecticides(Imidachloprid 3ml/10liters of water or Neem oil,300ppm@5ml /liter of water) to prevent virus spread.",India,Bihar
+716,Tomato,Early Blight,"Symptoms appears at the edge of tomato leaves, with dark, damaged plant tissue that spreads through the leaves toward the stem. Use fungicide sprays based on mandipropamid, chlorothalonil, fluazinam, mancozeb to combat blight disease at recommended dose.",India,Andhra Pradesh
+718,Mango,Powdery Mildew,Symptoms of powdery mildew disease in mango plant. Spray sulfur-based fungicides @1gm per liter of water to combat powdery mildew.,India,Bihar
+720,Maize,Fall Armyworm,"Maize fall armyworm 
+
+Symptoms
+Pinholes and window-pane feeding on young leaves
+
+Ragged holes and shredded leaves
+
+Sawdust-like frass inside whorl
+
+Larva hidden deep in whorl
+
+Control
+Early sowing and field sanitation
+
+Install pheromone traps (5/acre)
+
+Release Trichogramma pretiosum
+
+Spray Bacillus thuringiensis (Bt)
+
+If severe: Emamectin benzoate 0.4 g/L or Chlorantraniliprole 0.4 ml/L
+
+Direct spray into whorl",India,Andhra Pradesh
+725,Bitter gourd,Downy Mildew,"Bottle gourd downy mildew – symptoms & control
+
+Symptoms
+Yellow angular spots on upper leaf surface
+Grey-purple fuzzy growth on leaf underside
+Spots enlarge and leaves turn brown and dry
+Severe infection causes rapid leaf blighting and yield loss
+
+Control
+Cultural
+Ensure good spacing and air circulation
+Avoid late evening irrigation and leaf wetness
+Remove badly infected leaves
+Grow tolerant varieties if available
+
+Chemical
+Metalaxyl + Mancozeb @ 2 g/L
+
+Fosetyl-Al @ 2 g/L
+
+Cymoxanil + Mancozeb @ 2 g/L
+
+ Spray at first appearance and repeat every 7–10 days during favourable humid weather",India,Bihar
+726,Chilli,Mites,"Chilli mites – symptoms & control
+
+Symptoms
+Leaves curl downward and become crinkled
+Leaf margins turn bronze/brown
+Young leaves become narrow and distorted
+Stunted plant growth and poor flowering
+Mites usually on leaf undersides (not easily visible)
+
+Control
+Cultural
+Avoid excess nitrogen
+Remove heavily infested shoots
+Maintain field sanitation
+Biological
+Encourage predatory mites like Amblyseius swirskii
+
+Chemical
+Spiromesifen 1 ml/L
+
+Fenazaquin 1 ml/L
+
+Propargite 2 ml/L
+
+Abamectin 0.5 ml/L
+
+Spray thoroughly on leaf undersides and repeat after 7–10 days if needed.",India,Bihar
+727,Maize,Fall Armyworm,"Maize fall armyworm – symptoms & control
+
+ Symptoms
+Pinholes and window-pane feeding on young leaves
+
+Ragged holes and shredded leaves
+
+Whorl filled with sawdust-like frass
+
+Larva hidden deep inside whorl
+
+Severe cases: tassel/cob damage
+
+Control
+Cultural
+Early sowing and field sanitation
+
+Install pheromone traps (5/acre)
+
+Apply sand + ash into whorl (early stage)
+
+Biological
+
+Release Trichogramma pretiosum
+
+Spray Bacillus thuringiensis (Bt)
+
+Chemical (if ≥10% plants infested)
+
+Emamectin benzoate 0.4 g/L
+
+Chlorantraniliprole 0.4 ml/L
+
+Spinetoram 0.5 ml/L",India,Bihar
+728,Brinjal,Wilt,"Brinjal wilt – symptoms & control
+
+Symptoms
+
+Sudden drooping and wilting of plants
+
+Leaves remain green initially but plant collapses
+
+Vascular browning when stem is cut
+
+Patchy drying of plants in field
+
+In bacterial wilt: milky ooze from cut stem in water
+
+ Control
+Cultural
+Use resistant/tolerant varieties
+
+Follow crop rotation (avoid solanaceous crops for 2–3 years)
+
+Ensure good drainage; avoid waterlogging
+
+Remove and destroy infected plants
+
+Biological
+
+Soil application of Pseudomonas fluorescens
+
+Apply Trichoderma viride in nursery and main field
+
+Chemical (mainly for fungal wilt)
+
+Carbendazim 1 g/L soil drench
+
+Copper oxychloride 2.5 g/L (supportive)
+
+Start management early; wilt is difficult to cure once severe.",India,Bihar
+730,Maize,Turcicum Leaf Blight,"Maize streak virus – symptoms & control
+
+Symptoms
+Narrow yellow to white streaks parallel to leaf veins
+
+Mosaic or striped appearance on leaves
+
+Stunted plant growth
+
+Poor cob development and low yield
+
+Symptoms appear first on young leaves
+
+Control
+Cultural
+Use resistant/tolerant maize varieties
+
+Early sowing to escape vector peak
+
+Remove and destroy infected plants
+
+Maintain field sanitation and weed control (especially grasses)
+
+Vector management (leafhoppers)
+
+Install yellow sticky traps
+
+Avoid continuous maize cropping
+
+Chemical (for vector control)
+
+Imidacloprid 0.3 ml/L
+
+Thiamethoxam 0.25 g/L
+
+Acetamiprid 0.2 g/L
+
+ Focus on controlling the leafhopper vector; virus itself cannot be cured.",India,Bihar
+732,Chilli,Thrips,"नई पत्तियाँ ऊपर की ओर मुड़ी हुई और संकरी दिखाई दे रही हैं।
+
+पत्तियों की सतह पर चांदी जैसी चमक (सिल्वरिंग) स्पष्ट दिख रही है।
+
+पत्तियाँ सिकुड़ी हुई तथा किनारों से मुड़ी हुई नजर आ रही हैं।
+
+ऊपरी भाग की बढ़वार असामान्य और झाड़ीदार दिखाई दे रही है।",India,Andhra Pradesh
+734,Bean,Powdery Mildew,"Powdery mildew in bean plants. At initial stage powdery mildew can be controlled by spraying Neem oil,300ppm @ 5ml per liter of water or application of Sulfur: Wettable sulfur (2000 ppm)@ 1gm per liter of water is effective.",India,Bihar
+735,Chilli,Leaf Curl Virus,"Chilli Leaf Curl Virus – Symptoms and Control
+
+Symptoms
+Young leaves curl upward and become distorted.
+
+Leaves become small, thick and wrinkled.
+
+Leaf margins roll upward forming a cup-like shape.
+
+Plants show stunted growth and remain short.
+
+Reduced flowering and fruit set.
+
+In severe cases, plants produce very few or no fruits.
+
+Spread
+The virus is mainly transmitted by Whitefly.
+
+Control Measures
+Cultural control
+Remove and destroy infected plants from the field.
+
+Remove weed hosts around the crop.
+
+Install yellow sticky traps to monitor and reduce whitefly population.
+
+Biological / Botanical control
+Spray Azadirachtin (1500 ppm) @ 2–3 ml per liter of water.
+
+Chemical control
+Spray Imidacloprid 0.3 ml/L
+or
+Thiamethoxam 0.25 g/L.
+ Controlling the whitefly vector helps in reducing the spread of the virus",India,Andhra Pradesh
+740,Chickpea,Ascochyta Blight,"Graying and Drying of Leaves in Chickpea – Symptoms and Control
+
+Possible Cause
+
+This symptom is commonly associated with Chickpea Ascochyta Blight.
+
+Symptoms
+
+Grayish or light brown spots appear on leaves.
+
+Spots may enlarge and merge, causing leaves to turn gray and dry.
+
+Lesions may also appear on stems and pods.
+
+In severe cases, leaves dry and fall, weakening the plant.
+
+Control Measures
+
+Cultural control
+
+Use disease-free seeds.
+
+Maintain proper spacing and field sanitation.
+
+Remove and destroy infected plant parts.
+
+Chemical control
+
+Spray Mancozeb 2 g/L of water.
+
+Or spray Carbendazim 1 g/L of water.
+
+Timely fungicide application helps prevent spread of the disease and protect the crop.",India,Andhra Pradesh
+741,Maize,Fall Armyworm,"Fall Armyworm in Maize – Symptoms and Control
+
+Symptoms
+
+Small pin holes or window-like feeding marks on young leaves.
+
+Irregular large holes and ragged leaves as larvae grow.
+
+Presence of caterpillars inside the leaf whorl.
+
+Frass (insect excreta) seen inside the whorl.
+
+Severe infestation causes damaged central whorl and poor plant growth.
+
+Control Measures
+
+Cultural control
+
+Regular field monitoring, especially during early crop stages.
+
+Hand pick and destroy larvae in early infestation.
+
+Install pheromone traps to monitor pest population.
+
+Biological / Botanical control
+
+Spray Bacillus thuringiensis 1–2 g/L.
+
+Spray Azadirachtin 2–3 ml/L.
+
+Chemical control
+
+Spray Emamectin Benzoate 0.4 g/L
+or
+
+Chlorantraniliprole 0.3 ml/L into the leaf whorl.
+
+Early detection and proper control help reduce crop damage and yield loss in maize",India,Bihar
+742,Groundnut,Leaf Miner,"Spodoptera litura in Groundnut – Symptoms and Control
+
+Symptoms
+Young larvae scrape the leaf surface, causing window-like feeding.
+
+Older caterpillars eat large portions of leaves, leaving irregular holes.
+
+Severe infestation leads to heavy defoliation.
+
+Presence of green to dark brown caterpillars on leaves.
+
+Crop growth becomes weak due to loss of leaf area.
+
+Control Measures
+
+Cultural control
+
+Deep summer ploughing to destroy pupae in soil.
+
+Hand pick and destroy egg masses and larvae in early stages.
+
+Install pheromone traps to monitor pest population.
+
+Biological control
+
+Spray Bacillus thuringiensis 1–2 g/L.
+
+Release Trichogramma chilonis for biological control.
+
+Botanical control
+
+Spray Azadirachtin 2–3 ml/L.
+
+Chemical control
+
+Spray Emamectin Benzoate 0.4 g/L
+or
+Spinosad 0.3 ml/L.
+
+ Early management helps prevent severe leaf damage and yield loss in groundnut.",India,Andhra Pradesh
+744,Bean,Aphids,"Aphids on Cluster Bean Flowers – Symptoms and Control
+
+Symptoms
+
+Small green or black aphids cluster on flower buds, flowers, and tender shoots.
+
+Aphids suck plant sap, causing yellowing and curling of leaves.
+
+Sticky honeydew secretion appears on plant parts.
+
+Presence of Ants around flowers and shoots (ants feed on honeydew).
+
+Heavy infestation may cause poor flowering and reduced pod formation.
+
+Control Measures
+
+Cultural control
+
+Remove heavily infested plant parts.
+
+Control ant movement by maintaining field sanitation.
+
+Biological / Botanical control
+
+Spray Azadirachtin 2–3 ml/L of water.
+
+Chemical control
+
+Spray Imidacloprid 0.3 ml/L
+or
+
+Thiamethoxam 0.25 g/L.
+
+Controlling aphids will reduce honeydew secretion and ant activity and improve flowering and pod set",India,Bihar
+747,Onion,Thrips,"Tip Yellowing and Curling in Onion – Symptoms and Control
+
+Possible Cause
+
+This symptom is commonly associated with Thrips tabaci infestation.
+
+Symptoms
+Leaf tips turn yellow and gradually dry.
+
+Leaves show curling and twisting at the tips.
+
+Silvery or whitish streaks appear on leaves due to feeding.
+
+Severe infestation leads to leaf drying and reduced bulb development.
+
+Plants appear weak with poor growth.
+
+Control Measures
+Cultural control
+Maintain field sanitation and remove weeds.
+
+Avoid excess nitrogen fertilization.
+
+Ensure proper irrigation to reduce stress.
+
+Biological / Botanical control
+Spray Azadirachtin 2–3 ml/L of water.
+Chemical control
+Spray Spinosad 0.3 ml/L
+or
+Imidacloprid 0.3 ml/L.
+
+Early control of thrips helps prevent leaf damage and ensures good bulb development in onion",India,Bihar
+751,Chilli,Leaf Curl Virus,"Chilli Leaf Curl Virus – Symptoms and Control in Chilli
+
+Symptoms
+Young leaves curl upward or downward and become distorted.
+
+Leaves become small, thick, and wrinkled.
+
+Leaf margins roll upward forming cup-shaped leaves.
+
+Plants show stunted growth and bushy appearance.
+
+Reduced flowering and fruit set.
+
+Fruits, if formed, are small and deformed.
+
+Spread
+The virus is mainly transmitted by Whitefly.
+
+Control Measures
+Cultural control
+Remove and destroy infected plants immediately.
+
+Remove weed hosts around the crop.
+
+Install yellow sticky traps to monitor and reduce whitefly population.
+
+Biological / Botanical control
+Spray Azadirachtin 2–3 ml/L of water.
+
+Chemical control
+Spray Imidacloprid 0.3 ml/L
+or
+Thiamethoxam 0.25 g/L.",India,Andhra Pradesh
+755,Maize,Fall Armyworm,"Fall Armyworm in Maize – Symptoms and Control (Concise)
+
+Symptoms
+
+Small pin holes and window feeding on young leaves.
+
+Irregular large holes and ragged leaves as larvae grow.
+
+Caterpillars present inside the leaf whorl.
+
+Frass (insect excreta) seen in the whorl.
+
+Severe attack leads to damaged central whorl and poor plant growth.
+
+Control Measures
+
+Regular crop monitoring and remove larvae in early stage.
+
+Install pheromone traps for monitoring.
+
+Spray Azadirachtin 2–3 ml/L.
+
+Spray Emamectin Benzoate 0.4 g/L
+or Chlorantraniliprole 0.3 ml/L into the leaf whorl.
+
+Early control prevents severe leaf damage and yield loss in maize.",India,Bihar
+756,Pumpkin,Powdery Mildew,"Pumpkin seedlings at young stage have Powdery mildew disease, which can be controlled by application of Wettable sulphur @ 0.2%.. For Preventive measures, spray of Neem oil,300ppm @ 5ml per liter of water is advised at early stages of growth.",India,Bihar
+757,Tomato,Late Blight,"Blight disease in tomato at fruiting stage is quite harmful, act quickly by removing and disposing of infected leaves or entire plants in sealed bags, and avoid composting them. Copper fungicides to be sprayed as a preventive measure, especially in wet weather, and employ cultural practices such as planting resistant varieties, using drip irrigation to keep foliage dry, pruning for airflow, staking plants, and practicing good sanitation.",India,Bihar
+758,Potato,Late Blight,"Late blight in Potato for control: Use fungicides like mandipropamid, chlorothalonil, fluazinam, or mancozeb.
+Seed treatment with fungicides like mancozeb before sowing.
+Remove the affected plants immediately and destroy, do not use affected plants for composting.",India,Bihar
+762,Tobacco,Tobacco Caterpillar,Early stage of damage by leaf eating caterpillar in Tobacco plant. Spray Azadirachtin 1.0 % EC (10000 ppm) 2.0 ml/ lit. or apply Bacillus thuringiensis 2g/lit. during evening hours. Plough the soil to expose and kill the pupae. Grow castor along border and irrigation channel as trap crop.,India,Bihar
+765,Papaya,Anthracnose,"Infected Papaya plants exhibit a ""bunchy top"" appearance due to shortened petioles and reduced leaf size, often accompanied by yellowing. It is highly sensitive to tetracycline-based antibiotics, which cause temporary symptom remission, confirming it is not a virus.",India,Bihar
+766,Chilli,Thrips,"Chilli leaves affected with thrips, which can be controlled by spray Imidacloprid, or Acetamiprid @1ml per one liter of water, repeat spray in a gap of 8 to 10 days interval.",India,Bihar
+767,Broad bean,Healthy,"mosaic viruses:Mosaic viruses in which the leaves show sharply defined patches of unusual coloration may occur in beans.
+control measures:There are no recommended chemical controls for these problems.",India,Bihar
+770,Maize,Fall Armyworm,"FAW damage to the maize plants. For early infestations, apply biopesticides like azadirachtin or chemical insecticides such as chlorantraniliprole or flubendiamide to the plant's whorl.  The field also needs weeding and timely irrigation.",India,Andhra Pradesh
+772,Tobacco,Tobacco Mosaic Virus,"Symptoms of TMV in tobacco. The virus affected plants to be uprooted and destroyed immediately, to control whitefly (vector of TMV)spray Imidacloprid @3ml /10 liters of water or Neem oil,300ppm @ 5ml per liter of water as preventive measures at early stage of the crop.",India,Bihar
+787,Maize,Banded Leaf and Sheath Blight,"The disease typically appears around the pre-flowering stage (30-40 days after sowing) but can infect plants earlier. It spreads rapidly from the basal leaf sheaths upwards.
+1-Cultural Practices: Proper drainage, removing crop debris, and using resistant varieties are essential.
+2-Chemical Control: Application of fungicides (e.g., Carbendazim, Validamycin) can help manage the disease, but integrated management is most effective.",India,Bihar
+791,Banana,Sigatoka Leaf Spot,"The symptoms as visible are most likely caused by Sigatoka, a fungal disease. Spray 3 times with Carbendazim 0.1 per cent or Propicanozole 0.1 % or Mancozeb 0.25% and teepol (sticking agent) at 10-15 days interval, as the disease starting from initial appearance of leaf specks .",India,Bihar
+796,Bottle gourd,Fruit Fly,"Bottle gourd young fruits rotting due to infestation of fruit flies, which can be controlled by using attractants like citronella oil, eucalyptus oil, vinegar (acetic acid), and lactic acid to trap flies. Use poison baiting in severe infestation. Mix methyl eugenol + malathion 50 EC at 1:1 ratio and keep 10 ml of the bait in polythene bags @ 25/ha.",India,Bihar
+799,Mango,Anthracnose,"Vegetative Malformation(Bunchy Top) in mango seedlings and young shoots show shortened internodes, swelling of apical buds, and a dense, clustered appearance of small leaves.
+Management requires pruning infected parts, using disease-free planting material, and applying fungicides.",India,Andhra Pradesh
+806,Groundnut,Collar Rot,"Collar rot symptoms in groundnut plants, caused by the soil and seed-borne fungus Aspergillus niger, is a destructive disease causing 28–50% yield losses, particularly in sandy loam soils. It affects seedlings and adult plants, showing symptoms like yellowing, browning/rotting at the collar region, and wilting. Management includes seed treatment with Trichoderma viride (@ 4 g/kg), tebuconazole (@ 1.5 g/kg), or soil application of biocontrol agents.",India,Andhra Pradesh
+812,Chilli,Thrips,"To control Thrips in chilli, spray Imidacloprid, or Acetamiprid @1ml per one liter of water, repeat spray in a gap of 8 to 10 days interval.",India,Andhra Pradesh
+814,Potato,Healthy,"No such symptoms , potato plants looks healthy but weeds are many along with potato plants",India,Bihar
+816,Tomato,Healthy,"The soil have cracks seen and the tomato plants wilted and drooping due to dry soil, requires irrigation",India,Andhra Pradesh
+818,Mustard,Healthy,healthy mustard flowering crop,India,Bihar
+819,Cowpea,Healthy,"nothing,clear healthy plant",India,Bihar
+822,Papaya,Healthy,"stunted plant of Papaya, poor growth",India,Bihar
+824,Mustard,Healthy,picture is not clear,India,Bihar
+825,Mustard,Healthy,"Mustard pods are nearing maturity and still flowers are seen, crop is in good condition.",India,Bihar
+827,Rose,Healthy,no disease or nutrient deficiency in plant,India,Andhra Pradesh
+830,Brinjal,Healthy,"The purplish tinge on the leaves may be due to varietal characteristics. Additionally, localized mechanical damage is observed on two to three leaves",India,Bihar
+831,Rice,Healthy,no specific symptoms were observed on either the leaves or the panicles,India,Bihar
+832,Moringa,Healthy,"No mildew symptoms were identified; however, dust deposition was present on the leaf surfaces",India,Bihar
+833,Tomato,Healthy,dust/ soil deposition was noticed on the leaves,India,Bihar
+834,Groundnut,Healthy,no symptoms of disease or pest are seen,India,Andhra Pradesh
+835,Bean,Healthy,no signs of pests and diseases are seen,India,Bihar
+836,Potato,Healthy,no symptoms are observed,India,Bihar
+837,Wheat,Healthy,the issue with the crop in the image appears to be related to drought stress or terminal heat stress which can lead to desiccation  or wilting,India,Bihar
+838,Mustard,Healthy,no issue  can be seen,India,Bihar
+839,Tomato,Healthy,No visible symptoms of pests or diseases were observed,India,Bihar
+840,Bottle gourd,Healthy,so signs of pest or disease,India,Bihar
+841,Potato,Healthy,no signs of damage in the given image,India,Bihar
+842,Tomato,Healthy,"One fruit did not develop well; overall, plant is healthy.",India,Bihar
+843,Brinjal,Healthy,lush green field no evident symptom of damage,India,Bihar
+844,Gum,Healthy,"In order to choose a crop, it is not evident, so I had to choose gum. 
+
+Potential case of stem bleeding or gummosis: dark-reddish brown gum oozing out from the bark.",India,Bihar
+846,Tobacco,Healthy,the leaves slightly swollen may related to environmental factors and varietal characteristics or any other minor pest damage can cause localized distortions,India,Bihar
+848,Tomato,Healthy,Image shows a relatively healthy looking plant without more specific symptoms,India,Bihar
+849,Wheat,Healthy,"healthy plant 
+Dark green colored plant 
+firm leaves 
+brightly colored flowers 
+well",India,Rajasthan
+850,Mustard,Healthy,none of the problem is detected in the image of the mustard plant,India,Bihar
+851,Rice,Healthy,there isn't a clear problem with the plant they apper healty young rice seedlingd planted in flooded field,India,Telangana
+852,Mango,Healthy,"In the probelm of the plant section i mentioned none because of  there wilting is not mentioned image appears to be experiencing wilting indicated by drooping , curled leaves and leaf discolaration",India,Bihar
+853,Bean,Healthy,"Healthy plant
+ it has dark green colored plant 
+firm leaves root system is well developed",India,Bihar
+854,Tomato,Healthy,"Dark green colored plant 
+firm leaves 
+brightly colored plant 
+soil is surface looks dry and lack of moisture",India,Bihar
+855,Mustard,Healthy,the image provided here shows a healthy plant. no issue reported,India,Bihar
+856,Mustard,Healthy,no visible issue can be seen clearly,India,Bihar
+857,Groundnut,Healthy,no visible issue is seen,India,Bihar
+858,Mustard,Healthy,no diseases has found in the plant it looks healthy and green,India,Bihar
+859,Chickpea,Healthy,proper spacing should be maintained in crop field to obtained maximum yield,India,Bihar
+860,Brinjal,Healthy,its looks like brinjal plant and no clear disease of nutrient deficiency is visible,India,Bihar
+861,Mustard,Healthy,"Heavy weed infestation in Mustard field, Manual weeding is advised along with thinning the crowded plants for better growth of the crop.",India,Bihar
+863,Cowpea,Healthy,no disease or nutrient deficiency is visible in the picture,India,Bihar
+864,Maize,Healthy,"Healthy maize plants, no pest or disease symptoms noticed. Preventive spray of Neem oil,300ppm @ 5ml per liter of water to be done at 8 to 10 days interval.",India,Bihar
+865,Mango,Healthy,"Symptoms:
+this is the sap burn or tip burn symptom of the mango crop possible causes are salt injury to roots, occur when salt-based fertilizers or salts in the soil come in contact with the roots of the mango tree. Affected leaves may exhibit necrosis, leading to reduced photosynthesis and stunted growth
+control: watering, balanced fertilizer application",India,Bihar
+866,Red Gram,Healthy,"Healthy Arhar plants at flowering and pod formation stage. No disease or pest symptoms found. Apply preventive spray of  organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended with timely irrigation.",India,Bihar
+867,Wheat,Healthy,"Healthy Wheat plants at tillering stage, no disease or pest symptoms found. Apply preventive spray of  organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended with timely irrigation.",India,Bihar
+868,Mustard,Healthy,"Healthy Mustard plants at flowering stage , no disease or pest infestation observed.  Apply preventive spray of  organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended with proper irrigation.",India,Bihar
+869,Bottle gourd,Healthy,"Healthy bottle gourd plants,  preventive spray of Neem oil, 300ppm@ 5ml per liter of water to be done with recommended dose of fertiliser and timely irrigation.",India,Bihar
+870,Kidney bean,Healthy,"Healthy plants of Kidney bean, no disease and pest found, preventive spray of Neem oil, 300ppm@ 5ml per liter of water to be done with recommended dose of fertiliser and timely irrigation.",India,Bihar
+871,Banana,Healthy,The spots appearing on the leaves are common and are not caused by any pest or disease.,India,Bihar
+872,Potato,Healthy,no symptom of pest or disease is observed,India,Bihar
+874,Mustard,Healthy,"The crop is looking healthy, and no deficiency symptoms are visible on the leaves",India,Bihar
+875,Potato,Healthy,the healthy crop growth is observed and no symptoms of pests and diseases are seen,India,Bihar
+876,Maize,Healthy,healthy crop growth is observed in the given image,India,Bihar
+877,Bottle gourd,Healthy,no symptoms are observed,India,Bihar
+878,Tomato,Healthy,no symptoms are observed,India,Bihar
+879,Carrot,Healthy,no signs of pest and diseases are mentioned,India,Jharkhand
+880,Tomato,Healthy,no symptoms are noticed,India,Bihar
+881,Mango,Healthy,no symptoms are noticed,India,Andhra Pradesh
+883,Bean,Healthy,"Crop: Dolichos bean 
+no signs of pest and diseases are notice",India,Bihar
+884,Chilli,Healthy,no symptoms of pest and diseases are notice,India,Andhra Pradesh
+885,Kidney bean,Healthy,"Healthy plants at flowering and fruit setting stage. No pest and disease symptoms found. Preventive spray of Neem oil,300ppm @ 5ml per liter of water to be applied.",India,Bihar
+886,Papaya,Healthy,"Healthy Papaya crop at growing stage, needs balance NPK fertiliser and preventive application of Neem oil 300ppm @5ml per liter of water and timely irrigation for better growth and flowering",India,Bihar
+887,Red Gram,Healthy,"Matured pods of Arhar  with seeds visible, no symptoms of pest and diseases found. Proper storage to be done in air tight containers to prevent post harvest loss.",India,Bihar
+888,Onion,Healthy,"पौधा स्वस्थ दिख रहा है, पत्तियाँ गहरी हरी और ताजगी भरी हैं, जड़ प्रणाली मजबूत है और विकास नियमित हो रहा है। इस अवस्था में संतुलित नाइट्रोजन युक्त खाद दें और सिंचाई नियमित रखें, लेकिन अधिक पानी से बचें। समय-समय पर खेत की सफाई करें और खरपतवार नियंत्रण पर ध्यान दें, ताकि पौधे का विकास बाधित न हो।",India,Bihar
+889,Rice,Healthy,in the given image rice crop is seen but pest and disease symptoms are not able to found,India,Telangana
+890,Chilli,Healthy,"we could see the pale leaves with the chilli 
+this may be due to waterlogging conditions in the filed",India,Andhra Pradesh
+891,Bottle gourd,Healthy,only dust accumulations on the leaves of the bottle guard plant is found,India,Bihar
+892,Rose,Healthy,anthocyanin pigmentation in young flesh is common in roses,India,Bihar
+893,Maize,Healthy,"Healthy Maize plants at growing stage, no disease or pest symptoms found, preventive application of Neem oil, 300ppm @ 5ml per liter of water can be sprayed at regular interval of 8 to 10 days. Inspect the crop regularly and monitor for any signs of infestations.",India,Bihar
+894,Bitter gourd,Healthy,"Healthy Bitter gourd plants, no disease or pest symptoms found, preventive application of Neem oil,300ppm @ 5ml per liter of water can be sprayed at regular interval of 8 to 10 days. Inspect the crop regularly and monitor for any signs of infestations.",India,Bihar
+895,Wheat,Healthy,"Healthy wheat plants, no disease or pest symptoms found, preventive application of Neem oil,300ppm @ 5ml per liter of water can be sprayed at regular interval of 8 to 10 days. Inspect the crop regularly and monitor for any signs of infestations.",India,Bihar
+896,Potato,Healthy,"Healthy Potato crop, no disease or pest symptoms found, preventive application of Neem oil,300ppm @ 5ml per liter of water can be sprayed at regular interval of 8 to 10 days. Inspect the crop regularly and monitor for any signs of infestations.",India,Bihar
+898,Mango,Healthy,"The mango tree appears healthy and normal; however, a considerable amount of dust is observed on the leaf surfaces.",India,Bihar
+899,Wheat,Healthy,none of the symptoms are peculiar,India,Bihar
+903,Red Gram,Healthy,"Healthy Arhar crop at flowering stage, no signs of any disease or pest infestation. Preventive spray of Neem oil, 300ppm @5ml per liter of water may be applied.",India,Andhra Pradesh
+904,Peas,Healthy,"Healthy pea plants, no pest or disease symptoms found. Preventive spray of Neem oil, 300ppm@ 5ml per liter of water to be done with recommended dose of fertiliser and timely irrigation.",India,Bihar
+905,Tobacco,Healthy,"Healthy Tobacco plants at growing stage, no pest or disease symptoms found . Application of balance NPK fertiliser and timely irrigation is required.",India,Bihar
+906,Mustard,Healthy,"No visible signs of powdery mildew, white rust, or insect damage on the flowers.
+
+The plant appears healthy in its flowering stage.",India,Bihar
+907,Papaya,Healthy,"Male flowering papaya plants. Remove excess male trees to maintain a 1:10 to 1:20 ratio with female trees, keep only one plant per pit. Male plants are identified upon flowering (6-7 months) and removed, while female or hermaphrodite plants are kept.",India,Bihar
+908,Tobacco,Healthy,"Healthy tobacco leaves, no pest or disease infestation found. Regular inspection to monitor crop health is advised.",India,Bihar
+909,Bitter gourd,Healthy,Healthy Bitter gourd plants at growing stage. No disease pest infestation found. Apply balance nutrition with NPK fertiliser and timely irrigation for better flowering and fruiting.,India,Bihar
+910,Wheat,Healthy,"Healthy wheat plants at flowering stage. No disease or pest infestation is found, apply balance nutrition and timely irrigation at critical stages of wheat.",India,Bihar
+911,Lemongrass,Healthy,"Healthy Lemon grass plants, no pest or disease symptoms found. As lemon grass have essential oils, which emit scents that repels most of the pests.",India,Bihar
+912,Potato,Healthy,"Healthy potato plants, no symptoms of any disease and pest infestation. Apply preventive organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended.",India,Bihar
+913,Wheat,Healthy,"Crop looks healthy. So, at this vegetative growth stage, give the recommended dose of fertilizers and irrigation for better growth.",India,Bihar
+914,Wheat,Healthy,Crop looks healthy. There are no visible symptoms of pest or disease.,India,Telangana
+915,Wheat,Healthy,Wheat plant looks heathy at grain formation stage.,India,Bihar
+916,Rose,Healthy,Rose plant looks healthy without any pest or disease symptoms.,India,Bihar
+917,Mustard,Healthy,Mustard plant looks healthy without any pest or disease symptoms.,India,Bihar
+918,Brinjal,Healthy,Brinjal plant at vegetative stage looks healthy without any pest or disease symptoms,India,Andhra Pradesh
+919,Potato,Healthy,Potato plant looks healthy without any pest or disease symptoms.,India,Bihar
+920,Crossandra,Healthy,no symptoms are observed,India,Andhra Pradesh
+921,Wheat,Healthy,"slight leaf curling in wheat can be common and not always harmful, especially in young seedlings or under certain environmental conditions.",India,Bihar
+922,Radish,Healthy,"Healthy Radish crop, plants are lush green with no disease or pest symptoms found. Preventive spray of natural Neem oil,300ppm @ 5ml per liter of water to be sprayed with balance nutrition and timely irrigation to keep the soil moist and loose for growth of radish.",India,Bihar
+923,Pepper,Healthy,"Pepper plants are lush green with no disease or pest symptoms found. Preventive spray of natural Neem oil,300ppm @ 5ml per liter of water to be sprayed with balance nutrition and timely irrigation.",India,Andhra Pradesh
+924,Onion,Healthy,"Healthy onion plants with no disease or pest symptoms found. Preventive spray of natural Neem oil,300ppm @ 5ml per liter of water to be sprayed with balance nutrition and timely irrigation.",India,Jharkhand
+926,Wheat,Healthy,"Healthy wheat crops ,requires balanced fertiliser dose along with irrigation at critical stages.. Monitoring the crop for early detection of pest and diseases.",India,Bihar
+927,Canola,Healthy,"Healthy canola plants at flowering stage, requires balanced fertiliser dose. Monitoring the crop for early detection of pest and diseases.",India,Bihar
+929,Maize,Healthy,"Healthy Maize plants at growing stage, no pest or disease symptoms found. Preventive spray of Neem oil,300ppm @ 5ml per liter of water is required along with balance dose of fertiliser application and timely irrigation as per requirements.",India,Andhra Pradesh
+930,Bitter gourd,Healthy,"Healthy bitter gourd plants, at flowering and fruiting stage, no pest or disease symptoms found. Preventive spray of Neem oil,300ppm @ 5ml per liter of water is required along with balance dose of fertiliser application and timely irrigation as per requirements.",India,Bihar
+931,Chickpea,Healthy,"so symptoms of pests and diseases are observed 
+
+but seedlings are germinated spaces that may be due to seed distribution",India,Bihar
+932,Wheat,Healthy,no pest and disease symptoms noticed but germination is not proper in some places,India,Bihar
+933,Chickpea,Healthy,In chickpea no symptoms of pests and diseases are seen but weed infestation is bit more,India,Bihar
+934,Potato,Healthy,no signs of pests and diseases are observed,India,Bihar
+935,Rice,Healthy,no symptoms are identified,India,Bihar
+936,Potato,Healthy,"The plants are showing elongated (lanky) growth, with weakened stems bending and leaning toward one side, indicating uneven growth orientation longing for sunlight",India,Bihar
+937,Onion,Healthy,seedlings are slightly dull and becoming dry due to moisture stress,India,Bihar
+938,Wheat,Healthy,no symptoms are observed and image is also not clear,India,Jharkhand
+939,Chilli,Healthy,"The seedlings appear similar to freshly transplanted ones, and the wilting-like symptoms are likely due to transplanting shock.",India,Bihar
+941,Watermelon,Healthy,no symptoms are observed,India,Bihar
+942,Tomato,Healthy,"soft watery lesions on ripe tomato fruit 
+
+Reasons
+Mechanical injury during harvesting, packing, or transport
+
+Post-harvest bacterial soft rot entering through wounds
+
+Over-mature fruits with weak skin
+
+High humidity and poor ventilation after harvest
+
+Symptoms
+Water-soaked, soft patches on fruits
+
+Tissue becomes mushy and collapses
+
+Foul smell in advanced stages
+
+Rapid spread to nearby fruits
+
+Control / management
+Harvest at breaker–pink stage, avoid over-ripening
+
+Handle fruits gently; avoid bruising
+
+Remove damaged fruits immediately
+
+Wash fruits in chlorinated water (100–150 ppm)
+
+Dry and store in cool, well-ventilated conditions
+
+Use clean crates; avoid piling and compression",India,Bihar
+943,Chickpea,Healthy,the crop is looking health,India,Bihar
+944,Onion,Healthy,older leaves are getting dried off,India,Bihar
+946,Papaya,Healthy,lanky growth with more internodal length,India,Bihar
+947,Tomato,Healthy,crop is looking healthy in the given image,India,Bihar
+948,Cowpea,Healthy,just germinated seedling are shown and are looking healthy,India,Andhra Pradesh
+949,Onion,Healthy,"Onion field with white/salt deposition on soil
+
+Cause: Soil salinity (saline water, poor drainage, excess fertilizers)
+
+Symptoms: Poor germination, leaf tip burn, stunted bulbs
+
+Control: Improve drainage, leach salts with good-quality water, add organic matter, apply gypsum (if sodic), reduce fertilizer dose and confirm with soil EC test",India,Bihar
+950,Wheat,Healthy,crop is looking healthy,India,Bihar
+951,Tobacco,Healthy,"Sun scorch / Chemical burn
+
+Symptoms:
+Irregular brown patches
+Appears suddenly after spraying
+Upper exposed leaves affected
+
+Control:
+Avoid spraying during hot hours
+Use recommended dose",India,Bihar
+952,Wheat,Healthy,we cannot see any pest of disease infection in the given image,India,Bihar
+953,Wheat,Healthy,no symptoms of pest and diseases are noticed,India,Bihar
+954,Papaya,Healthy,In the given image no specific symptoms of pest and diseases are noticed,India,Bihar
+955,Cucumber,Healthy,just germinated seedling,India,Bihar
+958,Wheat,Healthy,"Healthy wheat plant at vegetative stage but soil cracks are seen due to water stress. Irrigate the field regularly, particularly at critical stages like tillering, CRI, PI, and grain filling stage.",India,Bihar
+959,Tomato,Healthy,"Tomato leaves whitish and curling . Heat and low moisture can cause the edges of the tomato leaves to die back, then twist and curl. Hot dry weather may also cause a symptom called physiological leaf roll.
+Irrigate regularly and do not allow the soil to dry completely to a wilting point.",India,Bihar
+960,Coriander,Healthy,sparce planting or poor germination of seed,India,Bihar
+961,Mango,Healthy,"Multiple Shoots in Young Mango Branches
+
+Possible Causes:
+-After pruning/tip damage – Normal lateral bud sprouting.
+
+-Mango malformation (Fusarium mangiferae)
+-Bunchy, compact shoots
+-Short internodes
+
+- Excess nitrogen – Vigorous clustered growth
+
+If malformation suspected:
+Prune 15–20 cm below affected area and spray Carbendazim 1 g/L.",India,Bihar
+962,Potato,Healthy,no symptoms are noticed and the dense crop is seen in the given image,India,Bihar
+963,Paddy,Healthy,paddy panicle with the grains,India,Odisha
+965,Mustard,Healthy,"Healthy mustard plants, no symptoms of any disease and pest infestation. Apply preventive spray of organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended.",India,Bihar
+966,Mustard,Healthy,Healthy mustard crop at flowering and pod setting stage. No pest or disease symptoms noticed.,India,Bihar
+967,Chilli,Healthy,"Green chilli fruits, seems dehydrated a bit and shriveled. Storage in aerated close containers at lower temperature in refrigerated condition is advised.",India,Bihar
+968,Mustard,Healthy,"Healthy mustard crop at flowering stage, no pest or disease infestations noticed. Preventive foliar spray of Neem oil,300ppm @5ml per liter of water, balance NPK nutrition and timely irrigation is advised.",India,Bihar
+969,Peas,Healthy,"Healthy Pea plants at growing stage, no pest or disease symptoms found. Preventive spray of Neem oil,300ppm @ 5ml per liter of water is required along with balance dose of fertiliser application and timely irrigation as per requirements.",India,Bihar
+970,Papaya,Healthy,Dust accumulation on the leaves,India,Bihar
+971,Pearl millet,Healthy,crop is looking comparatively healthy and normal,India,Andhra Pradesh
+972,Mustard,Healthy,no symptoms observed,India,Bihar
+973,Chickpea,Healthy,crop is looking healthy and normal,India,Madhya Pradesh
+975,Mustard,Healthy,no symptoms of pest and diseases are seen,India,Bihar
+976,Papaya,Healthy,due to shade the growth is lanky and poor growth,India,Bihar
+979,Potato,Healthy,no symptoms are seen,India,Bihar
+980,Maize,Healthy,Maize crop looks healthy without any symptoms of pest or disease.,India,Bihar
+981,Mustard,Healthy,Mustard flowers are healthy without any pest or disease symptoms,India,Bihar
+982,Bottle gourd,Healthy,crop is good its in fruiting stage,India,Bihar
+983,Papaya,Healthy,here we can see the male papaya plant,India,Bihar
+985,Wheat,Healthy,"Healthy wheat crop at grain filling stage, no symptoms of any disease and pest infestation. Apply preventive organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended with timely irrigation.",India,Bihar
+986,Potato,Healthy,"Healthy potato plants, no symptoms of any disease and pest infestation. Apply preventive organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended with timely irrigation.",India,Bihar
+988,Fruit trees,Healthy,early gemination of cloves,India,Bihar
+989,Bottle gourd,Healthy,plant is looking healthy,India,Bihar
+990,Pumpkin,Healthy,"Young pumpkin plant, having 2 to 3 leaves, no disease or pest symptoms found. Apply preventive spray of  organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended with timely irrigation.",India,Bihar
+991,Maize,Healthy,"Healthy Maize plants at growing stage, no pest or disease symptoms found. Preventive spray of Neem oil,300ppm @ 5ml per liter of water is required along with balance dose of fertiliser application and timely irrigation as per requirements.",India,Bihar
+993,Banana,Healthy,pigmentation in young banana seedlings is common in,India,Bihar
+994,Mustard,Healthy,Mustard Crop at flowering stage looks healthy without any symptoms of pest or disease.,India,Bihar
+995,Wheat,Healthy,"Healthy wheat crop at flowering stage. No pest or disease symptoms found. Preventive foliar spray of Neem oil,300ppm @5ml per liter of water, balance NPK nutrition and timely irrigation is advised.",India,Bihar
+996,Garlic,Healthy,"Healthy garlic plants, cultivated in ridge and furrow method. No disease or pest infestation visible .",India,Bihar
+997,Green Gram,Healthy,"Healthy green gram plants, no disease or pest infestation noticed. Preventive application of Neem oil,300ppm @ 5ml per liter of water can be sprayed at regular interval of 8 to 10 days.",India,Andhra Pradesh
+998,Marigold,Healthy,"Seems healthy marigold plants, image is not clear for a better observation",India,Bihar
+999,Mustard,Healthy,"Healthy Mustard plants at flowering and pod formation stage, no issues observed.",India,Bihar
+1001,Strawberry,Healthy,"Healthy and quality strawberry fruits after harvest, It should be stored in perforated containers in cooler temperature for longer shelf life and better market price.",India,Bihar
+1002,Tomato,Healthy,"Tomato fruit rot is primarily controlled by maintaining dry conditions, using staking to prevent soil contact, and applying fungicides like Dithane M-45, Bordeaux mixture, or copper-based sprays.",India,Bihar
+1003,Wheat,Healthy,"Healthy wheat crops at grain filling stage, no disease or pest infestation  symptoms observed.",India,Bihar
+1004,Rice,Healthy,germinated seedlings,India,Bihar
+1005,Rice,Healthy,no symptoms are noticed,India,Bihar
+1006,Potato,Healthy,only beneficial insect lady bird beetle is seen in the image,India,Bihar
+1009,Rice,Healthy,crop is looking healthy,India,Jharkhand
+1010,Maize,Healthy,crop is looking healthy and symptoms are not visible clearly in the given image,India,Bihar
+1011,Onion,Healthy,crop is comparatively healthy and symptoms are not very clear in the given image,India,Bihar
+1012,Red Gram,Healthy,crop is looking  healthy and pest and disease symptoms are not visible in the given image,India,Bihar
+1013,Capsicum,Healthy,The capsicum plant looks healthy without any symptoms of pest or disease.,India,Bihar
+1014,Mustard,Healthy,Mustard crop looks healthy without any symptoms of pest or disease.,India,Bihar
+1015,Potato,Healthy,the crop is looking healthy,India,Bihar
+1016,Cauliflower,Healthy,"Causes of Riceyness in Cauliflower in Cauliflower: surface of the curd is loose & has velvety appearance due to elongation of pedicel and form  small white flower buds at the curding stage
+
+Riceyness occurs when the curd starts producing small premature flower buds, making the curd loose and grainy.
+
+Main Causes
+
+High temperature during curd formation.
+
+Excess nitrogen fertilization leading to rapid growth.
+
+Improper variety for the season or climate.
+
+Late harvesting of the curd.
+
+Moisture stress or irregular irrigation.
+
+High humidity with warm weather conditions.
+ These factors cause premature floral development, resulting in a loose, granular curd instead of a compact head",India,Bihar
+1017,Potato,Healthy,the crop is looking healthy and normal,India,Bihar
+1018,Mustard,Healthy,crop is looking healthy and normal,India,Bihar
+1019,Rice,Healthy,rice crop is healthy and normal,India,Jharkhand
+1020,Wheat,Healthy,"Healthy wheat crop at growing stage, no symptoms of any disease and pest infestation. Apply preventive organic Neem oil ,300ppm @5ml per liter of water and balance dose of NPK fertiliser as recommended with timely irrigation.",India,Bihar
+1022,Canola,Healthy,crops looks healthy,India,Bihar
+1023,Banana,Healthy,banana seedling is heathy and pigmentation is common its not due to any pest or disease,India,Maharashtra
+1024,Chickpea,Healthy,crop is looking healthy and normal,India,Bihar
+1025,Bean,Healthy,Dolichos bean crop is looking healthy and normal,India,Bihar
+1026,Red Gram,Healthy,"Healthy Arhar crop at flowering and pod setting stage, no symptoms of pest or disease noticed. Preventive spray of Neem oil, 300ppm@ 5ml per liter of water to be done with recommended dose of fertiliser and timely irrigation.",India,Andhra Pradesh
+1027,Peas,Healthy,"Healthy Pea plants, no symptoms of pest or disease noticed. Preventive spray of Neem oil, 300ppm@ 5ml per liter of water to be done with recommended dose of fertiliser and timely irrigation.",India,Bihar

@@ -1,0 +1,48 @@
+def rank_plant_evidence(matches, symptom_terms):
+    """Rank evidence by text-term coverage; scores are not probabilities."""
+    if matches.empty:
+        return matches.copy()
+
+    required = {"crop", "diagnosis", "evidence_text", "source_row_number"}
+    missing = required - set(matches.columns)
+    if missing:
+        raise ValueError(f"Missing required columns: {missing}")
+
+    terms = [
+        str(term).strip().casefold()
+        for term in symptom_terms
+        if str(term).strip()
+    ]
+
+    ranked = matches.copy()
+    evidence_text = ranked["evidence_text"].fillna("").astype(str)
+    search_text = (
+        ranked["diagnosis"].fillna("").astype(str) + " " + evidence_text
+    ).str.casefold()
+
+    def find_terms(text):
+        return [
+            term for term in terms
+            if re.search(r"\b" + re.escape(term) + r"\b", text)
+        ]
+
+    ranked["matched_terms"] = search_text.apply(
+        lambda text: ", ".join(find_terms(text)) or "none"
+    )
+    ranked["term_coverage_score"] = search_text.apply(
+        lambda text: len(find_terms(text)) / len(terms) if terms else 0.0
+    )
+    ranked["evidence_component"] = (
+        evidence_text.str.strip().ne("").astype(float)
+    )
+    ranked["relevance_score"] = (
+        0.70 * ranked["term_coverage_score"]
+        + 0.30 * ranked["evidence_component"]
+    )
+
+    ranked = ranked.sort_values(
+        ["relevance_score", "source_row_number"],
+        ascending=[False, True]
+    ).reset_index(drop=True)
+    ranked["rank"] = range(1, len(ranked) + 1)
+    return ranked

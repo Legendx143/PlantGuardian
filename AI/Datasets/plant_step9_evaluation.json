@@ -1,0 +1,16 @@
+{
+  "step": "Step 9 - Evaluate the complete image-analysis pipeline",
+  "substeps": {
+    "9.1_pipeline_readiness": "PASS",
+    "9.2_saved_results_verification": "PASS",
+    "9.3_vision_api_test": "PASS",
+    "9.4_matching_ranking_explanations": "PASS"
+  },
+  "limitations": [
+    "Ranking scores are heuristic relevance scores, not probabilities.",
+    "Candidate diseases are not confirmed diagnoses.",
+    "The test image analysis reported tomato, but crop compatibility was not applied to the existing ranking because visual_findings still used an unknown crop.",
+    "Scientific accuracy has not been established by these integrity checks."
+  ],
+  "overall_status": "TECHNICAL_CHECKS_PASSED_WITH_LIMITATIONS"
+}

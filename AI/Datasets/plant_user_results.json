@@ -1,0 +1,26 @@
+{
+  "identified_crop": "Tomato",
+  "probable_disease": "Tomato \u2014 Bacterial Wilt",
+  "relevance_score": 0.72,
+  "disease_reason": "Matched symptoms: leaves turning yellow, yellowing, wilting | Crop identified as: Tomato | Evidence: In the given image tomato wilt symptoms are noticed:\nYellowing of lower leaves, wilting, and drooping. Plants may die in severe cases.\n\nControl Measures:\nCultural: Use resistant varieties; rotate crop...",
+  "user_symptoms": [
+    "leaves turning yellow",
+    "brown spots"
+  ],
+  "visual_symptoms": [
+    "yellowing",
+    "wilting",
+    "black spots"
+  ],
+  "nutrient_deficiencies_detected": false,
+  "deficiencies": [],
+  "care_guidance": [
+    "Apply copper-based bactericide (copper hydroxide or copper oxychloride).",
+    "Remove and destroy infected plants immediately to prevent spread.",
+    "Sanitize tools, hands, and equipment after handling infected plants.",
+    "Avoid working with plants when they are wet.",
+    "Use disease-free seed and resistant varieties when available.",
+    "Rotate crops and avoid planting the same family for 2\u20133 years."
+  ],
+  "status": "COMPLETED_AND_VERIFIED"
+}

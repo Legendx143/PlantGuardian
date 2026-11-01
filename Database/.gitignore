@@ -1,0 +1,25 @@
+# ==========================================
+# Database & Migrations .gitignore
+# ==========================================
+
+# ── Environment & Secrets ──
+.env
+.env.*
+*.env
+*.env.local
+!.env.example
+
+# ── Dependencies ──
+node_modules/
+npm-debug.log*
+
+# ── Database Dumps & Backups ──
+*.sql.bak
+*.dump
+dumps/
+
+# ── OS & IDE Artifacts ──
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

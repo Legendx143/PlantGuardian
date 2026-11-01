@@ -1,0 +1,104 @@
+# ==========================================
+# PlantGuardian Root .gitignore
+# ==========================================
+
+# ── Environment & Secrets ──
+.env
+.env.*
+*.env
+*.env.local
+!.env.example
+!.env.template
+
+# ── Node.js Dependencies & Package Managers ──
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# ── Build & Distribution Outputs ──
+dist/
+*/dist/
+dist-ssr/
+*/dist-ssr/
+build/
+*/build/
+out/
+.vite/
+*/.vite/
+
+# ── Python & Virtual Environments ──
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Jupyter Notebook Checkpoints ──
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# ── AI Model Weights & Large Checkpoints (>100MB) ──
+AI/Models/*.h5
+AI/Models/*.pth
+AI/Models/*.pt
+AI/Models/*.onnx
+AI/Models/*.bin
+AI/Models/*.tflite
+AI/Models/*.ckpt
+AI/Models/*.pkl
+AI/Models/*.pickle
+*.h5
+*.pth
+*.pt
+*.onnx
+*.tflite
+*.ckpt
+
+# ── Local Development Databases & Runtime Data ──
+Backend/data/scans.json
+Backend/data/farming_plans.json
+*.sqlite
+*.sqlite3
+*.db
+test_specimens/
+supabase/.temp/
+.temp/
+*/.temp/
+
+# ── Logs & Debugging ──
+logs/
+*/logs/
+*.log
+
+# ── OS & IDE Artifacts ──
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── Editor Directories ──
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
