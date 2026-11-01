@@ -106,7 +106,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenGetStarted }) =>
           className="w-full h-full object-cover scale-105"
           poster="/images/hero_terrace_view.jpg"
         >
-          <source src="/images/gemini_generated_video_a9242cf8.webm" type="video/webm" />
           <source src="/images/gemini_generated_video_a9242cf8.mp4" type="video/mp4" />
         </video>
 
