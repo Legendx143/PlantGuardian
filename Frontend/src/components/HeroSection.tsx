@@ -18,6 +18,51 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenGetStarted }) =>
     return () => clearTimeout(timer);
   }, []);
 
+  // Ensure robust cross-browser autoplay compliance (Brave/Chrome/Safari/iOS)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Explicitly enforce muted on the DOM node for browser autoplay policy compliance
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const playVideo = () => {
+      if (video.paused) {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay policy prevented immediate playback until interaction
+          });
+        }
+      }
+    };
+
+    playVideo();
+    video.addEventListener('loadeddata', playVideo);
+    video.addEventListener('canplay', playVideo);
+
+    // Interaction fallback for strict privacy browsers (Brave Shields, low-power mode)
+    const handleFirstInteraction = () => {
+      playVideo();
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('scroll', handleFirstInteraction);
+    };
+
+    window.addEventListener('pointerdown', handleFirstInteraction, { passive: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+    window.addEventListener('scroll', handleFirstInteraction, { passive: true });
+
+    return () => {
+      video.removeEventListener('loadeddata', playVideo);
+      video.removeEventListener('canplay', playVideo);
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('scroll', handleFirstInteraction);
+    };
+  }, []);
+
   // Performance: Auto-pause offscreen video to preserve GPU rendering power
   useEffect(() => {
     const video = videoRef.current;
@@ -61,6 +106,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenGetStarted }) =>
           className="w-full h-full object-cover scale-105"
           poster="/images/hero_terrace_view.jpg"
         >
+          <source src="/images/gemini_generated_video_a9242cf8.webm" type="video/webm" />
           <source src="/images/gemini_generated_video_a9242cf8.mp4" type="video/mp4" />
         </video>
 
