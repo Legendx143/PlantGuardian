@@ -104,4 +104,3 @@ Built with ❤️ for Plants and the people who love them.
 
 👤 Author
 Supriyo Halder - GitHub: @Legendx143
-Built for CodeStorm 2026: FutureForge
