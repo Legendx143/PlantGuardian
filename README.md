@@ -4,6 +4,17 @@ PlantGuardian is an intelligent agriculture and botanical health companion desig
 
 ---
 
+## 💡 What Problems It Solves
+
+| Challenge | Traditional Limitation | PlantGuardian's Solution |
+| :--- | :--- | :--- |
+| **Pathology & Diagnosis** | Relying on guesswork, slow field visits, or biased forum posts. | **Instant Multimodal AI:** Upload leaf photos or voice descriptions for instant cause & severity diagnosis. |
+| **Agronomy Guidance** | Generic crop tips that ignore local soil type and seasonal timing. | **Localized 7-Stage Roadmaps:** GPS-driven plans tailored by crop, season (*Kharif/Rabi/Zaid*), and soil profile. |
+| **Pest & Chemical Overuse** | Blind pesticide spraying that degrades soil and wastes money. | **Regenerative & Organic First:** Prescribes organic remedies, NPK nutrient balancing, and preventive IPM practices. |
+| **Field Accessibility** | Typing detailed botanical symptoms with dirty hands in the field is tedious. | **Hands-Free Speech Engine:** Continuous voice input with auto-silence cutoff for frictionless querying. |
+| **Record Continuity** | Forgetting prior treatments, soil tests, or seasonal patterns. | **Persistent Session Vault:** Supabase-backed history tracking past diagnoses and active roadmaps. |
+
+
 ## ✨ Features
 
 - **🔬 Multimodal Disease Diagnosis:** Upload plant leaf photographs or describe symptoms via voice input. The AI pathology model diagnoses probable diseases, deficiency causes, and organic/preventive treatments.
@@ -86,3 +97,11 @@ cd Frontend && npm run dev
 Visit `http://localhost:5173` in your browser.
 
 ---
+
+Demo Video: https://lnkd.in/p/dTJdJkKD  |  https://youtu.be/ml6OwZJ7Xms
+
+Built with ❤️ for Plants and the people who love them.
+
+👤 Author
+Supriyo Halder - GitHub: @Legendx143
+Built for CodeStorm 2026: FutureForge
