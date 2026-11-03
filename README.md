@@ -98,7 +98,7 @@ Visit `http://localhost:5173` in your browser.
 
 ---
 
-Demo Video: https://lnkd.in/p/dTJdJkKD  |  https://youtu.be/ml6OwZJ7Xms
+Demo Video: https://youtu.be/ml6OwZJ7Xms
 
 Built with ❤️ for Plants and the people who love them.
 
