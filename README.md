@@ -22,7 +22,6 @@ PlantGuardian is an intelligent agriculture and botanical health companion desig
 - **🎙️ Voice Recognition & Speech-to-Text:** Realtime continuous speech input for symptom descriptions and chatbot queries with an automated 5-second silence detection shutdown.
 - **💬 Interactive Agronomist AI Chatbot:** On-demand botanical advice for plant care, watering schedules, pest outbreaks, and NPK fertilizer dosing.
 - **📜 Session & History Management:** Diagnoses and farming plans persist across sessions with detailed drawers and full-plan modals.
-- **📍 GPS & Reverse Geocoding:** Auto-detects local region and district for hyper-localized agricultural advisories.
 - **🔐 Secure Authentication:** Seamless email registration and login powered by Supabase Auth and PostgreSQL.
 
 ---
