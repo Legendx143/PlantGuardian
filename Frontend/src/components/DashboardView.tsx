@@ -766,12 +766,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const isChatRecordingRef = useRef(false);
   const isUserStoppingChatRef = useRef(false);
   const chatRecognitionRef = useRef<any>(null);
-  const chatMediaStreamRef = useRef<MediaStream | null>(null);
-  const chatAudioContextRef = useRef<AudioContext | null>(null);
-  const chatLevelIntervalRef = useRef<any>(null);
   const chatSilenceIntervalRef = useRef<any>(null);
   const chatLastVoiceTimeRef = useRef<number>(Date.now());
-  const chatAccumulatedTextRef = useRef<string>('');
+  const chatBaseTextRef = useRef<string>('');
+  const chatCurrentSessionFinalRef = useRef<string>('');
   const [chatVoiceDetected, setChatVoiceDetected] = useState(false);
   const [chatSilenceCountdown, setChatSilenceCountdown] = useState<number>(5);
 
@@ -786,34 +784,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       clearInterval(chatSilenceIntervalRef.current);
       chatSilenceIntervalRef.current = null;
     }
-    if (chatLevelIntervalRef.current) {
-      clearInterval(chatLevelIntervalRef.current);
-      chatLevelIntervalRef.current = null;
-    }
 
     if (chatRecognitionRef.current) {
       try { chatRecognitionRef.current.stop(); } catch {}
       chatRecognitionRef.current = null;
     }
-
-    if (chatMediaStreamRef.current) {
-      try {
-        chatMediaStreamRef.current.getTracks().forEach((track) => track.stop());
-      } catch {}
-      chatMediaStreamRef.current = null;
-    }
-
-    if (chatAudioContextRef.current) {
-      try {
-        if (chatAudioContextRef.current.state !== 'closed') {
-          chatAudioContextRef.current.close();
-        }
-      } catch {}
-      chatAudioContextRef.current = null;
-    }
   };
 
-  const toggleChatVoiceRecording = async () => {
+  const toggleChatVoiceRecording = () => {
     if (isChatVoiceRecording) {
       stopChatRecording();
       return;
@@ -821,60 +799,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
+    if (!SpeechRecognition) return;
+
     isUserStoppingChatRef.current = false;
     isChatRecordingRef.current = true;
     setIsChatVoiceRecording(true);
     chatLastVoiceTimeRef.current = Date.now();
     setChatSilenceCountdown(5);
     setChatVoiceDetected(false);
-    chatAccumulatedTextRef.current = chatInput.trim();
+    chatBaseTextRef.current = chatInput.trim();
+    chatCurrentSessionFinalRef.current = '';
 
-    // 1. Microphone access + Real-time Audio Level Analyser for reliable voice detection
-    try {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (!isChatRecordingRef.current) {
-          stream.getTracks().forEach((t) => t.stop());
-          return;
-        }
-        chatMediaStreamRef.current = stream;
-
-        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-        if (AudioContextClass) {
-          const audioCtx = new AudioContextClass();
-          chatAudioContextRef.current = audioCtx;
-          const source = audioCtx.createMediaStreamSource(stream);
-          const analyser = audioCtx.createAnalyser();
-          analyser.fftSize = 512;
-          source.connect(analyser);
-
-          const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-          if (chatLevelIntervalRef.current) clearInterval(chatLevelIntervalRef.current);
-          chatLevelIntervalRef.current = setInterval(() => {
-            if (!isChatRecordingRef.current) return;
-            analyser.getByteFrequencyData(dataArray);
-
-            let sum = 0;
-            for (let i = 0; i < dataArray.length; i++) {
-              sum += dataArray[i];
-            }
-            const avg = sum / dataArray.length;
-
-            if (avg > 10) {
-              chatLastVoiceTimeRef.current = Date.now();
-              setChatVoiceDetected(true);
-            } else {
-              setChatVoiceDetected(false);
-            }
-          }, 100);
-        }
-      }
-    } catch (micErr: any) {
-      console.warn('Chat mic stream notice:', micErr);
-    }
-
-    // 2. 5-Second Silence Countdown Watcher Interval
+    // 1. 5-Second Silence Countdown Watcher Interval
     if (chatSilenceIntervalRef.current) clearInterval(chatSilenceIntervalRef.current);
     chatSilenceIntervalRef.current = setInterval(() => {
       if (!isChatRecordingRef.current) {
@@ -886,15 +822,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       const remainingSeconds = Math.max(0, Math.ceil((5000 - elapsedSilence) / 1000));
       setChatSilenceCountdown(remainingSeconds);
 
-      // Stop if no voice detected for 5 continuous seconds
+      if (elapsedSilence >= 1000) {
+        setChatVoiceDetected(false);
+      }
+
       if (elapsedSilence >= 5000) {
         stopChatRecording();
       }
     }, 150);
 
-    // 3. Web Speech Recognition for speech-to-text
-    if (!SpeechRecognition) return;
-
+    // 2. Direct Web Speech Recognition with real-time text streaming
     const startChatRecognitionSession = () => {
       if (!isChatRecordingRef.current || isUserStoppingChatRef.current) return;
 
@@ -904,10 +841,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.continuous = true;
         recognition.interimResults = true;
         recognition.maxAlternatives = 1;
-        const navLang = typeof navigator !== 'undefined' ? (navigator.language || 'en-US') : 'en-US';
-        recognition.lang = navLang;
 
-        recognition.onspeechstart = () => {
+        const userLang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
+        recognition.lang = userLang.startsWith('en') ? userLang : 'en-US';
+
+        chatCurrentSessionFinalRef.current = '';
+
+        recognition.onstart = () => {
+          chatLastVoiceTimeRef.current = Date.now();
+          setChatSilenceCountdown(5);
+        };
+
+        recognition.onaudiostart = () => {
           chatLastVoiceTimeRef.current = Date.now();
           setChatVoiceDetected(true);
         };
@@ -915,32 +860,41 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.onsoundstart = () => {
           chatLastVoiceTimeRef.current = Date.now();
           setChatVoiceDetected(true);
+          setChatSilenceCountdown(5);
+        };
+
+        recognition.onspeechstart = () => {
+          chatLastVoiceTimeRef.current = Date.now();
+          setChatVoiceDetected(true);
+          setChatSilenceCountdown(5);
         };
 
         recognition.onresult = (event: any) => {
           chatLastVoiceTimeRef.current = Date.now();
           setChatVoiceDetected(true);
+          setChatSilenceCountdown(5);
 
-          let interim = '';
-          let finalChunk = '';
-          for (let i = event.resultIndex; i < event.results.length; i++) {
-            const transcriptChunk = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-              finalChunk += (finalChunk ? ' ' : '') + transcriptChunk.trim();
+          let sessionFinal = '';
+          let sessionInterim = '';
+
+          for (let i = 0; i < event.results.length; i++) {
+            const item = event.results[i];
+            const text = item[0]?.transcript || '';
+            if (item.isFinal) {
+              sessionFinal += (sessionFinal ? ' ' : '') + text.trim();
             } else {
-              interim += transcriptChunk;
+              sessionInterim += (sessionInterim ? ' ' : '') + text.trim();
             }
           }
 
-          if (finalChunk) {
-            const base = chatAccumulatedTextRef.current;
-            chatAccumulatedTextRef.current = base ? `${base} ${finalChunk}` : finalChunk;
-          }
+          chatCurrentSessionFinalRef.current = sessionFinal;
 
-          const base = chatAccumulatedTextRef.current;
-          const combined = interim ? (base ? `${base} ${interim}` : interim) : base;
-          if (combined) {
-            setChatInput(combined);
+          const base = chatBaseTextRef.current;
+          const currentPart = (sessionFinal + (sessionInterim ? (sessionFinal ? ' ' : '') + sessionInterim : '')).trim();
+          const fullText = base ? (currentPart ? `${base} ${currentPart}` : base) : currentPart;
+
+          if (fullText) {
+            setChatInput(fullText);
           }
         };
 
@@ -951,11 +905,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         };
 
         recognition.onend = () => {
-          // If still recording and user didn't manually stop:
+          if (chatCurrentSessionFinalRef.current) {
+            const base = chatBaseTextRef.current;
+            chatBaseTextRef.current = base 
+              ? `${base} ${chatCurrentSessionFinalRef.current}` 
+              : chatCurrentSessionFinalRef.current;
+            chatCurrentSessionFinalRef.current = '';
+          }
+
           if (isChatRecordingRef.current && !isUserStoppingChatRef.current) {
             const elapsed = Date.now() - chatLastVoiceTimeRef.current;
             if (elapsed < 5000) {
-              // Restart recognition immediately so it keeps listening through pauses
               try {
                 recognition.start();
               } catch {}
@@ -1041,12 +1001,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   // ── Voice Recorder Handler for Symptoms Description ─────────────
   const isRecordingRef = useRef(false);
   const isUserStoppingSymptomRef = useRef(false);
-  const symptomMediaStreamRef = useRef<MediaStream | null>(null);
-  const symptomAudioContextRef = useRef<AudioContext | null>(null);
-  const symptomLevelIntervalRef = useRef<any>(null);
   const symptomSilenceIntervalRef = useRef<any>(null);
   const symptomLastVoiceTimeRef = useRef<number>(Date.now());
-  const symptomAccumulatedTextRef = useRef<string>('');
+  const symptomBaseTextRef = useRef<string>('');
+  const symptomCurrentSessionFinalRef = useRef<string>('');
   const [symptomVoiceDetected, setSymptomVoiceDetected] = useState(false);
   const [symptomSilenceCountdown, setSymptomSilenceCountdown] = useState<number>(5);
 
@@ -1061,34 +1019,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       clearInterval(symptomSilenceIntervalRef.current);
       symptomSilenceIntervalRef.current = null;
     }
-    if (symptomLevelIntervalRef.current) {
-      clearInterval(symptomLevelIntervalRef.current);
-      symptomLevelIntervalRef.current = null;
-    }
 
     if (recognitionRef.current) {
       try { recognitionRef.current.stop(); } catch {}
       recognitionRef.current = null;
     }
-
-    if (symptomMediaStreamRef.current) {
-      try {
-        symptomMediaStreamRef.current.getTracks().forEach((track) => track.stop());
-      } catch {}
-      symptomMediaStreamRef.current = null;
-    }
-
-    if (symptomAudioContextRef.current) {
-      try {
-        if (symptomAudioContextRef.current.state !== 'closed') {
-          symptomAudioContextRef.current.close();
-        }
-      } catch {}
-      symptomAudioContextRef.current = null;
-    }
   };
 
-  const toggleVoiceRecording = async () => {
+  const toggleVoiceRecording = () => {
     if (isRecording) {
       stopSymptomRecording();
       return;
@@ -1096,66 +1034,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
+    if (!SpeechRecognition) {
+      setDetectorError('Live speech recognition is not supported in this browser. Please use Google Chrome, Microsoft Edge, or Safari.');
+      return;
+    }
+
     isUserStoppingSymptomRef.current = false;
     isRecordingRef.current = true;
     setIsRecording(true);
     symptomLastVoiceTimeRef.current = Date.now();
     setSymptomSilenceCountdown(5);
     setSymptomVoiceDetected(false);
-    symptomAccumulatedTextRef.current = description.trim();
+    symptomBaseTextRef.current = description.trim();
+    symptomCurrentSessionFinalRef.current = '';
 
-    // 1. Request microphone stream and setup real-time Audio Level Analyser for reliable voice detection
-    try {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (!isRecordingRef.current) {
-          stream.getTracks().forEach((t) => t.stop());
-          return;
-        }
-        symptomMediaStreamRef.current = stream;
-
-        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-        if (AudioContextClass) {
-          const audioCtx = new AudioContextClass();
-          symptomAudioContextRef.current = audioCtx;
-          const source = audioCtx.createMediaStreamSource(stream);
-          const analyser = audioCtx.createAnalyser();
-          analyser.fftSize = 512;
-          source.connect(analyser);
-
-          const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-          if (symptomLevelIntervalRef.current) clearInterval(symptomLevelIntervalRef.current);
-          symptomLevelIntervalRef.current = setInterval(() => {
-            if (!isRecordingRef.current) return;
-            analyser.getByteFrequencyData(dataArray);
-
-            let sum = 0;
-            for (let i = 0; i < dataArray.length; i++) {
-              sum += dataArray[i];
-            }
-            const avg = sum / dataArray.length;
-
-            // Voice detected if average audio frequency level is above background ambient room noise (> 10)
-            if (avg > 10) {
-              symptomLastVoiceTimeRef.current = Date.now();
-              setSymptomVoiceDetected(true);
-            } else {
-              setSymptomVoiceDetected(false);
-            }
-          }, 100);
-        }
-      }
-    } catch (micErr: any) {
-      console.warn('Symptom mic stream notice:', micErr);
-      if (micErr.name === 'NotAllowedError' || micErr.name === 'PermissionDeniedError') {
-        setDetectorError('Microphone permission was denied. Please allow microphone access in your browser settings.');
-        stopSymptomRecording();
-        return;
-      }
-    }
-
-    // 2. 5-Second Silence Countdown Watcher Interval
+    // 1. Setup 5-Second Silence Countdown Watcher Interval
     if (symptomSilenceIntervalRef.current) clearInterval(symptomSilenceIntervalRef.current);
     symptomSilenceIntervalRef.current = setInterval(() => {
       if (!isRecordingRef.current) {
@@ -1167,18 +1060,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       const remainingSeconds = Math.max(0, Math.ceil((5000 - elapsedSilence) / 1000));
       setSymptomSilenceCountdown(remainingSeconds);
 
-      // Stop if no voice detected for 5 continuous seconds
+      if (elapsedSilence >= 1000) {
+        setSymptomVoiceDetected(false);
+      }
+
+      // Auto-stop if no voice detected for 5 continuous seconds
       if (elapsedSilence >= 5000) {
         stopSymptomRecording();
       }
     }, 150);
 
-    // 3. Web Speech Recognition for speech-to-text
-    if (!SpeechRecognition) {
-      setDetectorError('Live speech recognition is not supported in this browser. Please use Google Chrome, Microsoft Edge, or Safari.');
-      return;
-    }
-
+    // 2. Direct Web Speech Recognition with immediate real-time text streaming
     const startSymptomRecognitionSession = () => {
       if (!isRecordingRef.current || isUserStoppingSymptomRef.current) return;
 
@@ -1188,10 +1080,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.continuous = true;
         recognition.interimResults = true;
         recognition.maxAlternatives = 1;
-        const navLang = typeof navigator !== 'undefined' ? (navigator.language || 'en-US') : 'en-US';
-        recognition.lang = navLang;
 
-        recognition.onspeechstart = () => {
+        const userLang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
+        recognition.lang = userLang.startsWith('en') ? userLang : 'en-US';
+
+        symptomCurrentSessionFinalRef.current = '';
+
+        recognition.onstart = () => {
+          symptomLastVoiceTimeRef.current = Date.now();
+          setSymptomSilenceCountdown(5);
+        };
+
+        recognition.onaudiostart = () => {
           symptomLastVoiceTimeRef.current = Date.now();
           setSymptomVoiceDetected(true);
         };
@@ -1199,50 +1099,69 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.onsoundstart = () => {
           symptomLastVoiceTimeRef.current = Date.now();
           setSymptomVoiceDetected(true);
+          setSymptomSilenceCountdown(5);
+        };
+
+        recognition.onspeechstart = () => {
+          symptomLastVoiceTimeRef.current = Date.now();
+          setSymptomVoiceDetected(true);
+          setSymptomSilenceCountdown(5);
         };
 
         recognition.onresult = (event: any) => {
+          // Voice actively detected!
           symptomLastVoiceTimeRef.current = Date.now();
           setSymptomVoiceDetected(true);
+          setSymptomSilenceCountdown(5);
 
-          let interim = '';
-          let finalChunk = '';
-          for (let i = event.resultIndex; i < event.results.length; i++) {
-            const transcriptChunk = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-              finalChunk += (finalChunk ? ' ' : '') + transcriptChunk.trim();
+          let sessionFinal = '';
+          let sessionInterim = '';
+
+          for (let i = 0; i < event.results.length; i++) {
+            const item = event.results[i];
+            const text = item[0]?.transcript || '';
+            if (item.isFinal) {
+              sessionFinal += (sessionFinal ? ' ' : '') + text.trim();
             } else {
-              interim += transcriptChunk;
+              sessionInterim += (sessionInterim ? ' ' : '') + text.trim();
             }
           }
 
-          if (finalChunk) {
-            const base = symptomAccumulatedTextRef.current;
-            symptomAccumulatedTextRef.current = base ? `${base} ${finalChunk}` : finalChunk;
-          }
+          symptomCurrentSessionFinalRef.current = sessionFinal;
 
-          const base = symptomAccumulatedTextRef.current;
-          const combined = interim ? (base ? `${base} ${interim}` : interim) : base;
-          if (combined) {
-            setDescription(combined);
+          const base = symptomBaseTextRef.current;
+          const currentPart = (sessionFinal + (sessionInterim ? (sessionFinal ? ' ' : '') + sessionInterim : '')).trim();
+          const fullText = base ? (currentPart ? `${base} ${currentPart}` : base) : currentPart;
+
+          if (fullText) {
+            setDescription(fullText);
             if (detectorError) setDetectorError('');
           }
         };
 
         recognition.onerror = (err: any) => {
+          console.warn('Symptom speech recognition error:', err.error);
           if (err.error === 'not-allowed' || err.error === 'service-not-allowed') {
-            setDetectorError('Microphone or speech recognition permission was denied in your browser.');
+            setDetectorError('Microphone or speech permission was denied in your browser settings.');
             stopSymptomRecording();
           }
-          // 'no-speech' is expected during pauses — our 5-second silence interval handles the stop!
+          // 'no-speech' is expected during pauses — our 5s silence interval will handle auto-stop!
         };
 
         recognition.onend = () => {
+          if (symptomCurrentSessionFinalRef.current) {
+            const base = symptomBaseTextRef.current;
+            symptomBaseTextRef.current = base 
+              ? `${base} ${symptomCurrentSessionFinalRef.current}` 
+              : symptomCurrentSessionFinalRef.current;
+            symptomCurrentSessionFinalRef.current = '';
+          }
+
           // If still recording and user didn't manually stop:
           if (isRecordingRef.current && !isUserStoppingSymptomRef.current) {
             const elapsed = Date.now() - symptomLastVoiceTimeRef.current;
             if (elapsed < 5000) {
-              // Restart recognition immediately so it keeps listening through pauses
+              // Browser session timed out during a pause: restart seamlessly!
               try {
                 recognition.start();
               } catch {}
@@ -1253,8 +1172,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         };
 
         recognition.start();
-      } catch (err) {
-        console.warn('Symptom SpeechRecognition start error:', err);
+      } catch (err: any) {
+        console.warn('SpeechRecognition initialization error:', err);
+        setDetectorError('Failed to initialize voice recognition. Please try again.');
+        stopSymptomRecording();
       }
     };
 
@@ -1640,6 +1561,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       value={description}
                       onChange={(e) => {
                         setDescription(e.target.value);
+                        symptomBaseTextRef.current = e.target.value;
                         if (detectorError) setDetectorError('');
                       }}
                       placeholder="e.g. Tomato foliage has yellow margins, concentric brown spots, and wilting during morning hours..."
