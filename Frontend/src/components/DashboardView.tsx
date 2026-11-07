@@ -763,116 +763,215 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   // ── AI Chatbot Voice Recorder Handler ─────────────────────────────
   const [isChatVoiceRecording, setIsChatVoiceRecording] = useState(false);
+  const isChatRecordingRef = useRef(false);
+  const isUserStoppingChatRef = useRef(false);
   const chatRecognitionRef = useRef<any>(null);
-  const chatSilenceTimeoutRef = useRef<any>(null);
-
-  const clearChatSilenceTimer = () => {
-    if (chatSilenceTimeoutRef.current) {
-      clearTimeout(chatSilenceTimeoutRef.current);
-      chatSilenceTimeoutRef.current = null;
-    }
-  };
-
-  const resetChatSilenceTimer = () => {
-    clearChatSilenceTimer();
-    chatSilenceTimeoutRef.current = setTimeout(() => {
-      // 5 seconds of silence: automatically stop recording
-      stopChatRecording();
-    }, 5000);
-  };
+  const chatMediaStreamRef = useRef<MediaStream | null>(null);
+  const chatAudioContextRef = useRef<AudioContext | null>(null);
+  const chatLevelIntervalRef = useRef<any>(null);
+  const chatSilenceIntervalRef = useRef<any>(null);
+  const chatLastVoiceTimeRef = useRef<number>(Date.now());
+  const chatAccumulatedTextRef = useRef<string>('');
+  const [chatVoiceDetected, setChatVoiceDetected] = useState(false);
+  const [chatSilenceCountdown, setChatSilenceCountdown] = useState<number>(5);
 
   const stopChatRecording = () => {
-    clearChatSilenceTimer();
+    isUserStoppingChatRef.current = true;
+    isChatRecordingRef.current = false;
+    setIsChatVoiceRecording(false);
+    setChatVoiceDetected(false);
+    setChatSilenceCountdown(5);
+
+    if (chatSilenceIntervalRef.current) {
+      clearInterval(chatSilenceIntervalRef.current);
+      chatSilenceIntervalRef.current = null;
+    }
+    if (chatLevelIntervalRef.current) {
+      clearInterval(chatLevelIntervalRef.current);
+      chatLevelIntervalRef.current = null;
+    }
+
     if (chatRecognitionRef.current) {
       try { chatRecognitionRef.current.stop(); } catch {}
+      chatRecognitionRef.current = null;
     }
-    setIsChatVoiceRecording(false);
+
+    if (chatMediaStreamRef.current) {
+      try {
+        chatMediaStreamRef.current.getTracks().forEach((track) => track.stop());
+      } catch {}
+      chatMediaStreamRef.current = null;
+    }
+
+    if (chatAudioContextRef.current) {
+      try {
+        if (chatAudioContextRef.current.state !== 'closed') {
+          chatAudioContextRef.current.close();
+        }
+      } catch {}
+      chatAudioContextRef.current = null;
+    }
   };
 
-  const toggleChatVoiceRecording = () => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-
+  const toggleChatVoiceRecording = async () => {
     if (isChatVoiceRecording) {
       stopChatRecording();
       return;
     }
 
-    if (!SpeechRecognition) {
-      setIsChatVoiceRecording(true);
-      resetChatSilenceTimer();
-      const simulatedText = "How do I protect my crops from fungal blight and leaf spots?";
-      let charIdx = 0;
-      setChatInput("");
-      const timer = setInterval(() => {
-        charIdx += 3;
-        if (charIdx >= simulatedText.length) {
-          setChatInput(simulatedText);
-          clearInterval(timer);
-          resetChatSilenceTimer();
-        } else {
-          setChatInput(simulatedText.substring(0, charIdx));
-        }
-      }, 40);
-      return;
-    }
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
+    isUserStoppingChatRef.current = false;
+    isChatRecordingRef.current = true;
+    setIsChatVoiceRecording(true);
+    chatLastVoiceTimeRef.current = Date.now();
+    setChatSilenceCountdown(5);
+    setChatVoiceDetected(false);
+    chatAccumulatedTextRef.current = chatInput.trim();
+
+    // 1. Microphone access + Real-time Audio Level Analyser for reliable voice detection
     try {
-      const recognition = new SpeechRecognition();
-      chatRecognitionRef.current = recognition;
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.maxAlternatives = 1;
-
-      // Auto-detect browser/user locale for best voice recognition
-      const navLang = typeof navigator !== 'undefined' ? (navigator.language || 'en-US') : 'en-US';
-      recognition.lang = navLang;
-
-      recognition.onstart = () => {
-        setIsChatVoiceRecording(true);
-        // Start 5-second silence countdown on start
-        resetChatSilenceTimer();
-      };
-
-      recognition.onspeechstart = () => {
-        // Voice speech activity detected: reset 5-second silence timer
-        resetChatSilenceTimer();
-      };
-
-      recognition.onsoundstart = () => {
-        // Audio sound detected: reset 5-second silence timer
-        resetChatSilenceTimer();
-      };
-
-      recognition.onresult = (event: any) => {
-        // Voice recognized: reset 5-second silence timer
-        resetChatSilenceTimer();
-
-        let transcript = '';
-        for (let i = 0; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        if (!isChatRecordingRef.current) {
+          stream.getTracks().forEach((t) => t.stop());
+          return;
         }
-        if (transcript) {
-          setChatInput(transcript);
+        chatMediaStreamRef.current = stream;
+
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioContextClass) {
+          const audioCtx = new AudioContextClass();
+          chatAudioContextRef.current = audioCtx;
+          const source = audioCtx.createMediaStreamSource(stream);
+          const analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 512;
+          source.connect(analyser);
+
+          const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+          if (chatLevelIntervalRef.current) clearInterval(chatLevelIntervalRef.current);
+          chatLevelIntervalRef.current = setInterval(() => {
+            if (!isChatRecordingRef.current) return;
+            analyser.getByteFrequencyData(dataArray);
+
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+              sum += dataArray[i];
+            }
+            const avg = sum / dataArray.length;
+
+            if (avg > 10) {
+              chatLastVoiceTimeRef.current = Date.now();
+              setChatVoiceDetected(true);
+            } else {
+              setChatVoiceDetected(false);
+            }
+          }, 100);
         }
-      };
-
-      recognition.onerror = (err: any) => {
-        if (err.error !== 'no-speech') {
-          clearChatSilenceTimer();
-          setIsChatVoiceRecording(false);
-        }
-      };
-
-      recognition.onend = () => {
-        clearChatSilenceTimer();
-        setIsChatVoiceRecording(false);
-      };
-
-      recognition.start();
-    } catch {
-      clearChatSilenceTimer();
-      setIsChatVoiceRecording(false);
+      }
+    } catch (micErr: any) {
+      console.warn('Chat mic stream notice:', micErr);
     }
+
+    // 2. 5-Second Silence Countdown Watcher Interval
+    if (chatSilenceIntervalRef.current) clearInterval(chatSilenceIntervalRef.current);
+    chatSilenceIntervalRef.current = setInterval(() => {
+      if (!isChatRecordingRef.current) {
+        clearInterval(chatSilenceIntervalRef.current);
+        return;
+      }
+
+      const elapsedSilence = Date.now() - chatLastVoiceTimeRef.current;
+      const remainingSeconds = Math.max(0, Math.ceil((5000 - elapsedSilence) / 1000));
+      setChatSilenceCountdown(remainingSeconds);
+
+      // Stop if no voice detected for 5 continuous seconds
+      if (elapsedSilence >= 5000) {
+        stopChatRecording();
+      }
+    }, 150);
+
+    // 3. Web Speech Recognition for speech-to-text
+    if (!SpeechRecognition) return;
+
+    const startChatRecognitionSession = () => {
+      if (!isChatRecordingRef.current || isUserStoppingChatRef.current) return;
+
+      try {
+        const recognition = new SpeechRecognition();
+        chatRecognitionRef.current = recognition;
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
+        const navLang = typeof navigator !== 'undefined' ? (navigator.language || 'en-US') : 'en-US';
+        recognition.lang = navLang;
+
+        recognition.onspeechstart = () => {
+          chatLastVoiceTimeRef.current = Date.now();
+          setChatVoiceDetected(true);
+        };
+
+        recognition.onsoundstart = () => {
+          chatLastVoiceTimeRef.current = Date.now();
+          setChatVoiceDetected(true);
+        };
+
+        recognition.onresult = (event: any) => {
+          chatLastVoiceTimeRef.current = Date.now();
+          setChatVoiceDetected(true);
+
+          let interim = '';
+          let finalChunk = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcriptChunk = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalChunk += (finalChunk ? ' ' : '') + transcriptChunk.trim();
+            } else {
+              interim += transcriptChunk;
+            }
+          }
+
+          if (finalChunk) {
+            const base = chatAccumulatedTextRef.current;
+            chatAccumulatedTextRef.current = base ? `${base} ${finalChunk}` : finalChunk;
+          }
+
+          const base = chatAccumulatedTextRef.current;
+          const combined = interim ? (base ? `${base} ${interim}` : interim) : base;
+          if (combined) {
+            setChatInput(combined);
+          }
+        };
+
+        recognition.onerror = (err: any) => {
+          if (err.error === 'not-allowed' || err.error === 'service-not-allowed') {
+            stopChatRecording();
+          }
+        };
+
+        recognition.onend = () => {
+          // If still recording and user didn't manually stop:
+          if (isChatRecordingRef.current && !isUserStoppingChatRef.current) {
+            const elapsed = Date.now() - chatLastVoiceTimeRef.current;
+            if (elapsed < 5000) {
+              // Restart recognition immediately so it keeps listening through pauses
+              try {
+                recognition.start();
+              } catch {}
+            } else {
+              stopChatRecording();
+            }
+          }
+        };
+
+        recognition.start();
+      } catch (err) {
+        console.warn('Chat SpeechRecognition start error:', err);
+      }
+    };
+
+    startChatRecognitionSession();
   };
 
   useEffect(() => {
@@ -940,109 +1039,235 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   };
 
   // ── Voice Recorder Handler for Symptoms Description ─────────────
-  const symptomSilenceTimeoutRef = useRef<any>(null);
-
-  const clearSymptomSilenceTimer = () => {
-    if (symptomSilenceTimeoutRef.current) {
-      clearTimeout(symptomSilenceTimeoutRef.current);
-      symptomSilenceTimeoutRef.current = null;
-    }
-  };
-
-  const resetSymptomSilenceTimer = () => {
-    clearSymptomSilenceTimer();
-    symptomSilenceTimeoutRef.current = setTimeout(() => {
-      // 5 seconds of silence: stop recording
-      stopSymptomRecording();
-    }, 5000);
-  };
+  const isRecordingRef = useRef(false);
+  const isUserStoppingSymptomRef = useRef(false);
+  const symptomMediaStreamRef = useRef<MediaStream | null>(null);
+  const symptomAudioContextRef = useRef<AudioContext | null>(null);
+  const symptomLevelIntervalRef = useRef<any>(null);
+  const symptomSilenceIntervalRef = useRef<any>(null);
+  const symptomLastVoiceTimeRef = useRef<number>(Date.now());
+  const symptomAccumulatedTextRef = useRef<string>('');
+  const [symptomVoiceDetected, setSymptomVoiceDetected] = useState(false);
+  const [symptomSilenceCountdown, setSymptomSilenceCountdown] = useState<number>(5);
 
   const stopSymptomRecording = () => {
-    clearSymptomSilenceTimer();
+    isUserStoppingSymptomRef.current = true;
+    isRecordingRef.current = false;
+    setIsRecording(false);
+    setSymptomVoiceDetected(false);
+    setSymptomSilenceCountdown(5);
+
+    if (symptomSilenceIntervalRef.current) {
+      clearInterval(symptomSilenceIntervalRef.current);
+      symptomSilenceIntervalRef.current = null;
+    }
+    if (symptomLevelIntervalRef.current) {
+      clearInterval(symptomLevelIntervalRef.current);
+      symptomLevelIntervalRef.current = null;
+    }
+
     if (recognitionRef.current) {
       try { recognitionRef.current.stop(); } catch {}
+      recognitionRef.current = null;
     }
-    setIsRecording(false);
+
+    if (symptomMediaStreamRef.current) {
+      try {
+        symptomMediaStreamRef.current.getTracks().forEach((track) => track.stop());
+      } catch {}
+      symptomMediaStreamRef.current = null;
+    }
+
+    if (symptomAudioContextRef.current) {
+      try {
+        if (symptomAudioContextRef.current.state !== 'closed') {
+          symptomAudioContextRef.current.close();
+        }
+      } catch {}
+      symptomAudioContextRef.current = null;
+    }
   };
 
-  const toggleVoiceRecording = () => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-
+  const toggleVoiceRecording = async () => {
     if (isRecording) {
       stopSymptomRecording();
       return;
     }
 
-    if (!SpeechRecognition) {
-      setIsRecording(true);
-      resetSymptomSilenceTimer();
-      const simulatedSymptoms = "Lower leaves are showing yellowing margins with dark concentric brown rings, curled edges, and wilting during morning hours.";
-      let charIdx = 0;
-      setDescription("");
-      const timer = setInterval(() => {
-        charIdx += 4;
-        if (charIdx >= simulatedSymptoms.length) {
-          setDescription(simulatedSymptoms);
-          clearInterval(timer);
-          resetSymptomSilenceTimer();
-        } else {
-          setDescription(simulatedSymptoms.substring(0, charIdx));
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    isUserStoppingSymptomRef.current = false;
+    isRecordingRef.current = true;
+    setIsRecording(true);
+    symptomLastVoiceTimeRef.current = Date.now();
+    setSymptomSilenceCountdown(5);
+    setSymptomVoiceDetected(false);
+    symptomAccumulatedTextRef.current = description.trim();
+
+    // 1. Request microphone stream and setup real-time Audio Level Analyser for reliable voice detection
+    try {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        if (!isRecordingRef.current) {
+          stream.getTracks().forEach((t) => t.stop());
+          return;
         }
-      }, 40);
+        symptomMediaStreamRef.current = stream;
+
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioContextClass) {
+          const audioCtx = new AudioContextClass();
+          symptomAudioContextRef.current = audioCtx;
+          const source = audioCtx.createMediaStreamSource(stream);
+          const analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 512;
+          source.connect(analyser);
+
+          const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+          if (symptomLevelIntervalRef.current) clearInterval(symptomLevelIntervalRef.current);
+          symptomLevelIntervalRef.current = setInterval(() => {
+            if (!isRecordingRef.current) return;
+            analyser.getByteFrequencyData(dataArray);
+
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+              sum += dataArray[i];
+            }
+            const avg = sum / dataArray.length;
+
+            // Voice detected if average audio frequency level is above background ambient room noise (> 10)
+            if (avg > 10) {
+              symptomLastVoiceTimeRef.current = Date.now();
+              setSymptomVoiceDetected(true);
+            } else {
+              setSymptomVoiceDetected(false);
+            }
+          }, 100);
+        }
+      }
+    } catch (micErr: any) {
+      console.warn('Symptom mic stream notice:', micErr);
+      if (micErr.name === 'NotAllowedError' || micErr.name === 'PermissionDeniedError') {
+        setDetectorError('Microphone permission was denied. Please allow microphone access in your browser settings.');
+        stopSymptomRecording();
+        return;
+      }
+    }
+
+    // 2. 5-Second Silence Countdown Watcher Interval
+    if (symptomSilenceIntervalRef.current) clearInterval(symptomSilenceIntervalRef.current);
+    symptomSilenceIntervalRef.current = setInterval(() => {
+      if (!isRecordingRef.current) {
+        clearInterval(symptomSilenceIntervalRef.current);
+        return;
+      }
+
+      const elapsedSilence = Date.now() - symptomLastVoiceTimeRef.current;
+      const remainingSeconds = Math.max(0, Math.ceil((5000 - elapsedSilence) / 1000));
+      setSymptomSilenceCountdown(remainingSeconds);
+
+      // Stop if no voice detected for 5 continuous seconds
+      if (elapsedSilence >= 5000) {
+        stopSymptomRecording();
+      }
+    }, 150);
+
+    // 3. Web Speech Recognition for speech-to-text
+    if (!SpeechRecognition) {
+      setDetectorError('Live speech recognition is not supported in this browser. Please use Google Chrome, Microsoft Edge, or Safari.');
       return;
     }
 
-    try {
-      const recognition = new SpeechRecognition();
-      recognitionRef.current = recognition;
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      const navLang = typeof navigator !== 'undefined' ? (navigator.language || 'en-US') : 'en-US';
-      recognition.lang = navLang;
-      recognition.maxAlternatives = 1;
+    const startSymptomRecognitionSession = () => {
+      if (!isRecordingRef.current || isUserStoppingSymptomRef.current) return;
 
-      recognition.onstart = () => {
-        setIsRecording(true);
-        resetSymptomSilenceTimer();
-      };
+      try {
+        const recognition = new SpeechRecognition();
+        recognitionRef.current = recognition;
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
+        const navLang = typeof navigator !== 'undefined' ? (navigator.language || 'en-US') : 'en-US';
+        recognition.lang = navLang;
 
-      recognition.onspeechstart = () => {
-        resetSymptomSilenceTimer();
-      };
+        recognition.onspeechstart = () => {
+          symptomLastVoiceTimeRef.current = Date.now();
+          setSymptomVoiceDetected(true);
+        };
 
-      recognition.onsoundstart = () => {
-        resetSymptomSilenceTimer();
-      };
-      
-      recognition.onresult = (event: any) => {
-        resetSymptomSilenceTimer();
-        let transcript = '';
-        for (let i = 0; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
-        }
-        if (transcript) {
-          setDescription(transcript);
-        }
-      };
+        recognition.onsoundstart = () => {
+          symptomLastVoiceTimeRef.current = Date.now();
+          setSymptomVoiceDetected(true);
+        };
 
-      recognition.onerror = (err: any) => {
-        if (err.error !== 'no-speech') {
-          clearSymptomSilenceTimer();
-          setIsRecording(false);
-        }
-      };
+        recognition.onresult = (event: any) => {
+          symptomLastVoiceTimeRef.current = Date.now();
+          setSymptomVoiceDetected(true);
 
-      recognition.onend = () => {
-        clearSymptomSilenceTimer();
-        setIsRecording(false);
-      };
+          let interim = '';
+          let finalChunk = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcriptChunk = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalChunk += (finalChunk ? ' ' : '') + transcriptChunk.trim();
+            } else {
+              interim += transcriptChunk;
+            }
+          }
 
-      recognition.start();
-    } catch {
-      clearSymptomSilenceTimer();
-      setIsRecording(false);
-    }
+          if (finalChunk) {
+            const base = symptomAccumulatedTextRef.current;
+            symptomAccumulatedTextRef.current = base ? `${base} ${finalChunk}` : finalChunk;
+          }
+
+          const base = symptomAccumulatedTextRef.current;
+          const combined = interim ? (base ? `${base} ${interim}` : interim) : base;
+          if (combined) {
+            setDescription(combined);
+            if (detectorError) setDetectorError('');
+          }
+        };
+
+        recognition.onerror = (err: any) => {
+          if (err.error === 'not-allowed' || err.error === 'service-not-allowed') {
+            setDetectorError('Microphone or speech recognition permission was denied in your browser.');
+            stopSymptomRecording();
+          }
+          // 'no-speech' is expected during pauses — our 5-second silence interval handles the stop!
+        };
+
+        recognition.onend = () => {
+          // If still recording and user didn't manually stop:
+          if (isRecordingRef.current && !isUserStoppingSymptomRef.current) {
+            const elapsed = Date.now() - symptomLastVoiceTimeRef.current;
+            if (elapsed < 5000) {
+              // Restart recognition immediately so it keeps listening through pauses
+              try {
+                recognition.start();
+              } catch {}
+            } else {
+              stopSymptomRecording();
+            }
+          }
+        };
+
+        recognition.start();
+      } catch (err) {
+        console.warn('Symptom SpeechRecognition start error:', err);
+      }
+    };
+
+    startSymptomRecognitionSession();
   };
+
+  // Cleanup voice recorders on unmount
+  useEffect(() => {
+    return () => {
+      stopSymptomRecording();
+      stopChatRecording();
+    };
+  }, []);
 
   // ── Run Disease Diagnosis (AI Multimodal Pathology) ───────────────────
   const handleDiagnose = async (plantOverride?: string | React.MouseEvent) => {
@@ -1392,12 +1617,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       onClick={toggleVoiceRecording}
                       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                         isRecording 
-                          ? 'bg-rose-500 text-white animate-pulse'
+                          ? (symptomVoiceDetected
+                              ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 animate-pulse'
+                              : 'bg-rose-500 text-white shadow-lg shadow-rose-500/30 animate-pulse')
                           : 'bg-[#c7ea6b]/20 text-[#c7ea6b] border border-[#c7ea6b]/40 hover:bg-[#c7ea6b]/30'
                       }`}
                     >
                       {isRecording ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
-                      <span>{isRecording ? 'Listening... Speak Now' : 'Voice Recorder'}</span>
+                      <span>
+                        {isRecording
+                          ? (symptomVoiceDetected 
+                              ? `🎙️ Voice Detected (${symptomSilenceCountdown}s)`
+                              : `Listening... (${symptomSilenceCountdown}s silence)`)
+                          : 'Voice Recorder'}
+                      </span>
                     </button>
                   </div>
 
@@ -1415,7 +1648,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   </div>
 
                   <div className="flex items-center justify-between text-[11px] text-white/50 mt-1">
-                    <span>Click the Voice Recorder button to transcribe spoken symptoms automatically.</span>
+                    <span>
+                      {isRecording ? (
+                        symptomVoiceDetected ? (
+                          <span className="text-emerald-400 font-medium flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
+                            Voice detected — transcribing symptoms into textbox...
+                          </span>
+                        ) : (
+                          <span className="text-amber-300 font-medium">
+                            Listening... will automatically stop after {symptomSilenceCountdown}s of silence.
+                          </span>
+                        )
+                      ) : (
+                        'Click the Voice Recorder button to transcribe spoken symptoms. Automatically stops after 5s of silence.'
+                      )}
+                    </span>
                   </div>
                 </div>
 
@@ -2327,22 +2575,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 disabled={isChatLoading}
                 className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all cursor-pointer shrink-0 shadow-md active:scale-95 ${
                   isChatVoiceRecording
-                    ? 'bg-red-500 text-white animate-bounce'
+                    ? (chatVoiceDetected ? 'bg-emerald-500 text-white animate-pulse' : 'bg-red-500 text-white animate-bounce')
                     : 'hover:bg-white/10 text-white/75 hover:text-[#c7ea6b]'
                 }`}
                 style={
                   isChatVoiceRecording
                     ? {
-                        backgroundColor: '#ef4444',
-                        border: '1px solid #f87171',
-                        boxShadow: '0 0 12px rgba(239, 68, 68, 0.5)',
+                        backgroundColor: chatVoiceDetected ? '#10b981' : '#ef4444',
+                        border: chatVoiceDetected ? '1px solid #34d399' : '1px solid #f87171',
+                        boxShadow: chatVoiceDetected ? '0 0 12px rgba(16, 185, 129, 0.5)' : '0 0 12px rgba(239, 68, 68, 0.5)',
                       }
                     : {
                         backgroundColor: 'rgba(255, 255, 255, 0.07)',
                         border: '1px solid rgba(255, 255, 255, 0.15)',
                       }
                 }
-                title={isChatVoiceRecording ? "Stop voice recording" : "Voice Recorder (speak to type into textbox)"}
+                title={isChatVoiceRecording ? `Recording... (${chatSilenceCountdown}s silence auto-stop)` : "Voice Recorder (speak to type into textbox)"}
                 aria-label={isChatVoiceRecording ? "Stop voice recording" : "Voice recorder"}
               >
                 {isChatVoiceRecording ? (
