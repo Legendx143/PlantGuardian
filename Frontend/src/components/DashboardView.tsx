@@ -14,7 +14,6 @@ import {
   FlaskConical,
   Bug,
   Calendar,
-  MapPin,
   UploadCloud,
   Image as ImageIcon,
   Trash2,
@@ -522,7 +521,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [season, setSeason] = useState(SEASON_CHOICES[0]);
   const [generatingFarming, setGeneratingFarming] = useState(false);
   const [farmingGuide, setFarmingGuide] = useState<string | null>(null);
-  const [locDetecting, setLocDetecting] = useState(false);
 
   // ── Plant Image Upload State ─────────────────────────────────────────
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -900,21 +898,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         recognition.onerror = (err: any) => {
           console.warn('Chat speech recognition error:', err.error);
-          if (err.error === 'network') {
-            setChatMessages((prev) => [
-              ...prev,
-              {
-                sender: 'bot',
-                text: '🛡️ Brave Browser Notice: Brave disables Google speech recognition by default. To enable voice typing in Brave, open brave://settings/privacy and turn ON "Use Google services for speech recognition", or use Google Chrome.',
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-              },
-            ]);
-            stopChatRecording();
-            return;
-          }
-          if (err.error === 'not-allowed' || err.error === 'service-not-allowed') {
-            stopChatRecording();
-          }
+          stopChatRecording();
         };
 
         recognition.onend = () => {
@@ -1160,17 +1144,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         recognition.onerror = (err: any) => {
           console.warn('Symptom speech recognition error:', err.error);
-          if (err.error === 'network') {
-            setDetectorError('🛡️ Brave Browser Notice: Brave disables Google Speech recognition by default to protect privacy. To enable real-time voice typing in Brave: open brave://settings/privacy and turn ON "Use Google services for speech recognition", or use Google Chrome.');
-            stopSymptomRecording();
-            return;
-          }
           if (err.error === 'not-allowed' || err.error === 'service-not-allowed') {
             setDetectorError('Microphone or speech permission was denied in your browser settings.');
-            stopSymptomRecording();
-            return;
           }
-          // 'no-speech' is expected during pauses — our 3s silence interval will handle auto-stop!
+          stopSymptomRecording();
         };
 
         recognition.onend = () => {
@@ -1423,64 +1400,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     }
   };
 
-  // ── Auto Detect Location (High Accuracy GPS + Town Level Reverse Geocode) ──
-  const handleDetectLocation = async () => {
-    setLocDetecting(true);
-    try {
-      let resolved = false;
-
-      // 1. Attempt high-accuracy browser geolocation (GPS / Wi-Fi)
-      if (typeof navigator !== 'undefined' && 'geolocation' in navigator) {
-        try {
-          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject, {
-              enableHighAccuracy: true,
-              timeout: 7000,
-              maximumAge: 30000
-            });
-          });
-
-          if (position?.coords) {
-            const { latitude, longitude } = position.coords;
-            const revRes = await fetch(
-              `${BACKEND_URL}/api/geo/reverse?lat=${encodeURIComponent(latitude)}&lon=${encodeURIComponent(longitude)}`
-            );
-            if (revRes.ok) {
-              const data = await revRes.json();
-              if (data.location) {
-                setLocation(data.location);
-                resolved = true;
-              }
-            }
-          }
-        } catch (geoErr) {
-          console.info('High-accuracy geolocation skipped or prompt declined, falling back to IP:', geoErr);
-        }
-      }
-
-      // 2. If geolocation was declined or unavailable, use backend IP locator
-      if (!resolved) {
-        const ipRes = await fetch(`${BACKEND_URL}/api/geo/ip-locate`);
-        if (ipRes.ok) {
-          const data = await ipRes.json();
-          if (data.location) {
-            setLocation(data.location);
-            resolved = true;
-          }
-        }
-      }
-
-      if (!resolved) {
-        setLocation('Kanchrapara, West Bengal');
-      }
-    } catch (err) {
-      console.warn('Location detection error:', err);
-      setLocation('Kanchrapara, West Bengal');
-    } finally {
-      setLocDetecting(false);
-    }
-  };
-
   return (
     <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20">
       {/* ── Dashboard Top Header & Mode Switcher ─────────────────────── */}
@@ -1619,16 +1538,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       )}
                     </span>
                   </div>
-
-                  {detectorError && detectorError.includes('Brave') && (
-                    <div className="mt-2.5 p-3 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs leading-relaxed flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-amber-300 block mb-0.5">🛡️ Brave Browser Privacy Setting:</strong>
-                        Brave blocks Google speech services by default. To enable live speech typing: open <code className="bg-black/50 px-1.5 py-0.5 rounded text-[#c7ea6b] font-mono">brave://settings/privacy</code> in Brave and turn ON <strong>"Use Google services for speech recognition"</strong>, or use Google Chrome.
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 {/* 3. Plant Image Upload Section (Compact & Space-Efficient) */}
@@ -2083,28 +1992,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   />
                 </div>
 
-                {/* Location Input with Auto Detect */}
+                {/* Location Input (Optional) */}
                 <div className="mb-4">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#c7ea6b]">
-                      3. Location (State / District)
-                    </label>
-                    <button
-                      type="button"
-                      onClick={handleDetectLocation}
-                      disabled={locDetecting}
-                      className="inline-flex items-center gap-1 text-[11px] text-[#c7ea6b] hover:underline cursor-pointer"
-                    >
-                      <MapPin className="w-3 h-3" />
-                      <span>{locDetecting ? 'Locating...' : 'Auto-Detect'}</span>
-                    </button>
-                  </div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#c7ea6b] mb-1.5">
+                    3. Location <span className="text-white/50 text-[11px] font-normal normal-case">(Optional)</span>
+                  </label>
                   <input
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Enter district, state, or click Auto-Detect..."
-                    className="w-full bg-black/40 border border-white/20 rounded-xl px-4 py-2.5 text-sm text-white outline-none focus:border-[#c7ea6b] transition-colors"
+                    placeholder="Enter district, state, or leave empty for general climate..."
+                    className="w-full bg-black/40 border border-white/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/40 outline-none focus:border-[#c7ea6b] transition-colors"
                   />
                 </div>
 

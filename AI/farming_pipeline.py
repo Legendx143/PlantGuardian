@@ -37,9 +37,17 @@ Structure your response clearly with these markdown sections:
 7. 📅 **Growth Milestones & Harvest / Pruning Timeline**: Expected timeline from planting to maturity, flowering, and harvesting or pruning routine.
 """
 
-def generate_farming_guide(plant_name: str, soil_type: str, state: str, district: str, season: str, model: str = DEFAULT_FARMING_MODEL) -> str:
+def generate_farming_guide(
+    plant_name: str,
+    soil_type: str = "",
+    state: str = "",
+    district: str = "",
+    season: str = "",
+    model: str = DEFAULT_FARMING_MODEL
+) -> str:
     """
     Calls OpenRouter LLM to generate comprehensive planting and care instructions.
+    Location (state, district) is completely optional.
     """
     if not plant_name or not plant_name.strip():
         return "⚠️ Please enter a plant, tree, or crop name."
@@ -48,12 +56,15 @@ def generate_farming_guide(plant_name: str, soil_type: str, state: str, district
     if not api_key:
         return "❌ Error: OR_API_KEY is not configured in your .env file."
 
+    state_str = state.strip() if (state and str(state).strip()) else "General / Not specified"
+    district_str = district.strip() if (district and str(district).strip()) else "General / Not specified"
+
     user_query = f"""
     Please generate a comprehensive farming and care routine for:
     - **Plant / Crop Name**: {plant_name.strip()}
     - **Soil Type**: {soil_type or 'Not specified / Standard garden soil'}
-    - **State**: {state or 'General'}
-    - **District / Region**: {district or 'General'}
+    - **State**: {state_str}
+    - **District / Region**: {district_str}
     - **Season / Timing**: {season or 'Current Season'}
     """
 
@@ -84,32 +95,14 @@ def generate_farming_guide(plant_name: str, soil_type: str, state: str, district
     except (KeyError, IndexError) as e:
         return f"❌ Unexpected response format: {str(e)}"
 
-def detect_current_location():
-    """
-    Detects State and City/District based on network IP.
-    Returns: (state, district, status_message)
-    """
-    try:
-        res = requests.get("http://ip-api.com/json/", timeout=5).json()
-        if res.get("status") == "success":
-            state = res.get("regionName", "")
-            district = res.get("city", "")
-            return state, district, f"📍 Location detected: **{district}, {state}**"
-        return "", "", "⚠️ Could not auto-detect location. Please enter State and District manually."
-    except Exception as e:
-        return "", "", f"⚠️ Location lookup error: {str(e)}"
 
 if __name__ == "__main__":
-    print("--- 1. Testing Location Detection ---")
-    st, dist, msg = detect_current_location()
-    print(f"{msg}\n")
-
-    print("--- 2. Testing Farming AI Generation via OpenRouter ---")
+    print("--- Testing Farming AI Generation via OpenRouter (Location Optional) ---")
     guide = generate_farming_guide(
         plant_name="Tomato",
         soil_type="Loamy Soil",
-        state=st or "West Bengal",
-        district=dist or "Kolkata",
+        state="",
+        district="",
         season="Rabi (Winter)"
     )
     print("\n--- Farming Guide Preview ---")

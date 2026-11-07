@@ -835,7 +835,8 @@ User Symptoms Description: ${description || 'General disease assessment for ' + 
 // ─── POST /api/ai/farming-guide ───────────────────────────────────────────
 app.post('/api/ai/farming-guide', async (req, res) => {
   try {
-    const { plant = 'Wheat', soilType = 'Loamy', location = 'Regional', season = 'Spring' } = req.body;
+    const { plant = 'Wheat', soilType = 'Loamy', location = '', season = 'Spring' } = req.body;
+    const locDisplay = location && String(location).trim() ? String(location).trim() : 'General / Standard Climate';
 
     let finalGuide = null;
     if (OR_API_KEY) {
@@ -844,7 +845,7 @@ app.post('/api/ai/farming-guide', async (req, res) => {
 Generate practical, region-specific, step-by-step farming guidance for:
 Crop: ${plant}
 Soil Type: ${soilType}
-Location / Region: ${location}
+Location / Region (Optional): ${locDisplay}
 Season / Timing: ${season}
 
 Structure your response clearly with these 7 distinct sections. Put each section heading on its own line preceded by "# ". Put each point on its own new line preceded by "- **Point Title:** Description":
@@ -917,10 +918,10 @@ Write clean, concise, easy-to-read points. Avoid giant blocks of unbroken text.`
 
     if (!finalGuide) {
       finalGuide = `### Comprehensive Agronomic Advisory: ${plant}
-**Soil Type:** ${soilType} | **Region:** ${location} | **Season:** ${season}
+**Soil Type:** ${soilType} | **Region:** ${locDisplay} | **Season:** ${season}
 
 #### 1. 🌿 Suitability & Climate Feasibility
-- ${plant} is well-suited for ${soilType} in ${location} during the ${season} season. Ensure temperatures stay within optimal vegetative ranges.
+- ${plant} is well-suited for ${soilType} in ${locDisplay} during the ${season} season. Ensure temperatures stay within optimal vegetative ranges.
 
 #### 2. 🚜 Soil & Land Preparation & Optimal pH
 - Deep ploughing to 25–30 cm breaks sub-surface compaction. Maintain soil pH between 6.0 and 7.2.
