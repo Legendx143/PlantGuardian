@@ -899,6 +899,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         };
 
         recognition.onerror = (err: any) => {
+          console.warn('Chat speech recognition error:', err.error);
+          if (err.error === 'network') {
+            setChatMessages((prev) => [
+              ...prev,
+              {
+                sender: 'bot',
+                text: '🛡️ Brave Browser Notice: Brave disables Google speech recognition by default. To enable voice typing in Brave, open brave://settings/privacy and turn ON "Use Google services for speech recognition", or use Google Chrome.',
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              },
+            ]);
+            stopChatRecording();
+            return;
+          }
           if (err.error === 'not-allowed' || err.error === 'service-not-allowed') {
             stopChatRecording();
           }
@@ -1147,9 +1160,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         recognition.onerror = (err: any) => {
           console.warn('Symptom speech recognition error:', err.error);
+          if (err.error === 'network') {
+            setDetectorError('🛡️ Brave Browser Notice: Brave disables Google Speech recognition by default to protect privacy. To enable real-time voice typing in Brave: open brave://settings/privacy and turn ON "Use Google services for speech recognition", or use Google Chrome.');
+            stopSymptomRecording();
+            return;
+          }
           if (err.error === 'not-allowed' || err.error === 'service-not-allowed') {
             setDetectorError('Microphone or speech permission was denied in your browser settings.');
             stopSymptomRecording();
+            return;
           }
           // 'no-speech' is expected during pauses — our 3s silence interval will handle auto-stop!
         };
@@ -1600,6 +1619,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       )}
                     </span>
                   </div>
+
+                  {detectorError && detectorError.includes('Brave') && (
+                    <div className="mt-2.5 p-3 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs leading-relaxed flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-amber-300 block mb-0.5">🛡️ Brave Browser Privacy Setting:</strong>
+                        Brave blocks Google speech services by default. To enable live speech typing: open <code className="bg-black/50 px-1.5 py-0.5 rounded text-[#c7ea6b] font-mono">brave://settings/privacy</code> in Brave and turn ON <strong>"Use Google services for speech recognition"</strong>, or use Google Chrome.
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* 3. Plant Image Upload Section (Compact & Space-Efficient) */}

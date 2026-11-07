@@ -206,6 +206,16 @@ VOICE_RECORDER_HTML = """
         <span style="font-weight: 600; margin-right: 6px;">Transcribing live:</span>
         <span id="pg-voice-live-text" style="font-style: italic;">...</span>
     </div>
+    <div id="pg-brave-banner" style="display: none; margin-top: 10px; padding: 10px 14px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.45); border-radius: 8px; font-size: 12px; color: #92400e; line-height: 1.5;">
+        <div style="font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+            <span>🛡️</span> <span>Brave Browser Privacy Notice: Google Speech Blocked</span>
+        </div>
+        Brave disables Google Speech Services by default to protect user privacy.
+        <br/>
+        👉 <strong>To enable live typing in Brave:</strong> Open <code style="background: rgba(0,0,0,0.08); padding: 1px 6px; border-radius: 4px; font-family: monospace;">brave://settings/privacy</code> and turn ON <em>"Use Google services for speech recognition"</em>.
+        <br/>
+        🎙️ <em>Or use the <strong>Offline AI Voice Input</strong> section directly below — it runs 100% locally on your machine with no Google services needed!</em>
+    </div>
 </div>
 """
 
@@ -219,9 +229,11 @@ const dot = element.querySelector('#pg-voice-dot');
 const msg = element.querySelector('#pg-voice-msg');
 const liveStrip = element.querySelector('#pg-voice-live-strip');
 const liveText = element.querySelector('#pg-voice-live-text');
+const braveBanner = element.querySelector('#pg-brave-banner');
 
 let isRecording = false;
 let isUserStopping = false;
+let isBraveBlocked = false;
 let silenceInterval = null;
 let lastVoiceTime = Date.now();
 let activeRecognition = null;
@@ -378,10 +390,39 @@ function startVoiceSession() {
         };
 
         recognition.onerror = (e) => {
+            console.warn('Speech recognition error:', e.error);
+            if (e.error === 'network') {
+                isBraveBlocked = true;
+                isUserStopping = true;
+                isRecording = false;
+
+                if (silenceInterval) {
+                    clearInterval(silenceInterval);
+                    silenceInterval = null;
+                }
+                if (activeRecognition) {
+                    try { activeRecognition.stop(); } catch(err) {}
+                    activeRecognition = null;
+                }
+
+                btn.style.background = '#166534';
+                btn.style.boxShadow = '0 2px 8px rgba(22,101,52,0.35)';
+                btn.classList.remove('pg-pulse-anim');
+                icon.textContent = '🎙️';
+                btnLabel.textContent = 'Start Real-Time Voice Recording';
+                timerBadge.style.display = 'none';
+                dot.style.background = '#f59e0b';
+
+                msg.innerHTML = '<span style="color:#b45309; font-weight:700;">🛡️ Brave Privacy Block Detected.</span> Follow steps below to enable:';
+                if (braveBanner) braveBanner.style.display = 'block';
+                return;
+            }
+
             if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
                 dot.style.background = '#ef4444';
                 msg.innerHTML = '<span style="color:#dc2626; font-weight:600;">❌ Microphone permission denied in browser.</span>';
                 stopVoiceRecording('permission_denied');
+                return;
             }
         };
 
@@ -424,6 +465,7 @@ function startVoiceRecording() {
     isUserStopping = false;
     isRecording = true;
     lastVoiceTime = Date.now();
+    if (braveBanner) braveBanner.style.display = 'none';
 
     btn.style.background = '#dc2626';
     btn.style.boxShadow = '0 2px 12px rgba(220,38,38,0.5)';
@@ -624,15 +666,21 @@ def create_app():
                             elem_id="symptom_textbox",
                         )
 
-                        with gr.Accordion("📁 Or Upload Pre-Recorded Audio File (.wav, .mp3)", open=False):
+                        with gr.Accordion("🎙️ Offline / Brave Mode: Direct Audio Recording (100% Private, No Google Services)", open=False):
+                            gr.Markdown(
+                                "💡 **Brave / Privacy Browser Users:** If Google Speech Services are disabled in your browser, "
+                                "you can record your voice directly using the microphone button below. PlantGuardian AI transcribes "
+                                "your voice on-device in under 1 second without sending voice data to external servers."
+                            )
                             audio_input = gr.Audio(
                                 sources=["microphone", "upload"],
                                 type="filepath",
-                                label="🎙️ Audio File Upload / Offline Voice Input",
+                                label="🎙️ Direct Microphone Voice Recording / File Upload",
+                                elem_id="pg_audio_input",
                             )
 
                             transcribe_btn = gr.Button(
-                                "🔊 Transcribe Audio File to Text",
+                                "🔊 Transcribe Voice to Description",
                                 variant="secondary",
                                 size="sm",
                             )
