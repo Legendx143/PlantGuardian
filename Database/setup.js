@@ -72,26 +72,39 @@ async function runMigrationCheck() {
     console.warn(`⚠️   Storage check error: ${err.message}`);
   }
 
-  // 3. User Profiles Table Verification
-  const migrationPath = resolve(__dirname, '..', 'supabase', 'migrations', '20261031193000_create_user_profiles.sql');
-  const { error: tableErr } = await supabase.from('user_profiles').select('email').limit(1);
+  // 3. User Profiles & Scans & Farming Plans Table Verification
+  const userMigration = resolve(__dirname, '..', 'supabase', 'migrations', '20261031193000_create_user_profiles.sql');
+  const historyMigration = resolve(__dirname, '..', 'supabase', 'migrations', '20261107223000_create_scans_and_farming_plans.sql');
 
-  if (tableErr && (tableErr.message.includes('does not exist') || tableErr.message.includes('schema cache'))) {
-    console.log('');
-    console.log('⚠️   The "user_profiles" table is pending creation in PostgreSQL.');
-    console.log('    To execute the SQL migration schema:');
-    console.log('');
-    console.log('    1. Open your Supabase Dashboard:');
-    console.log(`       ${SUPABASE_URL.replace('.supabase.co', '')}.supabase.com`);
-    console.log('    2. Go to: SQL Editor (left sidebar)');
-    console.log(`    3. Paste and run the migration SQL from:\n       ${migrationPath}`);
-    console.log('');
-    console.log('    Note: The application already functions seamlessly using Supabase Auth,');
-    console.log('    and will automatically sync real-time user profiles once created.');
-  } else if (tableErr) {
-    console.log('✅  "user_profiles" table exists in PostgreSQL.');
+  const { error: tableErr } = await supabase.from('user_profiles').select('email').limit(1);
+  const { error: scansErr } = await supabase.from('plant_scans').select('id').limit(1);
+  const { error: farmingErr } = await supabase.from('farming_plans').select('id').limit(1);
+
+  if (!tableErr) {
+    console.log('✅  "user_profiles" table exists and is accessible.');
   } else {
-    console.log('✅  "user_profiles" table exists and is accessible (email is Primary Key).');
+    console.log(`⚠️   "user_profiles" table: ${tableErr.message}`);
+  }
+
+  if (!scansErr) {
+    console.log('✅  "plant_scans" table exists in PostgreSQL (Cross-device history active).');
+  } else {
+    console.log(`⚠️   "plant_scans" table: ${scansErr.message}`);
+  }
+
+  if (!farmingErr) {
+    console.log('✅  "farming_plans" table exists in PostgreSQL (Cross-device plans active).');
+  } else {
+    console.log(`⚠️   "farming_plans" table: ${farmingErr.message}`);
+  }
+
+  if (scansErr || farmingErr || tableErr) {
+    console.log('');
+    console.log('📋  To enable instant cloud PostgreSQL sync across all devices:');
+    console.log('    1. Open your Supabase Dashboard: https://supabase.com/dashboard/project/cdlwdyplznpnizwjcxvl/sql');
+    console.log('    2. In SQL Editor, copy and run the SQL from:');
+    console.log(`       ${historyMigration}`);
+    console.log('    (Note: The backend automatically stores & syncs history via disk database in the meantime!)');
   }
 
   console.log('');

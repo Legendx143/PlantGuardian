@@ -13,8 +13,10 @@ import {
   Activity,
   MapPin,
   Layers,
-  AlertTriangle
+  AlertTriangle,
+  Trash2
 } from 'lucide-react';
+import { BACKEND_URL } from '../lib/apiConfig';
 
 export interface ScanRecord {
   id: number | string;
@@ -64,12 +66,6 @@ interface HistoryDrawerProps {
   onSelectFarmingPlan?: (plan: FarmingRecord) => void;
 }
 
-const BACKEND_URL = (import.meta as any).env?.VITE_BACKEND_URL ?? (
-  typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
-    ? ''
-    : 'http://localhost:5000'
-);
-
 export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
   isOpen,
   onClose,
@@ -93,39 +89,60 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
     }
   }, [isOpen, activeTab]);
 
-  // Fetch disease diagnosis history
+  // Fetch disease diagnosis history with bidirectional database sync
   const fetchScans = async () => {
     setLoadingScans(true);
     try {
-      const userKey = userEmail ? `plantguardian_scans_${userEmail.toLowerCase()}` : 'plantguardian_scans';
+      const cleanEmail = userEmail ? userEmail.trim().toLowerCase() : '';
+      const userKey = cleanEmail ? `plantguardian_scans_${cleanEmail}` : 'plantguardian_scans';
       const cached = localStorage.getItem(userKey) || localStorage.getItem('plantguardian_recent_scans');
       let localRecords: ScanRecord[] = [];
       if (cached) {
         try { localRecords = JSON.parse(cached); } catch {}
       }
 
-      const url = userEmail 
-        ? `${BACKEND_URL}/api/scans?email=${encodeURIComponent(userEmail)}`
+      const url = cleanEmail 
+        ? `${BACKEND_URL}/api/scans?email=${encodeURIComponent(cleanEmail)}`
         : `${BACKEND_URL}/api/scans`;
       const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data.scans) && data.scans.length > 0) {
-          const map = new Map<string, ScanRecord>();
-          data.scans.forEach((s: ScanRecord) => map.set(String(s.id), s));
-          localRecords.forEach((s: ScanRecord) => {
-            if (!map.has(String(s.id))) {
-              map.set(String(s.id), s);
+        const serverScans: ScanRecord[] = Array.isArray(data.scans) ? data.scans : [];
+
+        // Identify local scans that are missing from the server database
+        const serverIds = new Set(serverScans.map((s: ScanRecord) => String(s.id)));
+        const missingOnServer = localRecords.filter((s: ScanRecord) => !serverIds.has(String(s.id)));
+
+        let finalScans = [...serverScans];
+
+        // If this device has local records not yet in server database, sync them up now!
+        if (cleanEmail && missingOnServer.length > 0) {
+          try {
+            const syncRes = await fetch(`${BACKEND_URL}/api/scans/sync`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: cleanEmail, scans: missingOnServer }),
+            });
+            if (syncRes.ok) {
+              const syncData = await syncRes.json();
+              if (Array.isArray(syncData.scans)) {
+                finalScans = syncData.scans;
+              }
             }
-          });
-          const merged = Array.from(map.values()).sort((a, b) => 
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          );
-          setScans(merged);
-          localStorage.setItem(userKey, JSON.stringify(merged));
-          setLoadingScans(false);
-          return;
+          } catch (syncErr) {
+            console.warn('Scans background sync deferred:', syncErr);
+            finalScans = [...serverScans, ...missingOnServer];
+          }
         }
+
+        const sorted = finalScans.sort((a, b) => 
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+
+        setScans(sorted);
+        localStorage.setItem(userKey, JSON.stringify(sorted));
+        setLoadingScans(false);
+        return;
       }
 
       if (localRecords.length > 0) {
@@ -143,39 +160,60 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
     }
   };
 
-  // Fetch farming guidance history
+  // Fetch farming guidance history with bidirectional database sync
   const fetchFarmingPlans = async () => {
     setLoadingFarming(true);
     try {
-      const userKey = userEmail ? `plantguardian_farming_${userEmail.toLowerCase()}` : 'plantguardian_farming';
+      const cleanEmail = userEmail ? userEmail.trim().toLowerCase() : '';
+      const userKey = cleanEmail ? `plantguardian_farming_${cleanEmail}` : 'plantguardian_farming';
       const cached = localStorage.getItem(userKey);
       let localRecords: FarmingRecord[] = [];
       if (cached) {
         try { localRecords = JSON.parse(cached); } catch {}
       }
 
-      const url = userEmail 
-        ? `${BACKEND_URL}/api/farming-plans?email=${encodeURIComponent(userEmail)}`
+      const url = cleanEmail 
+        ? `${BACKEND_URL}/api/farming-plans?email=${encodeURIComponent(cleanEmail)}`
         : `${BACKEND_URL}/api/farming-plans`;
       const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data.plans) && data.plans.length > 0) {
-          const map = new Map<string, FarmingRecord>();
-          data.plans.forEach((p: FarmingRecord) => map.set(String(p.id), p));
-          localRecords.forEach((p: FarmingRecord) => {
-            if (!map.has(String(p.id))) {
-              map.set(String(p.id), p);
+        const serverPlans: FarmingRecord[] = Array.isArray(data.plans) ? data.plans : [];
+
+        // Identify local plans that are missing from the server database
+        const serverIds = new Set(serverPlans.map((p: FarmingRecord) => String(p.id)));
+        const missingOnServer = localRecords.filter((p: FarmingRecord) => !serverIds.has(String(p.id)));
+
+        let finalPlans = [...serverPlans];
+
+        // If this device has local records not yet in server database, sync them up now!
+        if (cleanEmail && missingOnServer.length > 0) {
+          try {
+            const syncRes = await fetch(`${BACKEND_URL}/api/farming-plans/sync`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: cleanEmail, plans: missingOnServer }),
+            });
+            if (syncRes.ok) {
+              const syncData = await syncRes.json();
+              if (Array.isArray(syncData.plans)) {
+                finalPlans = syncData.plans;
+              }
             }
-          });
-          const merged = Array.from(map.values()).sort((a, b) => 
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          );
-          setFarmingPlans(merged);
-          localStorage.setItem(userKey, JSON.stringify(merged));
-          setLoadingFarming(false);
-          return;
+          } catch (syncErr) {
+            console.warn('Farming plans background sync deferred:', syncErr);
+            finalPlans = [...serverPlans, ...missingOnServer];
+          }
         }
+
+        const sorted = finalPlans.sort((a, b) => 
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+
+        setFarmingPlans(sorted);
+        localStorage.setItem(userKey, JSON.stringify(sorted));
+        setLoadingFarming(false);
+        return;
       }
 
       if (localRecords.length > 0) {
@@ -190,6 +228,42 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
       }
     } finally {
       setLoadingFarming(false);
+    }
+  };
+
+  const handleDeleteScan = async (e: React.MouseEvent, id: string | number) => {
+    e.stopPropagation();
+    const cleanEmail = userEmail ? userEmail.trim().toLowerCase() : '';
+    const userKey = cleanEmail ? `plantguardian_scans_${cleanEmail}` : 'plantguardian_scans';
+
+    const updated = scans.filter((s) => String(s.id) !== String(id));
+    setScans(updated);
+    localStorage.setItem(userKey, JSON.stringify(updated));
+
+    try {
+      await fetch(`${BACKEND_URL}/api/scans/${id}?email=${encodeURIComponent(cleanEmail)}`, {
+        method: 'DELETE',
+      });
+    } catch (err) {
+      console.warn('Failed to delete scan on server:', err);
+    }
+  };
+
+  const handleDeleteFarmingPlan = async (e: React.MouseEvent, id: string | number) => {
+    e.stopPropagation();
+    const cleanEmail = userEmail ? userEmail.trim().toLowerCase() : '';
+    const userKey = cleanEmail ? `plantguardian_farming_${cleanEmail}` : 'plantguardian_farming';
+
+    const updated = farmingPlans.filter((p) => String(p.id) !== String(id));
+    setFarmingPlans(updated);
+    localStorage.setItem(userKey, JSON.stringify(updated));
+
+    try {
+      await fetch(`${BACKEND_URL}/api/farming-plans/${id}?email=${encodeURIComponent(cleanEmail)}`, {
+        method: 'DELETE',
+      });
+    } catch (err) {
+      console.warn('Failed to delete farming plan on server:', err);
     }
   };
 
@@ -492,6 +566,14 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                         <Calendar className="w-2.5 h-2.5" />
                         {formatDate(scan.created_at)}
                       </span>
+                      <button
+                        type="button"
+                        onClick={(e) => handleDeleteScan(e, scan.id)}
+                        className="p-1 rounded-md text-white/30 hover:text-rose-400 hover:bg-rose-500/10 transition-colors ml-1"
+                        title="Delete this record"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
                     </div>
                   </div>
 
@@ -607,6 +689,14 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                         <Calendar className="w-2.5 h-2.5" />
                         {formatDate(plan.created_at)}
                       </span>
+                      <button
+                        type="button"
+                        onClick={(e) => handleDeleteFarmingPlan(e, plan.id)}
+                        className="p-1 rounded-md text-white/30 hover:text-rose-400 hover:bg-rose-500/10 transition-colors ml-1"
+                        title="Delete this farming plan"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
                     </div>
                   </div>
 

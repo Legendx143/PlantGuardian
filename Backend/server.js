@@ -391,6 +391,7 @@ app.get('/api/auth/verify', requireSession, (req, res) => {
 // ─── GET /api/scans ───────────────────────────────────────────────────────
 app.get('/api/scans', async (req, res) => {
   const { email } = req.query;
+  const cleanEmail = email ? String(email).trim().toLowerCase() : '';
   let scans = [...localScans];
 
   try {
@@ -399,35 +400,119 @@ app.get('/api/scans', async (req, res) => {
       .from('plant_scans')
       .select('*')
       .order('created_at', { ascending: false })
-      .limit(50);
+      .limit(100);
 
-    if (email) {
-      query = query.eq('user_email', email);
+    if (cleanEmail) {
+      query = query.eq('user_email', cleanEmail);
     }
 
     const { data, error } = await query;
 
-    if (!error && Array.isArray(data) && data.length > 0) {
-      const ids = new Set(data.map(d => String(d.id)));
-      const merged = [...data, ...scans.filter(s => !ids.has(String(s.id)))];
+    if (!error && Array.isArray(data)) {
+      const map = new Map();
+      data.forEach(d => map.set(String(d.id), d));
+      scans.forEach(s => {
+        if (!map.has(String(s.id))) {
+          if (!cleanEmail || (s.user_email && s.user_email.toLowerCase() === cleanEmail)) {
+            map.set(String(s.id), s);
+          }
+        }
+      });
+      const merged = Array.from(map.values()).sort((a, b) => 
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
       return res.json({ scans: merged });
     }
   } catch {}
 
   // Filter local scans by email if provided
-  if (email) {
-    const clean = String(email).trim().toLowerCase();
-    const filtered = scans.filter(s => s.user_email && s.user_email.toLowerCase() === clean);
-    if (filtered.length > 0) return res.json({ scans: filtered });
+  if (cleanEmail) {
+    const filtered = scans.filter(s => s.user_email && s.user_email.trim().toLowerCase() === cleanEmail);
+    return res.json({ scans: filtered });
   }
 
-  // Fallback to all local scans
   return res.json({ scans });
+});
+
+// ─── POST /api/scans/sync (Cross-device bidirectional sync) ────────────────
+app.post('/api/scans/sync', async (req, res) => {
+  try {
+    const { email, scans = [] } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: 'email is required' });
+    }
+    const cleanEmail = String(email).trim().toLowerCase();
+
+    if (Array.isArray(scans) && scans.length > 0) {
+      const existingMap = new Map();
+      localScans.forEach(s => existingMap.set(String(s.id), s));
+
+      const newItemsToInsert = [];
+      scans.forEach(scan => {
+        if (!scan || !scan.id) return;
+        const normalized = {
+          ...scan,
+          user_email: cleanEmail,
+          created_at: scan.created_at || new Date().toISOString()
+        };
+        if (!existingMap.has(String(scan.id))) {
+          localScans.unshift(normalized);
+          existingMap.set(String(scan.id), normalized);
+          newItemsToInsert.push(normalized);
+        }
+      });
+
+      if (newItemsToInsert.length > 0) {
+        saveScansToFile(localScans);
+        try {
+          await supabaseAdmin.from('plant_scans').upsert(newItemsToInsert);
+        } catch {}
+      }
+    }
+
+    const userScans = localScans
+      .filter(s => s.user_email && s.user_email.trim().toLowerCase() === cleanEmail)
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+    return res.json({ success: true, scans: userScans });
+  } catch (err) {
+    console.warn('Scans sync error:', err.message);
+    return res.status(500).json({ error: 'Failed to sync scans' });
+  }
+});
+
+// ─── DELETE /api/scans/:id ────────────────────────────────────────────────
+app.delete('/api/scans/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email } = req.query;
+    const cleanEmail = email ? String(email).trim().toLowerCase() : '';
+
+    const scanIndex = localScans.findIndex(s => 
+      String(s.id) === String(id) && (!cleanEmail || (s.user_email && s.user_email.toLowerCase() === cleanEmail))
+    );
+
+    if (scanIndex !== -1) {
+      localScans.splice(scanIndex, 1);
+      saveScansToFile(localScans);
+    }
+
+    try {
+      let q = supabaseAdmin.from('plant_scans').delete().eq('id', id);
+      if (cleanEmail) q = q.eq('user_email', cleanEmail);
+      await q;
+    } catch {}
+
+    return res.json({ success: true, message: 'Scan deleted' });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 });
 
 // ─── GET /api/farming-plans ────────────────────────────────────────────────
 app.get('/api/farming-plans', async (req, res) => {
   const { email } = req.query;
+  const cleanEmail = email ? String(email).trim().toLowerCase() : '';
   let plans = [...localFarmingPlans];
 
   try {
@@ -436,28 +521,112 @@ app.get('/api/farming-plans', async (req, res) => {
       .from('farming_plans')
       .select('*')
       .order('created_at', { ascending: false })
-      .limit(50);
+      .limit(100);
 
-    if (email) {
-      query = query.eq('user_email', email);
+    if (cleanEmail) {
+      query = query.eq('user_email', cleanEmail);
     }
 
     const { data, error } = await query;
-    if (!error && Array.isArray(data) && data.length > 0) {
-      const ids = new Set(data.map(d => String(d.id)));
-      const merged = [...data, ...plans.filter(p => !ids.has(String(p.id)))];
+    if (!error && Array.isArray(data)) {
+      const map = new Map();
+      data.forEach(d => map.set(String(d.id), d));
+      plans.forEach(p => {
+        if (!map.has(String(p.id))) {
+          if (!cleanEmail || (p.user_email && p.user_email.toLowerCase() === cleanEmail)) {
+            map.set(String(p.id), p);
+          }
+        }
+      });
+      const merged = Array.from(map.values()).sort((a, b) => 
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
       return res.json({ plans: merged });
     }
   } catch {}
 
   // Filter local plans by email if provided
-  if (email) {
-    const clean = String(email).trim().toLowerCase();
-    const filtered = plans.filter(p => p.user_email && p.user_email.toLowerCase() === clean);
-    if (filtered.length > 0) return res.json({ plans: filtered });
+  if (cleanEmail) {
+    const filtered = plans.filter(p => p.user_email && p.user_email.trim().toLowerCase() === cleanEmail);
+    return res.json({ plans: filtered });
   }
 
   return res.json({ plans });
+});
+
+// ─── POST /api/farming-plans/sync (Cross-device bidirectional sync) ────────
+app.post('/api/farming-plans/sync', async (req, res) => {
+  try {
+    const { email, plans = [] } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: 'email is required' });
+    }
+    const cleanEmail = String(email).trim().toLowerCase();
+
+    if (Array.isArray(plans) && plans.length > 0) {
+      const existingMap = new Map();
+      localFarmingPlans.forEach(p => existingMap.set(String(p.id), p));
+
+      const newItemsToInsert = [];
+      plans.forEach(plan => {
+        if (!plan || !plan.id) return;
+        const normalized = {
+          ...plan,
+          user_email: cleanEmail,
+          created_at: plan.created_at || new Date().toISOString()
+        };
+        if (!existingMap.has(String(plan.id))) {
+          localFarmingPlans.unshift(normalized);
+          existingMap.set(String(plan.id), normalized);
+          newItemsToInsert.push(normalized);
+        }
+      });
+
+      if (newItemsToInsert.length > 0) {
+        saveFarmingToFile(localFarmingPlans);
+        try {
+          await supabaseAdmin.from('farming_plans').upsert(newItemsToInsert);
+        } catch {}
+      }
+    }
+
+    const userPlans = localFarmingPlans
+      .filter(p => p.user_email && p.user_email.trim().toLowerCase() === cleanEmail)
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+    return res.json({ success: true, plans: userPlans });
+  } catch (err) {
+    console.warn('Farming plans sync error:', err.message);
+    return res.status(500).json({ error: 'Failed to sync farming plans' });
+  }
+});
+
+// ─── DELETE /api/farming-plans/:id ────────────────────────────────────────
+app.delete('/api/farming-plans/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email } = req.query;
+    const cleanEmail = email ? String(email).trim().toLowerCase() : '';
+
+    const planIndex = localFarmingPlans.findIndex(p => 
+      String(p.id) === String(id) && (!cleanEmail || (p.user_email && p.user_email.toLowerCase() === cleanEmail))
+    );
+
+    if (planIndex !== -1) {
+      localFarmingPlans.splice(planIndex, 1);
+      saveFarmingToFile(localFarmingPlans);
+    }
+
+    try {
+      let q = supabaseAdmin.from('farming_plans').delete().eq('id', id);
+      if (cleanEmail) q = q.eq('user_email', cleanEmail);
+      await q;
+    } catch {}
+
+    return res.json({ success: true, message: 'Farming plan deleted' });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
 });
 
 // ─── Botanical Species Profiles for Species Matching ──────────────────────
