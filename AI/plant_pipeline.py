@@ -46,14 +46,13 @@ import requests
 
 DEFAULT_ANALYSIS_PROMPT = (
     "Analyze this plant image carefully. Describe:\n"
-    "1. The type of plant or crop if identifiable\n"
+    "1. The exact type of plant, tree, or crop if identifiable (e.g., Citrus/Lemon, Tomato, Potato, Apple, Grape, Maize, Rice, etc.). Be clear about the plant species.\n"
     "2. Any visible symptoms of disease, pest damage, or nutrient deficiency\n"
-    "3. Leaf color changes (yellowing, browning, discoloration)\n"
+    "3. Leaf color changes (yellowing, chlorosis, browning, discoloration)\n"
     "4. Spots, lesions, or unusual markings on leaves or stems\n"
     "5. Leaf shape abnormalities (curling, wilting, holes, deformation)\n"
     "6. Overall plant health assessment\n\n"
-    "Be specific and descriptive about what you observe. "
-    "Do not diagnose — only describe the visible symptoms."
+    "Be specific and descriptive about what you observe, especially botanical species morphology and visible signs."
 )
 
 # Recognized symptom phrases for extraction from text.
@@ -978,7 +977,7 @@ def load_evidence_database(csv_path=None):
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Image Analysis via OpenRouter Vision API
-DEFAULT_VISION_MODEL = "google/gemini-2.5-flash"
+DEFAULT_VISION_MODEL = "nvidia/nemotron-3.5-super-vl:free"
 
 
 def analyze_plant_image(image_path, api_key, model_id=DEFAULT_VISION_MODEL, prompt=None):
@@ -991,7 +990,7 @@ def analyze_plant_image(image_path, api_key, model_id=DEFAULT_VISION_MODEL, prom
     api_key : str
         OpenRouter API key.
     model_id : str, optional
-        Vision model identifier (defaults to ``google/gemini-2.5-flash``).
+        Vision model identifier (defaults to ``nvidia/nemotron-3.5-super-vl:free``).
     prompt : str, optional
         Analysis prompt.  Defaults to ``DEFAULT_ANALYSIS_PROMPT``.
 
@@ -1037,7 +1036,7 @@ def analyze_plant_image(image_path, api_key, model_id=DEFAULT_VISION_MODEL, prom
                 }
             ]
         }],
-        "max_tokens": 800
+        "max_tokens": 2000
     }
 
     response = requests.post(
@@ -1055,7 +1054,8 @@ def analyze_plant_image(image_path, api_key, model_id=DEFAULT_VISION_MODEL, prom
     if not choices:
         raise RuntimeError("The API returned no choices.")
 
-    content = choices[0].get("message", {}).get("content")
+    msg = choices[0].get("message", {})
+    content = msg.get("content") or msg.get("reasoning")
     if not content or not str(content).strip():
         raise RuntimeError("The model returned no usable text.")
 
@@ -1287,8 +1287,8 @@ def normalize_symptoms(symptoms):
 def identify_crop(text):
     """Detect a crop name from a text description.
 
-    Scans for known crop names from ``CROP_NAMES``, preferring longer
-    matches to avoid false positives (e.g. "corn" inside "corner").
+    Robust against negations (e.g. 'not a tomato', 'unlike tomato') and
+    checks explicit plant identification section headers first.
 
     Parameters
     ----------
@@ -1303,12 +1303,53 @@ def identify_crop(text):
     if not isinstance(text, str) or not text.strip():
         return None
 
-    normalized = re.sub(r"[^a-z0-9\s']", " ", text.lower())
-    normalized = re.sub(r"\s+", " ", normalized).strip()
+    lower_text = text.lower()
 
-    for crop in sorted(CROP_NAMES, key=len, reverse=True):
-        if re.search(r"\b" + re.escape(crop) + r"\b", normalized):
-            return crop.title()
+    # Negation prefixes that indicate the crop is NOT what is present
+    negation_prefixes = [
+        r"\bnot\s+(?:a|an|the)?\s*",
+        r"\bunlike\s+(?:a|an|the)?\s*",
+        r"\binstead\s+of\s+(?:a|an|the)?\s*",
+        r"\brather\s+than\s+(?:a|an|the)?\s*",
+        r"\bdoesn't\s+appear\s+to\s+be\s+(?:a|an|the)?\s*",
+        r"\bdoes\s+not\s+appear\s+to\s+be\s+(?:a|an|the)?\s*",
+        r"\bisn't\s+(?:a|an|the)?\s*",
+        r"\bis\s+not\s+(?:a|an|the)?\s*",
+        r"\bno\s+",
+        r"\bdifferent\s+from\s+(?:a|an|the)?\s*",
+    ]
+
+    # Look for explicit plant type section if present (e.g., from vision model output)
+    type_section_match = re.search(
+        r"(?:1[.)]\s*(?:the\s+)?type\s+of\s+plant\s+or\s+crop|plant\s+type|species\s+identification)[:\s*\n]+(.*?)(?=\n\s*(?:2[.)]|\*\*2[.)]|$))",
+        lower_text,
+        re.DOTALL | re.IGNORECASE,
+    )
+    search_areas = []
+    if type_section_match:
+        search_areas.append(type_section_match.group(1))
+    search_areas.append(lower_text)
+
+    for area in search_areas:
+        clean_area = re.sub(r"[^a-z0-9\s']", " ", area)
+        clean_area = re.sub(r"\s+", " ", clean_area).strip()
+
+        candidates = []
+        for crop in sorted(CROP_NAMES, key=len, reverse=True):
+            pattern = r"\b" + re.escape(crop) + r"\b"
+            for m in re.finditer(pattern, clean_area):
+                start = m.start()
+                # Check preceding window for negation
+                window_start = max(0, start - 35)
+                preceding = clean_area[window_start:start]
+                is_negated = any(re.search(neg + "$", preceding) for neg in negation_prefixes)
+                if not is_negated:
+                    candidates.append((start, len(crop), crop.title()))
+
+        if candidates:
+            # Sort candidates: earliest non-negated match first, then longer length
+            candidates.sort(key=lambda c: (c[0], -c[1]))
+            return candidates[0][2]
 
     return None
 
@@ -2070,8 +2111,25 @@ def analyze_plantguardian(
     if user_crop and image_crop:
         norm_user = user_crop.lower()
         norm_img = image_crop.lower()
-        is_citrus_mismatch = (norm_user == "tomato" and norm_img in ["lemon", "citrus"]) or (norm_img == "tomato" and norm_user in ["lemon", "citrus"])
-        if norm_user != norm_img or is_citrus_mismatch:
+
+        def get_crop_group(c):
+            if c in ["lemon", "citrus", "lime", "orange", "citron", "mandarin"]:
+                return "citrus"
+            if c in ["corn", "maize"]:
+                return "corn"
+            if c in ["rice", "paddy"]:
+                return "rice"
+            if c in ["brinjal", "eggplant", "aubergine"]:
+                return "brinjal"
+            if c in ["chilli", "chili", "pepper", "capsicum"]:
+                return "chilli"
+            if c in ["potato"]:
+                return "potato"
+            if c in ["tomato"]:
+                return "tomato"
+            return c
+
+        if get_crop_group(norm_user) != get_crop_group(norm_img):
             species_match = False
             mismatch_warning = (
                 f"Selected/reported species '{user_crop}' does not match the plant "
@@ -2160,16 +2218,24 @@ def analyze_plantguardian(
 
     # ── 9. Summary diagnosis details ──────────────────────────────────
     top_candidate = candidate_results[0] if candidate_results else None
-    probable_disease = (
-        f"{top_candidate['crop']} — {top_candidate['diagnosis']}"
-        if top_candidate
-        else "Undetermined"
-    )
-    disease_reason = (
-        top_candidate["reason"]
-        if top_candidate
-        else "No conclusive evidence found matching the provided symptoms."
-    )
+    if not species_match:
+        probable_disease = f"Species Mismatch: Selected '{user_crop}', but image shows {image_crop}"
+        disease_reason = (
+            f"Botanical species mismatch. The specimen displays characteristic morphological features "
+            f"of {image_crop} rather than {user_crop}. Diagnosing this specimen under '{user_crop}' "
+            f"will produce incorrect pathological results."
+        )
+    else:
+        probable_disease = (
+            f"{top_candidate['crop']} — {top_candidate['diagnosis']}"
+            if top_candidate
+            else "Undetermined"
+        )
+        disease_reason = (
+            top_candidate["reason"]
+            if top_candidate
+            else "No conclusive evidence found matching the provided symptoms."
+        )
 
     # ── 10. Return comprehensive result ───────────────────────────────
     return {
@@ -2242,7 +2308,15 @@ def format_diagnosis_report(result):
 
     # ── 1. Probable Disease Name ──────────────────────────────────────
     lines.append("## 🦠 1. Probable Disease")
-    if top:
+    if result.get("species_match") is False:
+        user_c = result.get("selected_crop") or "Selected Plant"
+        img_c = result.get("detected_crop") or "Image Specimen"
+        lines.append(f"### **⚠️ Species Mismatch: Selected '{user_c}', but image shows {img_c}**")
+        lines.append(f"- **Species Status:** `Species Mismatch Detected`")
+        if top:
+            lines.append(f"- **Visible Condition on Specimen ({img_c}):** `{disease_name}` (Relevance: `{score * 100:.1f}%`)")
+            lines.append(f"- **Caution:** Do not apply treatments or disease diagnoses intended for `{user_c}` to this `{img_c}` specimen.")
+    elif top:
         lines.append(f"### **{crop} — {disease_name}**")
         lines.append(f"- **Relevance Score:** `{score * 100:.1f}%` (Rank 1 candidate)")
         lines.append(f"- **Matched Symptoms:** `{top.get('matched_terms', 'general signs')}`")
@@ -2295,7 +2369,15 @@ def format_diagnosis_report(result):
         )
 
     # ── 4. Proper Way to Treat the Disease ────────────────────────────
-    if top and top.get("care"):
+    if result.get("species_match") is False:
+        user_c = result.get("selected_crop") or "Selected Plant"
+        img_c = result.get("detected_crop") or "Image Specimen"
+        lines.append("## 🩺 4. Proper Way to Treat the Disease (Species Mismatch Guidance)")
+        lines.append("> ⚠️ **Corrective Action for Botanical Species Mismatch:**\n")
+        lines.append(f"> 1. **Switch Plant Selection:** In the **'Selected Plant / Crop Species'** dropdown, change your selection from `{user_c}` to `{img_c}` to receive tailored disease pathology and treatment guidelines.\n")
+        lines.append(f"> 2. **Re-upload Target Crop Specimen:** If you intended to diagnose a `{user_c}` plant, please upload a photo showing `{user_c}` foliage or stems instead.")
+        lines.append("")
+    elif top and top.get("care"):
         care = top["care"]
         lines.append("## 🩺 4. Proper Way to Treat the Disease (Care Guidance)")
         cond_type = care.get("condition_type", "condition").replace("_", " ").title()

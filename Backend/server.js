@@ -493,12 +493,63 @@ const SPECIES_PROFILES = [
 function detectPlantFromText(text) {
   if (!text) return null;
   const lower = text.toLowerCase();
+  const found = [];
+
   for (const sp of SPECIES_PROFILES) {
     for (const alias of sp.aliases) {
-      const regex = new RegExp(`(^|[^a-z0-9])${alias}([^a-z0-9]|$)`, 'i');
-      if (regex.test(lower)) {
-        return sp.name;
+      const idx = lower.indexOf(alias);
+      if (idx !== -1) {
+        // Check preceding 30 chars for negation words
+        const preceding = lower.slice(Math.max(0, idx - 30), idx);
+        const isNegated = /\b(not|unlike|instead of|rather than|doesn't look like|no)\s+(?:a|an)?\s*$/i.test(preceding);
+        if (!isNegated) {
+          found.push({ name: sp.name, alias, pos: idx, len: alias.length });
+        }
       }
+    }
+  }
+
+  if (found.length === 0) return null;
+  // Sort by longest matched alias
+  found.sort((a, b) => b.len - a.len);
+  return found[0].name;
+}
+
+function extractJsonFromModelResponse(content, reasoning) {
+  const candidates = [content, reasoning].filter(Boolean);
+  for (const text of candidates) {
+    if (typeof text !== 'string') continue;
+    // 1. Markdown code block
+    const match = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+    if (match) {
+      try { return JSON.parse(match[1].trim()); } catch {}
+    }
+    // 2. Direct JSON object boundary
+    const firstBrace = text.indexOf('{');
+    const lastBrace = text.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace > firstBrace) {
+      try {
+        return JSON.parse(text.slice(firstBrace, lastBrace + 1).trim());
+      } catch {}
+    }
+  }
+
+  // 3. Fallback heuristic key-value extraction from reasoning/text
+  for (const text of candidates) {
+    if (typeof text !== 'string') continue;
+    const matchMatch = text.match(/(?:speciesMatch|matches|species_match)[\s*:`"=]+(true|false)/i);
+    const detectedMatch = text.match(/(?:detectedSpecies|detected_species|actual species|plant is|identified as)[\s*:`"=]+["']?([^"'\n,;`]+)["']?/i);
+    const diseaseMatch = text.match(/(?:probableDisease|probable_disease|disease|condition)[\s*:`"=]+["']?([^"'\n,;`]+)["']?/i);
+
+    if (matchMatch || detectedMatch) {
+      const isMatch = matchMatch ? matchMatch[1].toLowerCase() === 'true' : true;
+      const detected = detectedMatch ? detectedMatch[1].trim() : null;
+      return {
+        isPlant: true,
+        speciesMatch: isMatch,
+        detectedSpecies: detected,
+        probableDisease: diseaseMatch ? diseaseMatch[1].trim() : undefined,
+      };
     }
   }
   return null;
@@ -534,13 +585,13 @@ Your tasks:
      * "speciesMatch": false,
      * "detectedSpecies": the actual plant identified in the image (e.g., "Lemon / Citrus (Citrus limon)"),
      * "selectedSpecies": "${plant}",
-     * "mismatchMessage": "The uploaded photo appears to be a ${detectedSpecies} plant, which does not match your selected species '${plant}'. The selected species and the image do not match.",
-     * "probableDisease": "Species Mismatch: Selected '${plant}', but image shows ${detectedSpecies}" (if a specific disease/condition like Iron Chlorosis or Citrus Canker is visible on the photo, you may note it in parentheses, e.g., "Species Mismatch: Detected Lemon / Citrus showing Iron Chlorosis (not Tomato)"),
+     * "mismatchMessage": "The uploaded photo appears to be a [detected plant name] plant, which does not match your selected species '${plant}'. The selected species and the image do not match.",
+     * "probableDisease": "Species Mismatch: Selected '${plant}', but image shows [detected plant name]",
      * "confidence": "string (e.g. 96.0%)",
-     * "causes": "Botanical species mismatch. The specimen displays characteristic morphological features of ${detectedSpecies} rather than ${plant}. Diagnosing a ${detectedSpecies} specimen under the '${plant}' profile will produce incorrect results.",
+     * "causes": "Botanical species mismatch. The specimen displays characteristic morphological features of the detected plant rather than ${plant}. Diagnosing this specimen under '${plant}' will produce incorrect results.",
      * "nutrientDeficiency": "None / Not Evaluated (Species mismatch)",
-     * "properNutrientWay": "Please select '${detectedSpecies}' (or the matching plant in the dropdown) to receive accurate nutrient guidelines.",
-     * "treatment": "1. Verify Plant Species: The specimen in the photo was recognized as ${detectedSpecies}, not ${plant}.\n2. Switch Plant Selection: In the 'Plant / Crop Name' dropdown, select '${detectedSpecies}' to diagnose issues specific to this plant.\n3. Re-upload If Incorrect: If you intended to diagnose a ${plant}, upload a photo of your ${plant} leaves, stems, or fruit."
+     * "properNutrientWay": "Please select the matching plant in the dropdown to receive accurate nutrient guidelines.",
+     * "treatment": "1. Verify Plant Species: The specimen in the photo is not ${plant}.\n2. Switch Plant Selection: In the 'Plant / Crop Name' dropdown, choose the matching plant to diagnose issues specific to this plant.\n3. Re-upload If Incorrect: If you intended to diagnose ${plant}, upload a photo of your ${plant} leaves, stems, or fruit."
    - IF SPECIES MATCH ("speciesMatch": true):
      * "isPlant": true,
      * "speciesMatch": true,
@@ -587,11 +638,34 @@ IMPORTANT: Verify whether the plant in the photo matches "${plant}". If the user
 Plant / Crop: ${plant}
 User Symptoms Description: ${description || 'General disease assessment for ' + plant}`;
 
-        const visionModels = ['openai/gpt-4o-mini', 'google/gemini-2.5-flash', 'google/gemini-2.0-flash-001'];
+        const visionModels = [
+          'nvidia/nemotron-3.5-super-vl:free',
+          'google/gemma-4-31b-it:free',
+          'google/gemma-4-26b-a4b-it:free',
+          'openai/gpt-4o-mini',
+          'google/gemini-2.0-flash-001'
+        ];
         let aiSuccess = false;
 
         for (const modelCandidate of visionModels) {
           try {
+            const bodyPayload = {
+              model: modelCandidate,
+              messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userContent }
+              ],
+              max_tokens: 2000,
+            };
+
+            // Use json_object only for models that reliably support response_format
+            if (!modelCandidate.includes('free') && !modelCandidate.includes('nemotron')) {
+              bodyPayload.response_format = { type: 'json_object' };
+            }
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 45000);
+
             const aiRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
               method: 'POST',
               headers: {
@@ -600,22 +674,20 @@ User Symptoms Description: ${description || 'General disease assessment for ' + 
                 'HTTP-Referer': 'https://plantguardian.ai',
                 'X-Title': 'PlantGuardian'
               },
-              body: JSON.stringify({
-                model: modelCandidate,
-                messages: [
-                  { role: 'system', content: systemPrompt },
-                  { role: 'user', content: userContent }
-                ],
-                response_format: { type: 'json_object' },
-                max_tokens: 1200,
-              }),
+              body: JSON.stringify(bodyPayload),
+              signal: controller.signal,
             });
+
+            clearTimeout(timeoutId);
 
             if (aiRes.ok) {
               const aiData = await aiRes.json();
-              const content = aiData.choices?.[0]?.message?.content;
-              if (content) {
-                diagnosis = JSON.parse(content);
+              const choice = aiData.choices?.[0];
+              const content = choice?.message?.content;
+              const reasoning = choice?.message?.reasoning;
+              const parsed = extractJsonFromModelResponse(content, reasoning);
+              if (parsed && (parsed.probableDisease || parsed.speciesMatch !== undefined || parsed.detectedSpecies)) {
+                diagnosis = parsed;
                 aiSuccess = true;
                 break;
               }
@@ -641,26 +713,65 @@ User Symptoms Description: ${description || 'General disease assessment for ' + 
       const selectedNorm = plant.toLowerCase().trim();
       const detectedNorm = diagnosis.detectedSpecies.toLowerCase().trim();
 
-      const isLemonCitrusVsTomato = (detectedNorm.includes('lemon') || detectedNorm.includes('citrus')) && selectedNorm.includes('tomato');
-      const isTomatoVsLemonCitrus = (selectedNorm.includes('lemon') || selectedNorm.includes('citrus')) && detectedNorm.includes('tomato');
-      const isDirectMismatch = !detectedNorm.includes(selectedNorm) && !selectedNorm.includes(detectedNorm) && detectedNorm !== 'plant';
+      const isCitrus = (s) => s.includes('lemon') || s.includes('citrus') || s.includes('lime') || s.includes('orange') || s.includes('mandarin') || s.includes('citron');
+      const isTomato = (s) => s.includes('tomato') || s.includes('lycopersic');
+      const isPotato = (s) => s.includes('potato') || s.includes('tuberosum');
+      const isApple = (s) => s.includes('apple') || s.includes('malus');
+      const isGrape = (s) => s.includes('grape') || s.includes('vitis');
+      const isCorn = (s) => s.includes('corn') || s.includes('maize');
+      const isRice = (s) => s.includes('rice') || s.includes('paddy');
+      const isChilli = (s) => s.includes('chilli') || s.includes('chili') || s.includes('pepper') || s.includes('capsicum');
+      const isBrinjal = (s) => s.includes('brinjal') || s.includes('eggplant') || s.includes('melongena');
 
-      if (diagnosis.speciesMatch === false || isLemonCitrusVsTomato || isTomatoVsLemonCitrus || (isDirectMismatch && diagnosis.speciesMatch !== true)) {
+      let speciesMismatch = diagnosis.speciesMatch === false;
+
+      // Group-based cross check
+      if ((isCitrus(detectedNorm) && !isCitrus(selectedNorm)) ||
+          (isTomato(detectedNorm) && !isTomato(selectedNorm)) ||
+          (isPotato(detectedNorm) && !isPotato(selectedNorm)) ||
+          (isApple(detectedNorm) && !isApple(selectedNorm)) ||
+          (isGrape(detectedNorm) && !isGrape(selectedNorm)) ||
+          (isCorn(detectedNorm) && !isCorn(selectedNorm)) ||
+          (isRice(detectedNorm) && !isRice(selectedNorm)) ||
+          (isChilli(detectedNorm) && !isChilli(selectedNorm)) ||
+          (isBrinjal(detectedNorm) && !isBrinjal(selectedNorm))) {
+        speciesMismatch = true;
+      } else if (!detectedNorm.includes(selectedNorm) &&
+                 !selectedNorm.includes(detectedNorm) &&
+                 !['plant', 'crop', 'leaf', 'tree', 'specimen', 'unknown'].includes(detectedNorm)) {
+        speciesMismatch = true;
+      }
+
+      if (speciesMismatch) {
         diagnosis.speciesMatch = false;
         if (!diagnosis.mismatchMessage) {
-          diagnosis.mismatchMessage = `The selected species '${plant}' does not match the plant observed in the uploaded image ('${diagnosis.detectedSpecies}'). The selected species and the image do not match.`;
+          diagnosis.mismatchMessage = `The uploaded photo appears to be a ${diagnosis.detectedSpecies} plant, which does not match your selected species '${plant}'. The selected species and the image do not match.`;
         }
         if (!diagnosis.probableDisease || !diagnosis.probableDisease.toLowerCase().includes('mismatch')) {
           diagnosis.probableDisease = `Species Mismatch: Selected '${plant}', but image shows ${diagnosis.detectedSpecies}`;
         }
-      } else if (diagnosis.speciesMatch === undefined) {
+        if (!diagnosis.causes || !diagnosis.causes.toLowerCase().includes('mismatch')) {
+          diagnosis.causes = `Botanical species mismatch. The specimen displays characteristic morphological features of ${diagnosis.detectedSpecies} rather than ${plant}. Diagnosing this specimen under '${plant}' will produce incorrect results.`;
+        }
+        if (!diagnosis.properNutrientWay || diagnosis.properNutrientWay.includes('NPK') || diagnosis.properNutrientWay.includes('10:20:20')) {
+          diagnosis.properNutrientWay = `Please select '${diagnosis.detectedSpecies}' in the dropdown to receive accurate nutrient guidelines.`;
+        }
+        if (!diagnosis.treatment || diagnosis.treatment.includes('Early Blight') || diagnosis.treatment.includes('copper oxychloride')) {
+          diagnosis.treatment = `1. Verify Plant Species: The specimen in the photo represents ${diagnosis.detectedSpecies}, not ${plant}.\n2. Switch Plant Selection: In the 'Plant / Crop Name' dropdown, choose '${diagnosis.detectedSpecies}' to diagnose issues specific to this plant.\n3. Re-upload If Incorrect: If you intended to diagnose ${plant}, upload a photo of your ${plant} leaves, stems, or fruit.`;
+        }
+      } else {
         diagnosis.speciesMatch = true;
         diagnosis.mismatchMessage = null;
       }
     } else {
       // Curated Fallback
-      const metaDetected = detectPlantFromText(`${imageName} ${description}`);
       const selectedClean = plant.split(' (')[0].trim();
+      const metaFromImage = detectPlantFromText(imageName);
+      const metaFromDesc = detectPlantFromText(description);
+
+      const metaDetected = (metaFromImage && metaFromImage.toLowerCase() !== selectedClean.toLowerCase())
+        ? metaFromImage
+        : (metaFromDesc || metaFromImage);
 
       if (metaDetected && !metaDetected.toLowerCase().includes(selectedClean.toLowerCase()) && !selectedClean.toLowerCase().includes(metaDetected.toLowerCase())) {
         // Mismatch detected from image file name or symptom description
@@ -671,7 +782,7 @@ User Symptoms Description: ${description || 'General disease assessment for ' + 
           selectedSpecies: selectedClean,
           mismatchMessage: `The uploaded image (${imageName ? `'${imageName}'` : 'specimen photo'}) indicates a ${metaDetected} plant, which does not match your selected species '${selectedClean}'. The selected species and the image do not match.`,
           probableDisease: `Species Mismatch: Selected '${selectedClean}', but image shows ${metaDetected}`,
-          confidence: '95.0%',
+          confidence: '96.0%',
           causes: `Botanical species mismatch. The specimen was identified as ${metaDetected} based on specimen characteristics, whereas '${selectedClean}' was selected. Pathological symptoms and disease classifications cannot be accurately diagnosed across mismatched botanical families.`,
           nutrientDeficiency: 'None / Not Evaluated (Species mismatch)',
           properNutrientWay: `Please switch your selected plant dropdown to '${metaDetected}' to view tailored nutritional and curative guidelines for this crop.`,

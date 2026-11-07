@@ -60,6 +60,35 @@ SEASON_CHOICES = [
     "Year-Round / Perennial",
 ]
 
+CROP_CHOICES = [
+    "Tomato",
+    "Lemon / Citrus",
+    "Potato",
+    "Apple",
+    "Grape",
+    "Corn / Maize",
+    "Rice / Paddy",
+    "Wheat",
+    "Cotton",
+    "Mango",
+    "Banana",
+    "Chilli / Pepper",
+    "Brinjal / Eggplant",
+    "Cabbage",
+    "Cauliflower",
+    "Strawberry",
+    "Soybean",
+    "Sugarcane",
+    "Onion",
+    "Garlic",
+    "Cucumber",
+    "Papaya",
+    "Guava",
+    "Spinach",
+    "Rose",
+    "Marigold",
+]
+
 # Preload the evidence database
 print("Loading PlantGuardian Evidence Database...")
 EVIDENCE_CSV = AI_DIR / "Datasets" / "plant_disease_corrected.csv"
@@ -92,8 +121,8 @@ def transcribe_voice_input(audio_file):
         return "", f"❌ **Error:** {type(exc).__name__}: {exc}"
 
 
-def diagnose_plant(symptom_text, image_file):
-    """Execute end-to-end diagnosis using user symptom text and plant image."""
+def diagnose_plant(symptom_text, image_file, selected_crop="Tomato"):
+    """Execute end-to-end diagnosis using user symptom text, plant image, and selected crop."""
     if not symptom_text or not str(symptom_text).strip():
         return (
             "### ⚠️ Missing Symptom Description\n\n"
@@ -110,11 +139,12 @@ def diagnose_plant(symptom_text, image_file):
         )
 
     try:
-        # Run end-to-end pipeline
+        # Run end-to-end pipeline with selected crop verification
         result = pp.analyze_plantguardian(
             symptom_text=symptom_text,
             image_path=str(image_file),
             evidence_db=evidence_db,
+            selected_crop=selected_crop,
         )
 
         report_md = pp.format_diagnosis_report(result)
@@ -125,9 +155,9 @@ def diagnose_plant(symptom_text, image_file):
             disease = top.get("diagnosis", "Undetermined")
             score = float(top.get("relevance_score", 0.0))
             if result.get("species_match") is False:
-                user_c = result.get("selected_crop") or "Selected"
-                img_c = result.get("detected_crop") or "Image"
-                status_summary = f"⚠️ **Species Mismatch:** User: {user_c} ≠ Photo: {img_c} ({crop} — {disease})"
+                user_c = result.get("selected_crop") or selected_crop or "Selected Crop"
+                img_c = result.get("detected_crop") or "Image Specimen"
+                status_summary = f"⚠️ **Species Mismatch Detected:** Selected '{user_c}' ≠ Photo shows '{img_c}'"
             else:
                 status_summary = f"✅ **Diagnosis Ready:** {crop} — {disease} ({score * 100:.1f}% match)"
         else:
@@ -145,14 +175,14 @@ def diagnose_plant(symptom_text, image_file):
 
 
 def load_sample_data():
-    """Load sample test audio and test image into the interface."""
+    """Load sample test audio, test image, and expected crop into the interface."""
     sample_text = (
         "My tomato plant leaves are turning yellow and I can see several brown spots on them."
     )
     sample_img = str(TEST_IMAGE_PATH) if TEST_IMAGE_PATH.is_file() else None
     sample_audio = str(TEST_AUDIO_PATH) if TEST_AUDIO_PATH.is_file() else None
     status = "💡 Loaded sample test data: Tomato leaf image and voice recording."
-    return sample_text, sample_img, sample_audio, status
+    return sample_text, sample_img, sample_audio, status, "Tomato"
 
 
 def create_app():
@@ -276,7 +306,14 @@ def create_app():
                 with gr.Row():
                     # ── LEFT COLUMN: INPUTS ──────────────────────────────
                     with gr.Column(scale=1):
-                        gr.Markdown("### 1️⃣ Describe Symptoms (Voice or Text)")
+                        gr.Markdown("### 1️⃣ Selected Plant & Symptoms (Voice or Text)")
+
+                        species_dropdown = gr.Dropdown(
+                            choices=CROP_CHOICES,
+                            value="Tomato",
+                            label="🌱 Expected / Selected Plant Species",
+                            info="Select the crop you are inspecting so PlantGuardian AI can verify botanical species match.",
+                        )
 
                         audio_input = gr.Audio(
                             sources=["microphone", "upload"],
@@ -366,7 +403,7 @@ def create_app():
         # 3. Diagnose button
         diagnose_btn.click(
             fn=diagnose_plant,
-            inputs=[symptom_textbox, image_input],
+            inputs=[symptom_textbox, image_input, species_dropdown],
             outputs=[results_markdown, status_box],
         )
 
@@ -374,7 +411,7 @@ def create_app():
         sample_btn.click(
             fn=load_sample_data,
             inputs=[],
-            outputs=[symptom_textbox, image_input, audio_input, status_box],
+            outputs=[symptom_textbox, image_input, audio_input, status_box, species_dropdown],
         )
 
     return demo
