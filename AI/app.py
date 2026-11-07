@@ -194,7 +194,7 @@ VOICE_RECORDER_HTML = """
                 <span id="pg-voice-btn-label">Start Real-Time Voice Recording</span>
             </button>
             <span id="pg-voice-timer-badge" style="display: none; font-size: 12.5px; font-weight: 600; color: #b45309; background: rgba(245, 158, 11, 0.15); padding: 5px 12px; border-radius: 9999px; border: 1px solid rgba(245, 158, 11, 0.4);">
-                ⏱️ Auto-stop in: <strong id="pg-voice-countdown" style="font-size: 13.5px; font-weight: 700; color: #b45309;">5</strong>s silence
+                ⏱️ Auto-stop in: <strong id="pg-voice-countdown" style="font-size: 13.5px; font-weight: 700; color: #b45309;">3</strong>s silence
             </span>
         </div>
         <div id="pg-voice-status" style="font-size: 12.5px; color: #374151; font-weight: 500; display: flex; align-items: center; gap: 6px;">
@@ -227,31 +227,50 @@ let lastVoiceTime = Date.now();
 let activeRecognition = null;
 let baseText = '';
 let currentSessionFinal = '';
+let cachedTarget = null;
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 function findTextarea() {
+    const directEl = document.getElementById('symptom_textbox');
+    if (directEl) {
+        if (directEl.tagName === 'TEXTAREA' || directEl.tagName === 'INPUT') {
+            return directEl;
+        }
+        const inner = directEl.querySelector('textarea') || directEl.querySelector('input');
+        if (inner) return inner;
+    }
     return document.querySelector('#symptom_textbox textarea') ||
            document.querySelector('#symptom_textbox input') ||
            document.querySelector('textarea[data-testid="textbox"]') ||
            document.querySelector('textarea');
 }
 
-function updateTextareaValue(val) {
-    const el = findTextarea();
-    if (!el) return;
-    
-    // Universal prototype setter for Svelte / Gradio 2-way data binding
-    const proto = Object.getPrototypeOf(el);
-    const setVal = Object.getOwnPropertyDescriptor(proto, 'value')?.set ||
-                   Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value')?.set;
-    if (setVal) {
-        setVal.call(el, val);
-    } else {
-        el.value = val;
+function updateTextareaValue(val, isFinal) {
+    if (!cachedTarget || !document.contains(cachedTarget)) {
+        cachedTarget = findTextarea();
     }
-    el.dispatchEvent(new Event('input', { bubbles: true }));
-    el.dispatchEvent(new Event('change', { bubbles: true }));
+    if (!cachedTarget) return;
+
+    // Fast direct property update with prototype setter fallback
+    try {
+        const proto = Object.getPrototypeOf(cachedTarget);
+        const setVal = Object.getOwnPropertyDescriptor(proto, 'value')?.set ||
+                       Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value')?.set;
+        if (setVal) {
+            setVal.call(cachedTarget, val);
+        } else {
+            cachedTarget.value = val;
+        }
+    } catch(e) {
+        cachedTarget.value = val;
+    }
+    
+    // Dispatch input event for real-time reactivity
+    cachedTarget.dispatchEvent(new Event('input', { bubbles: true }));
+    if (isFinal) {
+        cachedTarget.dispatchEvent(new Event('change', { bubbles: true }));
+    }
 }
 
 function stopVoiceRecording(reason) {
@@ -268,6 +287,11 @@ function stopVoiceRecording(reason) {
         activeRecognition = null;
     }
 
+    // Commit final change event
+    if (cachedTarget) {
+        cachedTarget.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
     btn.style.background = '#166534';
     btn.style.boxShadow = '0 2px 8px rgba(22,101,52,0.35)';
     btn.classList.remove('pg-pulse-anim');
@@ -277,7 +301,7 @@ function stopVoiceRecording(reason) {
     dot.style.background = '#10b981';
 
     if (reason === 'silence') {
-        msg.innerHTML = '<span style="color:#166534; font-weight:600;">✅ Recording stopped (5s silence detected).</span> Symptoms saved.';
+        msg.innerHTML = '<span style="color:#166534; font-weight:600;">✅ Recording complete (auto-stopped).</span> Symptoms saved.';
     } else {
         msg.innerHTML = '<span style="color:#166534; font-weight:600;">✅ Recording stopped.</span> Symptoms ready in description box.';
     }
@@ -288,7 +312,7 @@ function stopVoiceRecording(reason) {
             dot.style.background = '#9ca3af';
             msg.textContent = 'Click button to speak — Words transcribe into text box in real time';
         }
-    }, 4000);
+    }, 3000);
 }
 
 function startVoiceSession() {
@@ -301,8 +325,8 @@ function startVoiceSession() {
         recognition.interimResults = true;
         recognition.maxAlternatives = 1;
 
-        const navLang = (navigator.language && navigator.language.startsWith('en')) ? navigator.language : 'en-US';
-        recognition.lang = navLang;
+        // Use user browser language directly for minimum acoustic latency
+        recognition.lang = (navigator.language && navigator.language.length > 0) ? navigator.language : 'en-US';
 
         currentSessionFinal = '';
 
@@ -349,7 +373,7 @@ function startVoiceSession() {
                 : speakingNow;
 
             if (fullText) {
-                updateTextareaValue(fullText);
+                updateTextareaValue(fullText, false);
             }
         };
 
@@ -369,12 +393,12 @@ function startVoiceSession() {
 
             if (isRecording && !isUserStopping) {
                 const elapsed = Date.now() - lastVoiceTime;
-                if (elapsed < 5000) {
+                if (elapsed < 3000) {
                     setTimeout(() => {
                         if (isRecording && !isUserStopping) {
                             try { startVoiceSession(); } catch(err) {}
                         }
-                    }, 80);
+                    }, 50);
                 } else {
                     stopVoiceRecording('silence');
                 }
@@ -394,8 +418,8 @@ function startVoiceRecording() {
         return;
     }
 
-    const el = findTextarea();
-    baseText = el ? el.value.trim() : '';
+    cachedTarget = findTextarea();
+    baseText = cachedTarget ? cachedTarget.value.trim() : '';
     currentSessionFinal = '';
     isUserStopping = false;
     isRecording = true;
@@ -407,12 +431,13 @@ function startVoiceRecording() {
     icon.textContent = '⏹️';
     btnLabel.textContent = 'Stop Recording';
     timerBadge.style.display = 'inline-block';
-    countdownSpan.textContent = '5';
+    countdownSpan.textContent = '3';
     dot.style.background = '#ef4444';
     msg.innerHTML = '<span style="color:#dc2626; font-weight:700;">🔴 Recording...</span> Speak symptoms into your microphone.';
     liveStrip.style.display = 'block';
     liveText.textContent = 'Speak now... Words appear in the text box in real time';
 
+    // 3-second silence watcher interval
     if (silenceInterval) clearInterval(silenceInterval);
     silenceInterval = setInterval(() => {
         if (!isRecording) {
@@ -421,18 +446,18 @@ function startVoiceRecording() {
         }
 
         const elapsed = Date.now() - lastVoiceTime;
-        const remaining = Math.max(0, Math.ceil((5000 - elapsed) / 1000));
+        const remaining = Math.max(0, Math.ceil((3000 - elapsed) / 1000));
         countdownSpan.textContent = remaining;
 
-        if (elapsed >= 1000) {
+        if (elapsed >= 800) {
             dot.style.background = '#f59e0b';
-            msg.innerHTML = '<span style="color:#b45309; font-weight:500;">Listening...</span> will auto-stop after 5s of silence.';
+            msg.innerHTML = '<span style="color:#b45309; font-weight:500;">Listening...</span> will auto-stop after 3s of silence.';
         }
 
-        if (elapsed >= 5000) {
+        if (elapsed >= 3000) {
             stopVoiceRecording('silence');
         }
-    }, 150);
+    }, 120);
 
     startVoiceSession();
 }

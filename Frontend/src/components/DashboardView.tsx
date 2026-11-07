@@ -771,14 +771,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const chatBaseTextRef = useRef<string>('');
   const chatCurrentSessionFinalRef = useRef<string>('');
   const [chatVoiceDetected, setChatVoiceDetected] = useState(false);
-  const [chatSilenceCountdown, setChatSilenceCountdown] = useState<number>(5);
+  const [chatSilenceCountdown, setChatSilenceCountdown] = useState<number>(3);
 
   const stopChatRecording = () => {
     isUserStoppingChatRef.current = true;
     isChatRecordingRef.current = false;
     setIsChatVoiceRecording(false);
     setChatVoiceDetected(false);
-    setChatSilenceCountdown(5);
+    setChatSilenceCountdown(3);
 
     if (chatSilenceIntervalRef.current) {
       clearInterval(chatSilenceIntervalRef.current);
@@ -805,12 +805,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     isChatRecordingRef.current = true;
     setIsChatVoiceRecording(true);
     chatLastVoiceTimeRef.current = Date.now();
-    setChatSilenceCountdown(5);
+    setChatSilenceCountdown(3);
     setChatVoiceDetected(false);
     chatBaseTextRef.current = chatInput.trim();
     chatCurrentSessionFinalRef.current = '';
 
-    // 1. 5-Second Silence Countdown Watcher Interval
+    // 1. 3-Second Silence Countdown Watcher Interval
     if (chatSilenceIntervalRef.current) clearInterval(chatSilenceIntervalRef.current);
     chatSilenceIntervalRef.current = setInterval(() => {
       if (!isChatRecordingRef.current) {
@@ -819,17 +819,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       }
 
       const elapsedSilence = Date.now() - chatLastVoiceTimeRef.current;
-      const remainingSeconds = Math.max(0, Math.ceil((5000 - elapsedSilence) / 1000));
+      const remainingSeconds = Math.max(0, Math.ceil((3000 - elapsedSilence) / 1000));
       setChatSilenceCountdown(remainingSeconds);
 
-      if (elapsedSilence >= 1000) {
+      if (elapsedSilence >= 800) {
         setChatVoiceDetected(false);
       }
 
-      if (elapsedSilence >= 5000) {
+      if (elapsedSilence >= 3000) {
         stopChatRecording();
       }
-    }, 150);
+    }, 100);
 
     // 2. Direct Web Speech Recognition with real-time text streaming
     const startChatRecognitionSession = () => {
@@ -843,13 +843,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.maxAlternatives = 1;
 
         const userLang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
-        recognition.lang = userLang.startsWith('en') ? userLang : 'en-US';
+        recognition.lang = userLang;
 
         chatCurrentSessionFinalRef.current = '';
 
         recognition.onstart = () => {
           chatLastVoiceTimeRef.current = Date.now();
-          setChatSilenceCountdown(5);
+          setChatSilenceCountdown(3);
         };
 
         recognition.onaudiostart = () => {
@@ -860,19 +860,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.onsoundstart = () => {
           chatLastVoiceTimeRef.current = Date.now();
           setChatVoiceDetected(true);
-          setChatSilenceCountdown(5);
+          setChatSilenceCountdown(3);
         };
 
         recognition.onspeechstart = () => {
           chatLastVoiceTimeRef.current = Date.now();
           setChatVoiceDetected(true);
-          setChatSilenceCountdown(5);
+          setChatSilenceCountdown(3);
         };
 
         recognition.onresult = (event: any) => {
           chatLastVoiceTimeRef.current = Date.now();
           setChatVoiceDetected(true);
-          setChatSilenceCountdown(5);
+          setChatSilenceCountdown(3);
 
           let sessionFinal = '';
           let sessionInterim = '';
@@ -915,7 +915,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           if (isChatRecordingRef.current && !isUserStoppingChatRef.current) {
             const elapsed = Date.now() - chatLastVoiceTimeRef.current;
-            if (elapsed < 5000) {
+            if (elapsed < 3000) {
               setTimeout(() => {
                 if (isChatRecordingRef.current && !isUserStoppingChatRef.current) {
                   try {
@@ -924,7 +924,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     console.warn('Chat recognition restart error:', e);
                   }
                 }
-              }, 80);
+              }, 50);
             } else {
               stopChatRecording();
             }
@@ -1012,14 +1012,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const symptomBaseTextRef = useRef<string>('');
   const symptomCurrentSessionFinalRef = useRef<string>('');
   const [symptomVoiceDetected, setSymptomVoiceDetected] = useState(false);
-  const [symptomSilenceCountdown, setSymptomSilenceCountdown] = useState<number>(5);
+  const [symptomSilenceCountdown, setSymptomSilenceCountdown] = useState<number>(3);
 
   const stopSymptomRecording = () => {
     isUserStoppingSymptomRef.current = true;
     isRecordingRef.current = false;
     setIsRecording(false);
     setSymptomVoiceDetected(false);
-    setSymptomSilenceCountdown(5);
+    setSymptomSilenceCountdown(3);
 
     if (symptomSilenceIntervalRef.current) {
       clearInterval(symptomSilenceIntervalRef.current);
@@ -1049,12 +1049,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     isRecordingRef.current = true;
     setIsRecording(true);
     symptomLastVoiceTimeRef.current = Date.now();
-    setSymptomSilenceCountdown(5);
+    setSymptomSilenceCountdown(3);
     setSymptomVoiceDetected(false);
     symptomBaseTextRef.current = description.trim();
     symptomCurrentSessionFinalRef.current = '';
 
-    // 1. Setup 5-Second Silence Countdown Watcher Interval
+    // 1. Setup 3-Second Silence Countdown Watcher Interval
     if (symptomSilenceIntervalRef.current) clearInterval(symptomSilenceIntervalRef.current);
     symptomSilenceIntervalRef.current = setInterval(() => {
       if (!isRecordingRef.current) {
@@ -1063,18 +1063,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       }
 
       const elapsedSilence = Date.now() - symptomLastVoiceTimeRef.current;
-      const remainingSeconds = Math.max(0, Math.ceil((5000 - elapsedSilence) / 1000));
+      const remainingSeconds = Math.max(0, Math.ceil((3000 - elapsedSilence) / 1000));
       setSymptomSilenceCountdown(remainingSeconds);
 
-      if (elapsedSilence >= 1000) {
+      if (elapsedSilence >= 800) {
         setSymptomVoiceDetected(false);
       }
 
-      // Auto-stop if no voice detected for 5 continuous seconds
-      if (elapsedSilence >= 5000) {
+      // Auto-stop if no voice detected for 3 continuous seconds
+      if (elapsedSilence >= 3000) {
         stopSymptomRecording();
       }
-    }, 150);
+    }, 100);
 
     // 2. Direct Web Speech Recognition with immediate real-time text streaming
     const startSymptomRecognitionSession = () => {
@@ -1088,13 +1088,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.maxAlternatives = 1;
 
         const userLang = (typeof navigator !== 'undefined' && navigator.language) ? navigator.language : 'en-US';
-        recognition.lang = userLang.startsWith('en') ? userLang : 'en-US';
+        recognition.lang = userLang;
 
         symptomCurrentSessionFinalRef.current = '';
 
         recognition.onstart = () => {
           symptomLastVoiceTimeRef.current = Date.now();
-          setSymptomSilenceCountdown(5);
+          setSymptomSilenceCountdown(3);
         };
 
         recognition.onaudiostart = () => {
@@ -1105,20 +1105,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         recognition.onsoundstart = () => {
           symptomLastVoiceTimeRef.current = Date.now();
           setSymptomVoiceDetected(true);
-          setSymptomSilenceCountdown(5);
+          setSymptomSilenceCountdown(3);
         };
 
         recognition.onspeechstart = () => {
           symptomLastVoiceTimeRef.current = Date.now();
           setSymptomVoiceDetected(true);
-          setSymptomSilenceCountdown(5);
+          setSymptomSilenceCountdown(3);
         };
 
         recognition.onresult = (event: any) => {
           // Voice actively detected!
           symptomLastVoiceTimeRef.current = Date.now();
           setSymptomVoiceDetected(true);
-          setSymptomSilenceCountdown(5);
+          setSymptomSilenceCountdown(3);
 
           let sessionFinal = '';
           let sessionInterim = '';
@@ -1151,7 +1151,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             setDetectorError('Microphone or speech permission was denied in your browser settings.');
             stopSymptomRecording();
           }
-          // 'no-speech' is expected during pauses — our 5s silence interval will handle auto-stop!
+          // 'no-speech' is expected during pauses — our 3s silence interval will handle auto-stop!
         };
 
         recognition.onend = () => {
@@ -1166,7 +1166,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           // If still recording and user didn't manually stop:
           if (isRecordingRef.current && !isUserStoppingSymptomRef.current) {
             const elapsed = Date.now() - symptomLastVoiceTimeRef.current;
-            if (elapsed < 5000) {
+            if (elapsed < 3000) {
               // Browser session ended during a natural pause: restart cleanly without reusing dead instance!
               setTimeout(() => {
                 if (isRecordingRef.current && !isUserStoppingSymptomRef.current) {
@@ -1176,7 +1176,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     console.warn('Symptom recognition restart error:', e);
                   }
                 }
-              }, 80);
+              }, 50);
             } else {
               stopSymptomRecording();
             }
@@ -1569,6 +1569,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                   <div className="relative">
                     <textarea
+                      id="symptom_textbox"
                       rows={4}
                       value={description}
                       onChange={(e) => {
@@ -1595,7 +1596,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           </span>
                         )
                       ) : (
-                        'Click the Voice Recorder button to transcribe spoken symptoms. Automatically stops after 5s of silence.'
+                        'Click the Voice Recorder button to transcribe spoken symptoms. Automatically stops after 3s of silence.'
                       )}
                     </span>
                   </div>

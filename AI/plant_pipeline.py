@@ -1134,7 +1134,12 @@ def transcribe_audio(audio_path, language="en"):
         model = _get_whisper_model()
         lang_param = None if (language in (None, "", "auto")) else language
         segments, info = model.transcribe(
-            str(audio_path), beam_size=5, language=lang_param
+            str(audio_path),
+            beam_size=1,
+            best_of=1,
+            vad_filter=True,
+            vad_parameters=dict(min_silence_duration_ms=400),
+            language=lang_param,
         )
 
         text = " ".join(
