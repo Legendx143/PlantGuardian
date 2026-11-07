@@ -9,7 +9,7 @@ PlantGuardian is an intelligent agriculture and botanical health companion desig
 | Challenge | Traditional Limitation | PlantGuardian's Solution |
 | :--- | :--- | :--- |
 | **Pathology & Diagnosis** | Relying on guesswork, slow field visits, or biased forum posts. | **Instant Multimodal AI:** Upload leaf photos or voice descriptions for instant cause & severity diagnosis. |
-| **Agronomy Guidance** | Generic crop tips that ignore local soil type and seasonal timing. | **Localized 7-Stage Roadmaps:** GPS-driven plans tailored by crop, season (*Kharif/Rabi/Zaid*), and soil profile. |
+| **Agronomy Guidance** | Generic crop tips that ignore local soil type and seasonal timing. | **Localized 8-Stage Roadmaps:** GPS-driven plans tailored by crop, season (*Kharif/Rabi/Zaid*), and soil profile. |
 | **Pest & Chemical Overuse** | Blind pesticide spraying that degrades soil and wastes money. | **Regenerative & Organic First:** Prescribes organic remedies, NPK nutrient balancing, and preventive IPM practices. |
 | **Field Accessibility** | Typing detailed botanical symptoms with dirty hands in the field is tedious. | **Hands-Free Speech Engine:** Continuous voice input with auto-silence cutoff for frictionless querying. |
 | **Record Continuity** | Forgetting prior treatments, soil tests, or seasonal patterns. | **Persistent Session Vault:** Supabase-backed history tracking past diagnoses and active roadmaps. |
