@@ -185,6 +185,269 @@ def load_sample_data():
     return sample_text, sample_img, sample_audio, status, "Tomato"
 
 
+VOICE_RECORDER_HTML = """
+<div id="pg-voice-box" style="margin-top: 10px; margin-bottom: 12px; padding: 12px 16px; background: rgba(16, 185, 129, 0.08); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button id="pg-voice-btn" type="button" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 9999px; font-weight: 600; font-size: 13.5px; cursor: pointer; border: none; background: #166534; color: #ffffff; box-shadow: 0 2px 8px rgba(22,101,52,0.35); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);">
+                <span id="pg-voice-icon" style="font-size: 16px;">🎙️</span>
+                <span id="pg-voice-btn-label">Start Real-Time Voice Recording</span>
+            </button>
+            <span id="pg-voice-timer-badge" style="display: none; font-size: 12.5px; font-weight: 600; color: #b45309; background: rgba(245, 158, 11, 0.15); padding: 5px 12px; border-radius: 9999px; border: 1px solid rgba(245, 158, 11, 0.4);">
+                ⏱️ Auto-stop in: <strong id="pg-voice-countdown" style="font-size: 13.5px; font-weight: 700; color: #b45309;">5</strong>s silence
+            </span>
+        </div>
+        <div id="pg-voice-status" style="font-size: 12.5px; color: #374151; font-weight: 500; display: flex; align-items: center; gap: 6px;">
+            <span id="pg-voice-dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #9ca3af;"></span>
+            <span id="pg-voice-msg">Click button to speak — Words transcribe into text box in real time</span>
+        </div>
+    </div>
+    <div id="pg-voice-live-strip" style="display: none; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.85); border-left: 3px solid #166534; border-radius: 6px; font-size: 12.5px; color: #14532d;">
+        <span style="font-weight: 600; margin-right: 6px;">Transcribing live:</span>
+        <span id="pg-voice-live-text" style="font-style: italic;">...</span>
+    </div>
+</div>
+"""
+
+VOICE_RECORDER_JS = """
+const btn = element.querySelector('#pg-voice-btn');
+const btnLabel = element.querySelector('#pg-voice-btn-label');
+const icon = element.querySelector('#pg-voice-icon');
+const timerBadge = element.querySelector('#pg-voice-timer-badge');
+const countdownSpan = element.querySelector('#pg-voice-countdown');
+const dot = element.querySelector('#pg-voice-dot');
+const msg = element.querySelector('#pg-voice-msg');
+const liveStrip = element.querySelector('#pg-voice-live-strip');
+const liveText = element.querySelector('#pg-voice-live-text');
+
+let isRecording = false;
+let isUserStopping = false;
+let silenceInterval = null;
+let lastVoiceTime = Date.now();
+let activeRecognition = null;
+let baseText = '';
+let currentSessionFinal = '';
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+function findTextarea() {
+    return document.querySelector('#symptom_textbox textarea') ||
+           document.querySelector('#symptom_textbox input') ||
+           document.querySelector('textarea[data-testid="textbox"]') ||
+           document.querySelector('textarea');
+}
+
+function updateTextareaValue(val) {
+    const el = findTextarea();
+    if (!el) return;
+    
+    // Universal prototype setter for Svelte / Gradio 2-way data binding
+    const proto = Object.getPrototypeOf(el);
+    const setVal = Object.getOwnPropertyDescriptor(proto, 'value')?.set ||
+                   Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value')?.set;
+    if (setVal) {
+        setVal.call(el, val);
+    } else {
+        el.value = val;
+    }
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+function stopVoiceRecording(reason) {
+    isUserStopping = true;
+    isRecording = false;
+
+    if (silenceInterval) {
+        clearInterval(silenceInterval);
+        silenceInterval = null;
+    }
+
+    if (activeRecognition) {
+        try { activeRecognition.stop(); } catch(e) {}
+        activeRecognition = null;
+    }
+
+    btn.style.background = '#166534';
+    btn.style.boxShadow = '0 2px 8px rgba(22,101,52,0.35)';
+    btn.classList.remove('pg-pulse-anim');
+    icon.textContent = '🎙️';
+    btnLabel.textContent = 'Start Real-Time Voice Recording';
+    timerBadge.style.display = 'none';
+    dot.style.background = '#10b981';
+
+    if (reason === 'silence') {
+        msg.innerHTML = '<span style="color:#166534; font-weight:600;">✅ Recording stopped (5s silence detected).</span> Symptoms saved.';
+    } else {
+        msg.innerHTML = '<span style="color:#166534; font-weight:600;">✅ Recording stopped.</span> Symptoms ready in description box.';
+    }
+
+    setTimeout(() => {
+        if (!isRecording) {
+            liveStrip.style.display = 'none';
+            dot.style.background = '#9ca3af';
+            msg.textContent = 'Click button to speak — Words transcribe into text box in real time';
+        }
+    }, 4000);
+}
+
+function startVoiceSession() {
+    if (!isRecording || isUserStopping) return;
+
+    try {
+        const recognition = new SpeechRecognition();
+        activeRecognition = recognition;
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
+
+        const navLang = (navigator.language && navigator.language.startsWith('en')) ? navigator.language : 'en-US';
+        recognition.lang = navLang;
+
+        currentSessionFinal = '';
+
+        recognition.onstart = () => {
+            lastVoiceTime = Date.now();
+        };
+
+        const markVoiceActive = () => {
+            lastVoiceTime = Date.now();
+            dot.style.background = '#10b981';
+            msg.innerHTML = '<span style="color:#15803d; font-weight:700;">🟢 🎙️ Voice Detected!</span> Transcribing live into text box...';
+        };
+
+        recognition.onaudiostart = markVoiceActive;
+        recognition.onsoundstart = markVoiceActive;
+        recognition.onspeechstart = markVoiceActive;
+
+        recognition.onresult = (event) => {
+            lastVoiceTime = Date.now();
+            dot.style.background = '#10b981';
+            msg.innerHTML = '<span style="color:#15803d; font-weight:700;">🟢 🎙️ Voice Detected!</span> Transcribing live into text box...';
+
+            let curFinal = '';
+            let curInterim = '';
+
+            for (let i = 0; i < event.results.length; i++) {
+                const item = event.results[i];
+                const txt = item[0]?.transcript || '';
+                if (item.isFinal) {
+                    curFinal += (curFinal ? ' ' : '') + txt.trim();
+                } else {
+                    curInterim += (curInterim ? ' ' : '') + txt.trim();
+                }
+            }
+
+            currentSessionFinal = curFinal;
+            const speakingNow = (curFinal + (curInterim ? (curFinal ? ' ' : '') + curInterim : '')).trim();
+
+            liveStrip.style.display = 'block';
+            liveText.textContent = speakingNow || 'Listening for speech...';
+
+            const fullText = baseText
+                ? (speakingNow ? baseText + ' ' + speakingNow : baseText)
+                : speakingNow;
+
+            if (fullText) {
+                updateTextareaValue(fullText);
+            }
+        };
+
+        recognition.onerror = (e) => {
+            if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+                dot.style.background = '#ef4444';
+                msg.innerHTML = '<span style="color:#dc2626; font-weight:600;">❌ Microphone permission denied in browser.</span>';
+                stopVoiceRecording('permission_denied');
+            }
+        };
+
+        recognition.onend = () => {
+            if (currentSessionFinal) {
+                baseText = baseText ? (baseText + ' ' + currentSessionFinal) : currentSessionFinal;
+                currentSessionFinal = '';
+            }
+
+            if (isRecording && !isUserStopping) {
+                const elapsed = Date.now() - lastVoiceTime;
+                if (elapsed < 5000) {
+                    setTimeout(() => {
+                        if (isRecording && !isUserStopping) {
+                            try { startVoiceSession(); } catch(err) {}
+                        }
+                    }, 80);
+                } else {
+                    stopVoiceRecording('silence');
+                }
+            }
+        };
+
+        recognition.start();
+    } catch(err) {
+        console.warn('SpeechRecognition error:', err);
+    }
+}
+
+function startVoiceRecording() {
+    if (!SpeechRecognition) {
+        dot.style.background = '#ef4444';
+        msg.innerHTML = '<span style="color:#dc2626; font-weight:600;">❌ Real-time speech recognition requires Chrome, Edge, or Safari.</span>';
+        return;
+    }
+
+    const el = findTextarea();
+    baseText = el ? el.value.trim() : '';
+    currentSessionFinal = '';
+    isUserStopping = false;
+    isRecording = true;
+    lastVoiceTime = Date.now();
+
+    btn.style.background = '#dc2626';
+    btn.style.boxShadow = '0 2px 12px rgba(220,38,38,0.5)';
+    btn.classList.add('pg-pulse-anim');
+    icon.textContent = '⏹️';
+    btnLabel.textContent = 'Stop Recording';
+    timerBadge.style.display = 'inline-block';
+    countdownSpan.textContent = '5';
+    dot.style.background = '#ef4444';
+    msg.innerHTML = '<span style="color:#dc2626; font-weight:700;">🔴 Recording...</span> Speak symptoms into your microphone.';
+    liveStrip.style.display = 'block';
+    liveText.textContent = 'Speak now... Words appear in the text box in real time';
+
+    if (silenceInterval) clearInterval(silenceInterval);
+    silenceInterval = setInterval(() => {
+        if (!isRecording) {
+            clearInterval(silenceInterval);
+            return;
+        }
+
+        const elapsed = Date.now() - lastVoiceTime;
+        const remaining = Math.max(0, Math.ceil((5000 - elapsed) / 1000));
+        countdownSpan.textContent = remaining;
+
+        if (elapsed >= 1000) {
+            dot.style.background = '#f59e0b';
+            msg.innerHTML = '<span style="color:#b45309; font-weight:500;">Listening...</span> will auto-stop after 5s of silence.';
+        }
+
+        if (elapsed >= 5000) {
+            stopVoiceRecording('silence');
+        }
+    }, 150);
+
+    startVoiceSession();
+}
+
+btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (isRecording) {
+        stopVoiceRecording('user');
+    } else {
+        startVoiceRecording();
+    }
+});
+"""
+
+
 def create_app():
     """Construct and configure the Gradio Blocks UI."""
     custom_css = """
@@ -216,6 +479,13 @@ def create_app():
         font-weight: 500;
         padding: 8px 12px;
         border-radius: 6px;
+    }
+    @keyframes pg-pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.08); }
+    }
+    .pg-pulse-anim {
+        animation: pg-pulse 1.2s infinite ease-in-out;
     }
     """
 
@@ -315,24 +585,32 @@ def create_app():
                             info="Select the crop you are inspecting so PlantGuardian AI can verify botanical species match.",
                         )
 
-                        audio_input = gr.Audio(
-                            sources=["microphone", "upload"],
-                            type="filepath",
-                            label="🎙️ Voice Input (Record or Upload Audio)",
-                        )
-
-                        transcribe_btn = gr.Button(
-                            "🔊 Transcribe Voice to Text",
-                            variant="secondary",
-                            size="sm",
+                        # Real-Time Voice Recording & Live Dictation Widget
+                        gr.HTML(
+                            value=VOICE_RECORDER_HTML,
+                            js_on_load=VOICE_RECORDER_JS,
                         )
 
                         symptom_textbox = gr.Textbox(
-                            label="📝 Disease / Symptom Description (Transcribed text appears here, or type directly)",
+                            label="📝 Disease / Symptom Description (Spoken voice appears here in real time, or type directly)",
                             placeholder="Describe what you see on your plant (e.g., 'Tomato leaves turning yellow with brown spots and wilting')...",
                             lines=4,
                             max_lines=8,
+                            elem_id="symptom_textbox",
                         )
+
+                        with gr.Accordion("📁 Or Upload Pre-Recorded Audio File (.wav, .mp3)", open=False):
+                            audio_input = gr.Audio(
+                                sources=["microphone", "upload"],
+                                type="filepath",
+                                label="🎙️ Audio File Upload / Offline Voice Input",
+                            )
+
+                            transcribe_btn = gr.Button(
+                                "🔊 Transcribe Audio File to Text",
+                                variant="secondary",
+                                size="sm",
+                            )
 
                         gr.Markdown("### 2️⃣ Provide Plant Image")
                         image_input = gr.Image(

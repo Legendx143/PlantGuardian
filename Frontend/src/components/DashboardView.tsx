@@ -916,9 +916,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           if (isChatRecordingRef.current && !isUserStoppingChatRef.current) {
             const elapsed = Date.now() - chatLastVoiceTimeRef.current;
             if (elapsed < 5000) {
-              try {
-                recognition.start();
-              } catch {}
+              setTimeout(() => {
+                if (isChatRecordingRef.current && !isUserStoppingChatRef.current) {
+                  try {
+                    startChatRecognitionSession();
+                  } catch (e) {
+                    console.warn('Chat recognition restart error:', e);
+                  }
+                }
+              }, 80);
             } else {
               stopChatRecording();
             }
@@ -1161,10 +1167,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           if (isRecordingRef.current && !isUserStoppingSymptomRef.current) {
             const elapsed = Date.now() - symptomLastVoiceTimeRef.current;
             if (elapsed < 5000) {
-              // Browser session timed out during a pause: restart seamlessly!
-              try {
-                recognition.start();
-              } catch {}
+              // Browser session ended during a natural pause: restart cleanly without reusing dead instance!
+              setTimeout(() => {
+                if (isRecordingRef.current && !isUserStoppingSymptomRef.current) {
+                  try {
+                    startSymptomRecognitionSession();
+                  } catch (e) {
+                    console.warn('Symptom recognition restart error:', e);
+                  }
+                }
+              }, 80);
             } else {
               stopSymptomRecording();
             }
