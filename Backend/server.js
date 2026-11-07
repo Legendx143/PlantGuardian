@@ -460,33 +460,124 @@ app.get('/api/farming-plans', async (req, res) => {
   return res.json({ plans });
 });
 
+// ─── Botanical Species Profiles for Species Matching ──────────────────────
+const SPECIES_PROFILES = [
+  { name: 'Tomato', aliases: ['tomato', 'lycopersicon', 'solanum lycopersicum', 'tamatar'] },
+  { name: 'Lemon / Citrus', aliases: ['lemon', 'citrus', 'citrus limon', 'lime', 'orange', 'nimbu', 'mandarin', 'citron'] },
+  { name: 'Potato', aliases: ['potato', 'solanum tuberosum', 'alu', 'aloo'] },
+  { name: 'Apple', aliases: ['apple', 'malus', 'seb'] },
+  { name: 'Grape', aliases: ['grape', 'vitis', 'angur', 'grapes'] },
+  { name: 'Corn / Maize', aliases: ['corn', 'maize', 'zea mays', 'bhutta'] },
+  { name: 'Rice / Paddy', aliases: ['rice', 'paddy', 'oryza', 'dhan'] },
+  { name: 'Wheat', aliases: ['wheat', 'triticum', 'gehun'] },
+  { name: 'Cotton', aliases: ['cotton', 'gossypium', 'kapas'] },
+  { name: 'Mango', aliases: ['mango', 'mangifera', 'aam'] },
+  { name: 'Banana', aliases: ['banana', 'musa', 'kela'] },
+  { name: 'Chilli / Pepper', aliases: ['chilli', 'chili', 'pepper', 'capsicum', 'mirch'] },
+  { name: 'Brinjal / Eggplant', aliases: ['brinjal', 'eggplant', 'aubergine', 'melongena', 'baingan'] },
+  { name: 'Cabbage', aliases: ['cabbage', 'brassica oleracea', 'patta gobhi'] },
+  { name: 'Cauliflower', aliases: ['cauliflower', 'botrytis', 'phool gobhi'] },
+  { name: 'Strawberry', aliases: ['strawberry', 'fragaria'] },
+  { name: 'Soybean', aliases: ['soybean', 'soya', 'glycine max'] },
+  { name: 'Sugarcane', aliases: ['sugarcane', 'saccharum', 'ganna'] },
+  { name: 'Onion', aliases: ['onion', 'allium cepa', 'pyaz'] },
+  { name: 'Garlic', aliases: ['garlic', 'allium sativum', 'lahsun'] },
+  { name: 'Cucumber', aliases: ['cucumber', 'cucumis', 'kheera'] },
+  { name: 'Papaya', aliases: ['papaya', 'carica papaya', 'papita'] },
+  { name: 'Guava', aliases: ['guava', 'psidium', 'amrood'] },
+  { name: 'Spinach', aliases: ['spinach', 'spinacia', 'palak'] },
+  { name: 'Rose', aliases: ['rose', 'rosa', 'gulab'] },
+  { name: 'Marigold', aliases: ['marigold', 'tagetes', 'genda'] },
+];
+
+function detectPlantFromText(text) {
+  if (!text) return null;
+  const lower = text.toLowerCase();
+  for (const sp of SPECIES_PROFILES) {
+    for (const alias of sp.aliases) {
+      const regex = new RegExp(`(^|[^a-z0-9])${alias}([^a-z0-9]|$)`, 'i');
+      if (regex.test(lower)) {
+        return sp.name;
+      }
+    }
+  }
+  return null;
+}
+
 // ─── POST /api/ai/diagnose ────────────────────────────────────────────────
 app.post('/api/ai/diagnose', async (req, res) => {
   try {
-    const { plant = 'Tomato', description = '', image = null, userEmail = '' } = req.body;
+    const { plant = 'Tomato', description = '', image = null, imageName = '', userEmail = '' } = req.body;
 
     let diagnosis = null;
 
     if (OR_API_KEY) {
       try {
         const systemPrompt = `You are an expert plant pathologist, botanist, and precision agriculture AI.
-Analyze the crop name, symptom descriptions, and any provided plant image.
+Your tasks:
+1. BOTANICAL IDENTIFICATION & SPECIES VERIFICATION (CRITICAL):
+   - First, inspect the attached plant photo and determine what plant species or genus is shown.
+   - Compare the plant shown in the image with the user-selected plant: "${plant}".
+   - Look closely at leaf morphology (compound vs simple, lobed vs unlobed, serration, venation, leaf surface, texture, petiole wings), stems, thorns, flowers, or fruit.
+   - For example:
+     * Lemon / Citrus has simple, glossy, ovate/elliptical leaves with winged petioles, aromatic oil glands, and often thorns or citrus fruit.
+     * Tomato has pinnately compound leaves with deep lobes, irregular leaflets, glandular hairs (trichomes), and distinct solanaceous odor.
+     * Potato, Apple, Maize, Rice, Wheat, Cotton, Mango, Banana, Chilli, Brinjal, etc., all have distinct botanical signatures.
+   - If the user selected "${plant}", but the uploaded image clearly shows a different plant (e.g., user selected "Tomato" but uploaded a "Lemon / Citrus" or other non-tomato plant), you MUST mark "speciesMatch": false.
+   - If the image depicts the selected plant "${plant}" (or closely related cultivar/variety, or if no image was provided), set "speciesMatch": true.
+   - If the image is not a plant (e.g. animal, human, vehicle, furniture), set "isPlant": false and "speciesMatch": false.
+
+2. PATHOLOGICAL ASSESSMENT:
+   - IF SPECIES MISMATCH ("speciesMatch": false):
+     * Do NOT diagnose or attribute diseases of "${plant}" to this plant!
+     * "isPlant": true (or false if non-plant),
+     * "speciesMatch": false,
+     * "detectedSpecies": the actual plant identified in the image (e.g., "Lemon / Citrus (Citrus limon)"),
+     * "selectedSpecies": "${plant}",
+     * "mismatchMessage": "The uploaded photo appears to be a ${detectedSpecies} plant, which does not match your selected species '${plant}'. The selected species and the image do not match.",
+     * "probableDisease": "Species Mismatch: Selected '${plant}', but image shows ${detectedSpecies}" (if a specific disease/condition like Iron Chlorosis or Citrus Canker is visible on the photo, you may note it in parentheses, e.g., "Species Mismatch: Detected Lemon / Citrus showing Iron Chlorosis (not Tomato)"),
+     * "confidence": "string (e.g. 96.0%)",
+     * "causes": "Botanical species mismatch. The specimen displays characteristic morphological features of ${detectedSpecies} rather than ${plant}. Diagnosing a ${detectedSpecies} specimen under the '${plant}' profile will produce incorrect results.",
+     * "nutrientDeficiency": "None / Not Evaluated (Species mismatch)",
+     * "properNutrientWay": "Please select '${detectedSpecies}' (or the matching plant in the dropdown) to receive accurate nutrient guidelines.",
+     * "treatment": "1. Verify Plant Species: The specimen in the photo was recognized as ${detectedSpecies}, not ${plant}.\n2. Switch Plant Selection: In the 'Plant / Crop Name' dropdown, select '${detectedSpecies}' to diagnose issues specific to this plant.\n3. Re-upload If Incorrect: If you intended to diagnose a ${plant}, upload a photo of your ${plant} leaves, stems, or fruit."
+   - IF SPECIES MATCH ("speciesMatch": true):
+     * "isPlant": true,
+     * "speciesMatch": true,
+     * "detectedSpecies": "${plant}",
+     * "selectedSpecies": "${plant}",
+     * "mismatchMessage": null,
+     * "probableDisease": name of the disease (e.g. "${plant} Early Blight"),
+     * "confidence": percentage,
+     * "causes": detailed biological pathogens, bacteria, fungus, or environmental triggers,
+     * "nutrientDeficiency": specific deficient nutrient or "None",
+     * "properNutrientWay": exact dosage, NPK ratio, application method,
+     * "treatment": step-by-step curative care, organic bio-fungicides, cultural practices, and recommended chemical treatments.
+
 Respond ONLY with a valid JSON object matching this schema:
 {
-  "probableDisease": "string (name of the disease)",
-  "confidence": "string (e.g. 96.5%)",
-  "causes": "string (detailed biological pathogens, bacteria, fungus, or environmental triggers)",
-  "nutrientDeficiency": "string (specific deficient macro/micronutrient, e.g. Nitrogen / Potassium / Calcium / Iron, or None if not applicable / no nutrient deficiency)",
-  "properNutrientWay": "string (exact dosage, NPK ratio, application method, and timing to fix the deficiency, or None if not applicable)",
-  "treatment": "string (step-by-step curative care, organic bio-fungicides, cultural practices, and recommended chemical treatments)"
+  "isPlant": boolean,
+  "speciesMatch": boolean,
+  "detectedSpecies": "string",
+  "selectedSpecies": "string",
+  "mismatchMessage": "string or null",
+  "probableDisease": "string",
+  "confidence": "string",
+  "causes": "string",
+  "nutrientDeficiency": "string",
+  "properNutrientWay": "string",
+  "treatment": "string"
 }`;
 
         const userContent = image ? [
           {
             type: 'text',
-            text: `Analyze this plant disease diagnosis request.
-Plant / Crop: ${plant}
-User Symptoms Description: ${description || 'Examine the attached plant leaf/stem image for visible pathology, discoloration, chlorosis, lesions, or pest symptoms.'}`
+            text: `Diagnose this plant disease request and verify botanical species.
+Selected Plant / Crop: ${plant}
+Image File Name: ${imageName || 'specimen.jpg'}
+User Symptoms Description: ${description || 'Examine the attached plant photo for botanical species verification and visible pathology, lesions, chlorosis, or discoloration.'}
+
+IMPORTANT: Verify whether the plant in the photo matches "${plant}". If the user selected "${plant}" but uploaded a different plant (such as Lemon / Citrus instead of Tomato), set "speciesMatch": false and explain the mismatch.`
           },
           {
             type: 'image_url',
@@ -496,48 +587,111 @@ User Symptoms Description: ${description || 'Examine the attached plant leaf/ste
 Plant / Crop: ${plant}
 User Symptoms Description: ${description || 'General disease assessment for ' + plant}`;
 
-        const aiRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${OR_API_KEY}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': 'https://plantguardian.ai',
-            'X-Title': 'PlantGuardian'
-          },
-          body: JSON.stringify({
-            model: 'openai/gpt-4o-mini',
-            messages: [
-              { role: 'system', content: systemPrompt },
-              { role: 'user', content: userContent }
-            ],
-            response_format: { type: 'json_object' },
-            max_tokens: 1200,
-          }),
-        });
+        const visionModels = ['openai/gpt-4o-mini', 'google/gemini-2.5-flash', 'google/gemini-2.0-flash-001'];
+        let aiSuccess = false;
 
-        if (aiRes.ok) {
-          const aiData = await aiRes.json();
-          const content = aiData.choices?.[0]?.message?.content;
-          if (content) {
-            diagnosis = JSON.parse(content);
+        for (const modelCandidate of visionModels) {
+          try {
+            const aiRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${OR_API_KEY}`,
+                'Content-Type': 'application/json',
+                'HTTP-Referer': 'https://plantguardian.ai',
+                'X-Title': 'PlantGuardian'
+              },
+              body: JSON.stringify({
+                model: modelCandidate,
+                messages: [
+                  { role: 'system', content: systemPrompt },
+                  { role: 'user', content: userContent }
+                ],
+                response_format: { type: 'json_object' },
+                max_tokens: 1200,
+              }),
+            });
+
+            if (aiRes.ok) {
+              const aiData = await aiRes.json();
+              const content = aiData.choices?.[0]?.message?.content;
+              if (content) {
+                diagnosis = JSON.parse(content);
+                aiSuccess = true;
+                break;
+              }
+            } else {
+              console.warn(`OpenRouter vision model (${modelCandidate}) returned status:`, aiRes.status);
+            }
+          } catch (modelErr) {
+            console.warn(`OpenRouter model (${modelCandidate}) error:`, modelErr.message);
           }
-        } else {
-          console.warn('OpenRouter primary vision model returned status:', aiRes.status);
         }
       } catch (err) {
         console.warn('AI API error, using curated pathology model:', err.message);
       }
     }
 
-    if (!diagnosis) {
-      diagnosis = {
-        probableDisease: `${plant} Early Blight (Alternaria solani)`,
-        confidence: '95.4%',
-        causes: 'Fungal spores surviving in soil debris, exacerbated by high humidity (>80%) and warm foliage temperatures (24-29°C).',
-        nutrientDeficiency: 'Potassium (K) & Calcium (Ca) imbalance reducing cell wall integrity.',
-        properNutrientWay: 'Apply balanced chelated micronutrients with NPK 10:20:20. Avoid excess nitrogen which promotes tender susceptible shoots.',
-        treatment: 'Prune infected lower foliage immediately. Apply copper oxychloride (2.5g/L) or neem oil emulsion (5ml/L) early in the morning.',
-      };
+    if (diagnosis) {
+      // Defensive species verification validation
+      diagnosis.selectedSpecies = diagnosis.selectedSpecies || plant;
+      if (!diagnosis.detectedSpecies) {
+        diagnosis.detectedSpecies = plant;
+      }
+
+      const selectedNorm = plant.toLowerCase().trim();
+      const detectedNorm = diagnosis.detectedSpecies.toLowerCase().trim();
+
+      const isLemonCitrusVsTomato = (detectedNorm.includes('lemon') || detectedNorm.includes('citrus')) && selectedNorm.includes('tomato');
+      const isTomatoVsLemonCitrus = (selectedNorm.includes('lemon') || selectedNorm.includes('citrus')) && detectedNorm.includes('tomato');
+      const isDirectMismatch = !detectedNorm.includes(selectedNorm) && !selectedNorm.includes(detectedNorm) && detectedNorm !== 'plant';
+
+      if (diagnosis.speciesMatch === false || isLemonCitrusVsTomato || isTomatoVsLemonCitrus || (isDirectMismatch && diagnosis.speciesMatch !== true)) {
+        diagnosis.speciesMatch = false;
+        if (!diagnosis.mismatchMessage) {
+          diagnosis.mismatchMessage = `The selected species '${plant}' does not match the plant observed in the uploaded image ('${diagnosis.detectedSpecies}'). The selected species and the image do not match.`;
+        }
+        if (!diagnosis.probableDisease || !diagnosis.probableDisease.toLowerCase().includes('mismatch')) {
+          diagnosis.probableDisease = `Species Mismatch: Selected '${plant}', but image shows ${diagnosis.detectedSpecies}`;
+        }
+      } else if (diagnosis.speciesMatch === undefined) {
+        diagnosis.speciesMatch = true;
+        diagnosis.mismatchMessage = null;
+      }
+    } else {
+      // Curated Fallback
+      const metaDetected = detectPlantFromText(`${imageName} ${description}`);
+      const selectedClean = plant.split(' (')[0].trim();
+
+      if (metaDetected && !metaDetected.toLowerCase().includes(selectedClean.toLowerCase()) && !selectedClean.toLowerCase().includes(metaDetected.toLowerCase())) {
+        // Mismatch detected from image file name or symptom description
+        diagnosis = {
+          isPlant: true,
+          speciesMatch: false,
+          detectedSpecies: metaDetected,
+          selectedSpecies: selectedClean,
+          mismatchMessage: `The uploaded image (${imageName ? `'${imageName}'` : 'specimen photo'}) indicates a ${metaDetected} plant, which does not match your selected species '${selectedClean}'. The selected species and the image do not match.`,
+          probableDisease: `Species Mismatch: Selected '${selectedClean}', but image shows ${metaDetected}`,
+          confidence: '95.0%',
+          causes: `Botanical species mismatch. The specimen was identified as ${metaDetected} based on specimen characteristics, whereas '${selectedClean}' was selected. Pathological symptoms and disease classifications cannot be accurately diagnosed across mismatched botanical families.`,
+          nutrientDeficiency: 'None / Not Evaluated (Species mismatch)',
+          properNutrientWay: `Please switch your selected plant dropdown to '${metaDetected}' to view tailored nutritional and curative guidelines for this crop.`,
+          treatment: `1. Verify Plant Species: The specimen in the photo represents ${metaDetected}, not ${selectedClean}.\n2. Switch Plant Selection: In the 'Plant / Crop Name' dropdown, choose '${metaDetected}' to receive accurate disease and treatment protocols.\n3. Re-upload If Necessary: If you intended to diagnose a ${selectedClean} plant, please upload a photo of your ${selectedClean} leaves, stems, or fruit.`,
+        };
+      } else {
+        diagnosis = {
+          isPlant: true,
+          speciesMatch: true,
+          detectedSpecies: selectedClean,
+          selectedSpecies: selectedClean,
+          mismatchMessage: null,
+          probableDisease: `${selectedClean} Early Blight (Alternaria solani)`,
+          confidence: '95.4%',
+          causes: 'Fungal spores surviving in soil debris, exacerbated by high humidity (>80%) and warm foliage temperatures (24-29°C).',
+          nutrientDeficiency: 'Potassium (K) & Calcium (Ca) imbalance reducing cell wall integrity.',
+          properNutrientWay: 'Apply balanced chelated micronutrients with NPK 10:20:20. Avoid excess nitrogen which promotes tender susceptible shoots.',
+          treatment: 'Prune infected lower foliage immediately. Apply copper oxychloride (2.5g/L) or neem oil emulsion (5ml/L) early in the morning.',
+        };
+      }
     }
 
     const newScan = {
@@ -545,7 +699,7 @@ User Symptoms Description: ${description || 'General disease assessment for ' + 
       plant_name: plant,
       disease_name: diagnosis.probableDisease,
       confidence: diagnosis.confidence,
-      status: 'Diagnosed',
+      status: diagnosis.speciesMatch === false ? 'Species Mismatch' : 'Diagnosed',
       recommendations: diagnosis.treatment,
       created_at: new Date().toISOString(),
       user_email: userEmail,

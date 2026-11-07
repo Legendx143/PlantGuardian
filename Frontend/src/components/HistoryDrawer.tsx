@@ -12,7 +12,8 @@ import {
   ShieldCheck,
   Activity,
   MapPin,
-  Layers
+  Layers,
+  AlertTriangle
 } from 'lucide-react';
 
 export interface ScanRecord {
@@ -34,6 +35,11 @@ export interface ScanRecord {
     nutrientDeficiency: string;
     properNutrientWay: string;
     treatment: string;
+    isPlant?: boolean;
+    speciesMatch?: boolean;
+    detectedSpecies?: string;
+    selectedSpecies?: string;
+    mismatchMessage?: string | null;
   };
 }
 
@@ -517,10 +523,17 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                     className="flex items-center justify-between text-[11px] pt-1.5"
                     style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}
                   >
-                    <span className="flex items-center gap-1 text-emerald-400 font-medium">
-                      <CheckCircle2 className="w-3 h-3" />
-                      {scan.status || 'Diagnosed'}
-                    </span>
+                    {scan.status === 'Species Mismatch' ? (
+                      <span className="flex items-center gap-1 text-amber-400 font-medium">
+                        <AlertTriangle className="w-3 h-3 text-amber-400" />
+                        Species Mismatch
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-1 text-emerald-400 font-medium">
+                        <CheckCircle2 className="w-3 h-3" />
+                        {scan.status || 'Diagnosed'}
+                      </span>
+                    )}
                     <span className="text-[#c7ea6b] font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       <span>Load into Dashboard</span>
                       <ChevronRight className="w-3.5 h-3.5" />

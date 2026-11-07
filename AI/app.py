@@ -124,7 +124,12 @@ def diagnose_plant(symptom_text, image_file):
             crop = result.get("identified_crop") or top.get("crop", "Plant")
             disease = top.get("diagnosis", "Undetermined")
             score = float(top.get("relevance_score", 0.0))
-            status_summary = f"✅ **Diagnosis Ready:** {crop} — {disease} ({score * 100:.1f}% match)"
+            if result.get("species_match") is False:
+                user_c = result.get("selected_crop") or "Selected"
+                img_c = result.get("detected_crop") or "Image"
+                status_summary = f"⚠️ **Species Mismatch:** User: {user_c} ≠ Photo: {img_c} ({crop} — {disease})"
+            else:
+                status_summary = f"✅ **Diagnosis Ready:** {crop} — {disease} ({score * 100:.1f}% match)"
         else:
             status_summary = f"❌ **Analysis Incomplete:** {result.get('message', 'Check input values.')}"
 

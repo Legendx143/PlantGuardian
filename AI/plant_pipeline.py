@@ -1938,6 +1938,7 @@ def analyze_plantguardian(
     evidence_db=None,
     prompt=None,
     max_candidates=10,
+    selected_crop=None,
 ):
     """Complete end-to-end plant disease analysis.
 
@@ -2059,8 +2060,26 @@ def analyze_plantguardian(
         user_symptoms + image_symptoms
     ))
 
-    # Use both sources to identify the crop.
-    crop = identify_crop(user_text + " " + str(image_description))
+    # Detect user crop and image crop to verify species match
+    user_crop = (selected_crop.strip().title() if selected_crop else None) or identify_crop(user_text)
+    image_crop = identify_crop(image_description)
+
+    species_match = True
+    mismatch_warning = None
+
+    if user_crop and image_crop:
+        norm_user = user_crop.lower()
+        norm_img = image_crop.lower()
+        is_citrus_mismatch = (norm_user == "tomato" and norm_img in ["lemon", "citrus"]) or (norm_img == "tomato" and norm_user in ["lemon", "citrus"])
+        if norm_user != norm_img or is_citrus_mismatch:
+            species_match = False
+            mismatch_warning = (
+                f"Selected/reported species '{user_crop}' does not match the plant "
+                f"identified in the uploaded photo ('{image_crop}'). The selected species and the image do not match."
+            )
+
+    # Use detected image crop if mismatch, or identified crop
+    crop = (image_crop if (not species_match and image_crop) else None) or user_crop or identify_crop(user_text + " " + str(image_description))
 
     # ── 4. Check for usable symptoms ──────────────────────────────────
     if not combined_symptoms:
@@ -2161,6 +2180,10 @@ def analyze_plantguardian(
         "combined_symptoms": combined_symptoms,
         "image_description": image_description,
         "identified_crop": crop,
+        "selected_crop": user_crop,
+        "detected_crop": image_crop,
+        "species_match": species_match,
+        "mismatch_warning": mismatch_warning,
         "ranked_candidates": candidate_results,
         "top_candidate": top_candidate,
         "probable_disease": probable_disease,
@@ -2206,6 +2229,16 @@ def format_diagnosis_report(result):
     lines.append(f"# 🌿 PlantGuardian Diagnostic Report")
     lines.append(f"**Identified Plant/Crop:** `{crop}` &nbsp;|&nbsp; **Category:** `{triage_cat}`\n")
     lines.append("---")
+
+    # ── Species Mismatch Alert (if applicable) ────────────────────────
+    if result.get("species_match") is False:
+        user_c = result.get("selected_crop") or "Selected Plant"
+        img_c = result.get("detected_crop") or "Image Specimen"
+        warning_msg = result.get("mismatch_warning") or f"Selected species '{user_c}' and photo species '{img_c}' do not match."
+        lines.append("> ⚠️ **Species Mismatch Detected:**")
+        lines.append(f"> **Selected / Stated Species:** `{user_c}` &nbsp;|&nbsp; **Image Analysis Indicates:** `{img_c}`")
+        lines.append(f"> {warning_msg}\n")
+        lines.append("---")
 
     # ── 1. Probable Disease Name ──────────────────────────────────────
     lines.append("## 🦠 1. Probable Disease")

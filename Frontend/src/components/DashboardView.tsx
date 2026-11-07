@@ -22,7 +22,9 @@ import {
   Maximize2,
   Minimize2,
   Bot,
-  Send
+  Send,
+  AlertTriangle,
+  AlertCircle
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { CustomDropdown } from './CustomDropdown';
@@ -47,6 +49,11 @@ interface DiagnosisResult {
   nutrientDeficiency: string;
   properNutrientWay: string;
   treatment: string;
+  isPlant?: boolean;
+  speciesMatch?: boolean;
+  detectedSpecies?: string;
+  selectedSpecies?: string;
+  mismatchMessage?: string | null;
 }
 
 export const AVAILABLE_PLANTS = [
@@ -163,6 +170,25 @@ function hasNutrientDeficiency(deficiency?: string | null, method?: string | nul
   return true;
 }
 
+/**
+ * Matches an AI-detected species name to one of the available dropdown plant choices.
+ */
+function getMatchingAvailablePlant(detectedName?: string): string | null {
+  if (!detectedName) return null;
+  const lower = detectedName.toLowerCase().trim();
+  const found = AVAILABLE_PLANTS.find((p) => {
+    const pLower = p.toLowerCase();
+    const commonName = pLower.split(' (')[0];
+    const parts = commonName.split('/').map((s) => s.trim());
+    return (
+      parts.some((part) => lower.includes(part) || part.includes(lower)) ||
+      pLower.includes(lower) ||
+      lower.includes(pLower)
+    );
+  });
+  return found || null;
+}
+
 interface TreatmentStepItem {
   id: number;
   stepNumber: string;
@@ -266,7 +292,7 @@ function parseTreatmentSteps(rawTreatment: string): TreatmentStepItem[] {
   });
 }
 
-const CurativeCareSteps: React.FC<{ treatment: string }> = ({ treatment }) => {
+const CurativeCareSteps: React.FC<{ treatment: string; isMismatch?: boolean }> = ({ treatment, isMismatch = false }) => {
   const steps = useMemo(() => parseTreatmentSteps(treatment), [treatment]);
   const [completedSteps, setCompletedSteps] = useState<Record<number, boolean>>({});
   const [copied, setCopied] = useState(false);
@@ -298,26 +324,42 @@ const CurativeCareSteps: React.FC<{ treatment: string }> = ({ treatment }) => {
   };
 
   return (
-    <div className="rounded-2xl border border-emerald-500/30 bg-gradient-to-b from-emerald-950/25 via-black/50 to-black/75 p-4 sm:p-5 shadow-xl backdrop-blur-md transition-all">
+    <div className={`rounded-2xl border p-4 sm:p-5 shadow-xl backdrop-blur-md transition-all ${
+      isMismatch 
+        ? 'border-amber-500/35 bg-gradient-to-b from-amber-950/25 via-black/50 to-black/75' 
+        : 'border-emerald-500/30 bg-gradient-to-b from-emerald-950/25 via-black/50 to-black/75'
+    }`}>
       {/* Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/35 flex items-center justify-center text-emerald-400 shrink-0 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
-            <CheckCircle2 className="w-4 h-4" />
+          <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border ${
+            isMismatch
+              ? 'bg-amber-500/15 border-amber-500/35 text-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
+              : 'bg-emerald-500/15 border-emerald-500/35 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)]'
+          }`}>
+            {isMismatch ? <AlertCircle className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
           </div>
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-2">
-              <span>Curative Care & Disease Treatment Protocol</span>
+            <div className={`text-xs font-bold uppercase tracking-wider flex items-center gap-2 ${
+              isMismatch ? 'text-amber-300' : 'text-emerald-300'
+            }`}>
+              <span>{isMismatch ? 'Species Correction & Action Steps' : 'Curative Care & Disease Treatment Protocol'}</span>
             </div>
             <div className="text-[11px] text-white/50">
-              Interactive recovery action checklist for your crops
+              {isMismatch 
+                ? 'Action steps to resolve plant mismatch & receive accurate diagnosis' 
+                : 'Interactive recovery action checklist for your crops'}
             </div>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           {/* Step Count Badge */}
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/25">
+          <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border ${
+            isMismatch
+              ? 'bg-amber-500/10 text-amber-300 border-amber-500/25'
+              : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/25'
+          }`}>
             {steps.length} {steps.length === 1 ? 'Action Step' : 'Action Steps'}
           </span>
 
@@ -549,6 +591,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         nutrientDeficiency: rawDiag.nutrientDeficiency || scan.nutrientDeficiency || 'None',
         properNutrientWay: rawDiag.properNutrientWay || scan.properNutrientWay || 'None',
         treatment: rawDiag.treatment || scan.recommendations || 'Apply cultural sanitation and recommended agronomic treatment steps.',
+        isPlant: rawDiag.isPlant ?? true,
+        speciesMatch: rawDiag.speciesMatch ?? (scan.status === 'Species Mismatch' ? false : true),
+        detectedSpecies: rawDiag.detectedSpecies || '',
+        selectedSpecies: rawDiag.selectedSpecies || scan.plant_name || '',
+        mismatchMessage: rawDiag.mismatchMessage || (scan.status === 'Species Mismatch' ? (rawDiag.mismatchMessage || 'Species mismatch between selected plant and image.') : null),
       };
       setDiagnosis(newDiagnosis);
 
@@ -998,7 +1045,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   };
 
   // ── Run Disease Diagnosis (AI Multimodal Pathology) ───────────────────
-  const handleDiagnose = async () => {
+  const handleDiagnose = async (plantOverride?: string | React.MouseEvent) => {
     setDetectorError('');
     setLoadedFromHistory(null);
     if (!description.trim() && !selectedImage) {
@@ -1008,6 +1055,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
     setAnalyzing(true);
     setDiagnosis(null);
+
+    const targetPlantRaw = typeof plantOverride === 'string' ? plantOverride : selectedPlant;
+    const targetPlant = targetPlantRaw.split(' (')[0];
 
     try {
       // Optional backup upload to Supabase storage bucket
@@ -1026,10 +1076,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          plant: selectedPlant.split(' (')[0],
+          plant: targetPlant,
           description: description.trim() || 'Examine the attached plant leaf photo for disease lesions, blight, or discoloration.',
           image: base64Image,
-          userEmail: user.email
+          imageName: selectedImage?.name || '',
+          userEmail: user?.email || ''
         })
       });
 
@@ -1042,19 +1093,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           const scanItem = {
             ...(data.scan || {}),
             id: data.scan?.id || Date.now(),
-            plant_name: data.scan?.plant_name || selectedPlant.split(' (')[0],
+            plant_name: data.scan?.plant_name || targetPlant,
             disease_name: data.scan?.disease_name || data.diagnosis.probableDisease,
             confidence: data.scan?.confidence || data.diagnosis.confidence || '92.0%',
-            status: 'Diagnosed',
+            status: data.diagnosis.speciesMatch === false ? 'Species Mismatch' : 'Diagnosed',
             recommendations: data.scan?.recommendations || data.diagnosis.treatment || '',
             created_at: data.scan?.created_at || new Date().toISOString(),
-            user_email: user.email,
+            user_email: user?.email || '',
             causes: data.diagnosis.causes,
             nutrientDeficiency: data.diagnosis.nutrientDeficiency,
             properNutrientWay: data.diagnosis.properNutrientWay,
             diagnosis: data.diagnosis,
           };
-          const userKey = `plantguardian_scans_${user.email.toLowerCase()}`;
+          const userKey = `plantguardian_scans_${(user?.email || 'guest').toLowerCase()}`;
           const currentList = JSON.parse(localStorage.getItem(userKey) || '[]');
           const updatedList = [scanItem, ...currentList.filter((s: any) => s.id !== scanItem.id)].slice(0, 50);
           localStorage.setItem(userKey, JSON.stringify(updatedList));
@@ -1070,6 +1121,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     } finally {
       setAnalyzing(false);
     }
+  };
+
+  const handleSwitchPlantAndRediagnose = (matchedPlant: string) => {
+    setSelectedPlant(matchedPlant);
+    setFarmPlant(matchedPlant);
+    handleDiagnose(matchedPlant);
   };
 
   // ── Run Farming Guidance ────────────────────────────────────────────
@@ -1512,7 +1569,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {/* Diagnose Button */}
               <button
                 type="button"
-                onClick={handleDiagnose}
+                onClick={() => handleDiagnose()}
                 disabled={analyzing}
                 className="w-full py-3.5 rounded-xl btn-lime font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg hover:shadow-xl transition-all"
               >
@@ -1595,17 +1652,107 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       </div>
                     )}
 
-                    {/* Probable Disease */}
-                    <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-rose-950/25 via-black/50 to-black/70 border border-rose-500/30 shadow-lg backdrop-blur-md">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-xs font-bold uppercase tracking-wider text-rose-300 flex items-center gap-2">
-                          <span className="p-1 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-400">
-                            <Bug className="w-3.5 h-3.5" />
-                          </span>
-                          <span>Probable Disease Name</span>
+                    {/* Species Mismatch Alert Banner */}
+                    {diagnosis.speciesMatch === false && (
+                      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-amber-950/40 via-red-950/30 to-black/80 border-2 border-amber-500/60 shadow-2xl backdrop-blur-md animate-fade-in">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 shrink-0 mt-0.5 shadow-lg shadow-amber-500/10">
+                            <AlertTriangle className="w-5 h-5 text-amber-400 animate-pulse" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                              <h4 className="text-base font-bold text-amber-200 flex items-center gap-2">
+                                <span>Selected Species & Image Mismatch</span>
+                              </h4>
+                              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/25 text-amber-300 border border-amber-500/50 shadow-sm">
+                                Species Mismatch
+                              </span>
+                            </div>
+
+                            <p className="text-xs sm:text-sm text-white/90 leading-relaxed mb-3 font-normal">
+                              {diagnosis.mismatchMessage || (
+                                <>
+                                  The uploaded image does not match your selected species (<strong>{diagnosis.selectedSpecies || selectedPlant.split(' (')[0]}</strong>). The AI identified the plant in the photo as <strong>{diagnosis.detectedSpecies || 'a different species'}</strong>.
+                                </>
+                              )}
+                            </p>
+
+                            {/* Side-by-side Comparison Pills */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-3 rounded-xl bg-black/50 border border-white/10 mb-3.5 text-xs">
+                              <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-rose-500/10 border border-rose-500/25">
+                                <span className="text-white/60 font-medium">Selected Plant:</span>
+                                <span className="font-bold text-rose-300 truncate">
+                                  {diagnosis.selectedSpecies || selectedPlant.split(' (')[0]}
+                                </span>
+                              </div>
+                              <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/25">
+                                <span className="text-white/60 font-medium">Image Identified As:</span>
+                                <span className="font-bold text-emerald-300 truncate">
+                                  {diagnosis.detectedSpecies || 'Unmatched Specimen'}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Quick-Switch Action Button */}
+                            {(() => {
+                              const matchedPlant = getMatchingAvailablePlant(diagnosis.detectedSpecies);
+                              if (matchedPlant && matchedPlant !== selectedPlant) {
+                                return (
+                                  <button
+                                    type="button"
+                                    onClick={() => handleSwitchPlantAndRediagnose(matchedPlant)}
+                                    disabled={analyzing}
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-lime-400 to-[#c7ea6b] text-[#183615] font-bold text-xs shadow-lg hover:shadow-lime-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                                  >
+                                    <RefreshCw className={`w-3.5 h-3.5 ${analyzing ? 'animate-spin' : ''}`} />
+                                    <span>Switch to "{matchedPlant.split(' (')[0]}" & Diagnose Accurately</span>
+                                  </button>
+                                );
+                              }
+                              return null;
+                            })()}
+                          </div>
                         </div>
-                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-300 border border-rose-500/25">
-                          Pathological Match
+                      </div>
+                    )}
+
+                    {/* Species Verified Badge (when species matches) */}
+                    {diagnosis.speciesMatch === true && imagePreview && (
+                      <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-xs text-emerald-300 animate-fade-in">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                        <span>Botanical Species Verified: Specimen matches <strong>{diagnosis.selectedSpecies || selectedPlant.split(' (')[0]}</strong></span>
+                      </div>
+                    )}
+
+                    {/* Probable Disease */}
+                    <div className={`p-4 sm:p-5 rounded-2xl shadow-lg backdrop-blur-md ${
+                      diagnosis.speciesMatch === false
+                        ? 'bg-gradient-to-r from-amber-950/25 via-black/50 to-black/70 border border-amber-500/35'
+                        : 'bg-gradient-to-r from-rose-950/25 via-black/50 to-black/70 border border-rose-500/30'
+                    }`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className={`text-xs font-bold uppercase tracking-wider flex items-center gap-2 ${
+                          diagnosis.speciesMatch === false ? 'text-amber-300' : 'text-rose-300'
+                        }`}>
+                          <span className={`p-1 rounded-lg border ${
+                            diagnosis.speciesMatch === false
+                              ? 'bg-amber-500/15 border-amber-500/30 text-amber-400'
+                              : 'bg-rose-500/15 border-rose-500/30 text-rose-400'
+                          }`}>
+                            {diagnosis.speciesMatch === false ? (
+                              <AlertCircle className="w-3.5 h-3.5" />
+                            ) : (
+                              <Bug className="w-3.5 h-3.5" />
+                            )}
+                          </span>
+                          <span>{diagnosis.speciesMatch === false ? 'Species Verification Status' : 'Probable Disease Name'}</span>
+                        </div>
+                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${
+                          diagnosis.speciesMatch === false
+                            ? 'bg-amber-500/10 text-amber-300 border-amber-500/25'
+                            : 'bg-rose-500/10 text-rose-300 border-rose-500/25'
+                        }`}>
+                          {diagnosis.speciesMatch === false ? 'Species Mismatch' : 'Pathological Match'}
                         </span>
                       </div>
                       <div className="text-lg font-serif font-bold text-white tracking-wide">
@@ -1620,10 +1767,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                           <span className="p-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-400">
                             <Activity className="w-3.5 h-3.5" />
                           </span>
-                          <span>Biological & Environmental Causes</span>
+                          <span>{diagnosis.speciesMatch === false ? 'Botanical Distinction & Species Analysis' : 'Biological & Environmental Causes'}</span>
                         </div>
                         <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/25">
-                          Etiology & Triggers
+                          {diagnosis.speciesMatch === false ? 'Species Morphology' : 'Etiology & Triggers'}
                         </span>
                       </div>
                       <p className="text-sm text-white font-normal leading-relaxed">
@@ -1654,7 +1801,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     )}
 
                     {/* Curative Care & Disease Treatment Protocol (Interactive Step Checklist) */}
-                    <CurativeCareSteps treatment={diagnosis.treatment} />
+                    <CurativeCareSteps treatment={diagnosis.treatment} isMismatch={diagnosis.speciesMatch === false} />
                   </div>
                 ) : (
                   <div className="py-20 text-center text-white/50 flex flex-col items-center">

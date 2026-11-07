@@ -20,19 +20,12 @@ if hasattr(sys.stderr, "reconfigure"):
 # Set paths
 PROJECT_ROOT = Path(__file__).resolve().parent
 AI_DIR = PROJECT_ROOT / "AI"
-for p in [str(AI_DIR), str(PROJECT_ROOT)]:
+for p in [str(PROJECT_ROOT), str(AI_DIR)]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
-# Support both IDE static resolution and direct execution
-try:
-    from AI.app import create_app
-except ImportError:
-    try:
-        from app import create_app
-    except ImportError:
-        import AI.app as _app
-        create_app = _app.create_app
+# Canonical package import
+from AI.app import create_app
 
 if __name__ == "__main__":
     demo = create_app()
