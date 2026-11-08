@@ -1392,7 +1392,7 @@ app.get('/api/geo/ip-locate', async (req, res) => {
 // ─── Export & Start Server ─────────────────────────────────────────────────
 export default app;
 
-if (!process.env.VERCEL && !process.env.VERCEL_ENV && !process.env.NOW_REGION) {
+if (!process.env.VERCEL) {
   app.listen(Number(PORT), () => {
     console.log(`🌱  PlantGuardian backend listening on http://localhost:${PORT}`);
     console.log(`    Supabase PostgreSQL connected: ${SUPABASE_URL}`);
