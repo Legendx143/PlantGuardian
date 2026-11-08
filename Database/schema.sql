@@ -178,3 +178,4 @@ drop policy if exists "Users can delete own plant images" on storage.objects;
 create policy "Users can delete own plant images" on storage.objects
   for delete to authenticated
   using (bucket_id = 'plant-images' and (storage.foldername(name))[1] = (select auth.uid()::text));
+

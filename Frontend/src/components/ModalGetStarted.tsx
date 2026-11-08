@@ -10,7 +10,7 @@ import {
   Lock,
   ShieldCheck
 } from 'lucide-react';
-import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { BACKEND_URL } from '../lib/apiConfig';
 
 interface User {
@@ -113,11 +113,6 @@ export const ModalGetStarted: React.FC<ModalGetStartedProps> = ({
         setErrorMessage('Please fill in all the details');
         return;
       }
-    }
-
-    if (!isSupabaseConfigured || !supabase) {
-      setErrorMessage('Supabase is not configured. Check your environment variables.');
-      return;
     }
 
     setIsLoading(true);

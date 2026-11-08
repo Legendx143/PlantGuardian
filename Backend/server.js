@@ -6,24 +6,18 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
 
-const {
-  SUPABASE_URL,
-  SUPABASE_SERVICE_ROLE_KEY,
-  FRONTEND_ORIGIN = 'http://localhost:5173',
-  PORT = '5000',
-  OR_API_KEY,
-  SMTP_HOST,
-  SMTP_PORT,
-  SMTP_USER,
-  SMTP_PASS,
-  SMTP_FROM,
-} = process.env;
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://cdlwdyplznpnizwjcxvl.supabase.co';
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
+const PORT = process.env.PORT || '5000';
+const OR_API_KEY = process.env.OR_API_KEY;
+const SMTP_HOST = process.env.SMTP_HOST;
+const SMTP_PORT = process.env.SMTP_PORT;
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
+const SMTP_FROM = process.env.SMTP_FROM;
 
-if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-  console.warn('⚠️ Warning: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are not set in environment variables.');
-}
-
-// Admin client — used for server-side operations that need elevated privileges.
+// Admin client — used for server-side operations with full PostgreSQL & Auth privileges.
 const supabaseAdmin = (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY)
   ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
       auth: { autoRefreshToken: false, persistSession: false },
@@ -106,6 +100,21 @@ app.use(cors({
 }));
 
 app.use(express.json({ limit: '10mb' }));
+
+// URL normalization for serverless rewrites: ensures /auth/... matches /api/auth/... if /api prefix is stripped
+app.use((req, _res, next) => {
+  if (req.url && !req.url.startsWith('/api') && (
+    req.url.startsWith('/auth') ||
+    req.url.startsWith('/scans') ||
+    req.url.startsWith('/farming-plans') ||
+    req.url.startsWith('/ai') ||
+    req.url.startsWith('/me') ||
+    req.url.startsWith('/geo')
+  )) {
+    req.url = `/api${req.url}`;
+  }
+  next();
+});
 
 // Persistent disk storage for scans so records survive server reloads & restarts
 const SCANS_DIR = process.env.VERCEL ? '/tmp' : path.join(process.cwd(), 'data');
@@ -1383,7 +1392,7 @@ app.get('/api/geo/ip-locate', async (req, res) => {
 // ─── Export & Start Server ─────────────────────────────────────────────────
 export default app;
 
-if (!process.env.VERCEL) {
+if (!process.env.VERCEL && !process.env.VERCEL_ENV && !process.env.NOW_REGION) {
   app.listen(Number(PORT), () => {
     console.log(`🌱  PlantGuardian backend listening on http://localhost:${PORT}`);
     console.log(`    Supabase PostgreSQL connected: ${SUPABASE_URL}`);

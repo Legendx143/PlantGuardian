@@ -2,7 +2,12 @@
   "name": "plantguardian-root",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "description": "PlantGuardian Workspace Root",
+  "workspaces": [
+    "Frontend",
+    "Backend"
+  ],
   "scripts": {
     "dev": "node run_dev.js",
     "dev:all": "node run_dev.js",
