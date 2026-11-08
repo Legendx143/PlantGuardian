@@ -17,6 +17,7 @@ import {
   Trash2
 } from 'lucide-react';
 import { BACKEND_URL } from '../lib/apiConfig';
+import { supabase } from '../lib/supabase';
 
 export interface ScanRecord {
   id: number | string;
@@ -279,7 +280,46 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
     }
   }, [isOpen, userEmail]);
 
-  // Listen to real-time events from the dashboard
+  // Real-time PostgreSQL database subscription across devices
+  useEffect(() => {
+    if (!isOpen || !supabase || !userEmail) return;
+    const client = supabase;
+    const cleanEmail = userEmail.trim().toLowerCase();
+
+    const channel = client
+      .channel(`realtime_scans:${cleanEmail}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'plant_scans',
+          filter: `user_email=eq.${cleanEmail}`,
+        },
+        () => {
+          fetchScans();
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'farming_plans',
+          filter: `user_email=eq.${cleanEmail}`,
+        },
+        () => {
+          fetchFarmingPlans();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      void client.removeChannel(channel);
+    };
+  }, [isOpen, userEmail]);
+
+  // Listen to local real-time events from the dashboard
   useEffect(() => {
     const handleNewScan = (e: any) => {
       if (e.detail) {

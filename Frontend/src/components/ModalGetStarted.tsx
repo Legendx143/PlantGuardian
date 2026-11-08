@@ -144,22 +144,31 @@ export const ModalGetStarted: React.FC<ModalGetStartedProps> = ({
             return;
           }
           registered = true;
-        } catch {
+        } catch (fetchErr: any) {
+          console.warn('Backend register request failed, checking direct Supabase fallback:', fetchErr);
           // If backend server is unreachable, fall back to direct Supabase sign up
-          const { error } = await supabase.auth.signUp({
-            email: email.trim().toLowerCase(),
-            password,
-          });
-          if (error) {
-            if (error.message?.toLowerCase().includes('already') || error.message?.toLowerCase().includes('exists')) {
-              setErrorMessage('An account with this email already exists. Please sign in.');
-            } else {
-              setErrorMessage(error.message);
+          if (supabase) {
+            const { error } = await supabase.auth.signUp({
+              email: email.trim().toLowerCase(),
+              password,
+            });
+            if (error) {
+              if (error.message?.toLowerCase().includes('already') || error.message?.toLowerCase().includes('exists')) {
+                setErrorMessage('An account with this email already exists. Please sign in.');
+              } else if (error.message?.toLowerCase().includes('api key')) {
+                setErrorMessage('Database connection key needs update in project settings. Please sign in or contact administrator.');
+              } else {
+                setErrorMessage(error.message);
+              }
+              setIsLoading(false);
+              return;
             }
+            registered = true;
+          } else {
+            setErrorMessage('Unable to connect to authentication server. Please check your internet connection.');
             setIsLoading(false);
             return;
           }
-          registered = true;
         }
 
         if (registered) {

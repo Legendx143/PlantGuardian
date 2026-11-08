@@ -10,13 +10,22 @@
  *   node setup.js
  */
 
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Load from Database/.env or Backend/.env
+if (existsSync(resolve(__dirname, '.env'))) {
+  dotenv.config({ path: resolve(__dirname, '.env') });
+} else if (existsSync(resolve(__dirname, '../Backend/.env'))) {
+  dotenv.config({ path: resolve(__dirname, '../Backend/.env') });
+} else {
+  dotenv.config();
+}
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;

@@ -11,5 +11,12 @@
     "build": "npm --prefix Frontend run build",
     "start": "npm --prefix Backend run start",
     "lint": "npm --prefix Frontend run lint"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.90.1",
+    "cors": "2.8.5",
+    "dotenv": "17.2.3",
+    "express": "5.1.0",
+    "nodemailer": "^10.3.1"
   }
 }
